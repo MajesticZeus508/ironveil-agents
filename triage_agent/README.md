@@ -1,4 +1,16 @@
-# Alert Triage Agent — proof of concept
+# IronVeil Investigation — entry point, orchestration, and triage
+
+**Start here in Donovan:** select **IronVeil Investigation — Start Here**.
+This directory implements the user-facing entry point for the entire workflow:
+it performs triage, calls IronVeil Historical Enrichment, then calls IronVeil
+Recommendations automatically. It is not only a standalone triage agent.
+
+**Proof of concept:** approved synthetic data only; AWS history is unavailable,
+human review is required, and no response actions are executed.
+
+Former staging display name: **Network Investigation Demo**. The 2026-11-12
+display-name/description update kept IDs, versions and source bundles unchanged.
+The `triage_agent/` directory name and historical release records are retained.
 
 **Demo update:** see [DEMO.md](../DEMO.md) for the three-stage entry application,
 current release/acceptance checkpoint and Donovan run instructions. It supersedes
@@ -37,7 +49,7 @@ See [current runbook and exact evidence](../DEMO.md) and
 
 | Item | Current value |
 |---|---|
-| Display name | Network Investigation Demo |
+| Display name | IronVeil Investigation — Start Here |
 | AMS agent ID | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` |
 | Environment | ScaleGov staging |
 | Tenant | `6a1099f9e1ca37ee1216d8c3` (`platform`) |
@@ -55,7 +67,7 @@ documentation cleanup.
 ## Use in Donovan
 
 1. Open Donovan staging in the tenant above; refresh the agent list.
-2. Start a new chat with **Network Investigation Demo**.
+2. Start a new chat with **IronVeil Investigation — Start Here**.
 3. Attach **one UTF-8 findings file**, at most **1,000,000 bytes / 100 records**.
 4. Ask: **“Run the network investigation and produce analyst recommendations.”**
 

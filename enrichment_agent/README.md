@@ -1,4 +1,12 @@
-# Historical network enrichment agent — offline core and AMS receiver
+# IronVeil Historical Enrichment — supporting agent
+
+**To run the full workflow, start with IronVeil Investigation — Start Here in
+Donovan**, not this receiver. The entry point calls this agent automatically
+after triage, then calls IronVeil Recommendations. See the [runbook](../DEMO.md).
+
+**Proof of concept:** AWS history is not connected; local historical examples are
+synthetic. Former staging name: **Historical Enrichment POC**. The 2026-11-12
+display-name/description update did not change IDs, versions or source bundles.
 
 > **Current staging: 0.1.3 active/latest**, independently rechecked in AMS.
 > Rebuilt after the operator-reported platform fix; its recorded image digest
@@ -14,7 +22,7 @@ tuple was seen before**. The original triage agent is preserved.
 This version is operational against local JSON historical-data fixtures/subsets.
 AWS is not connected. The history-adapter boundary is ready for an S3-backed query
 implementation once storage format, field mapping, access and coverage are known.
-The deployed receiver source is in `ams/`. **Historical Enrichment POC 0.1.3**
+The deployed receiver source is in `ams/`. **IronVeil Historical Enrichment 0.1.3**
 is active/latest at live recheck; v3 receipt and managed outputs are
 verified. See [AMS_RELEASE.md](AMS_RELEASE.md) for agent ID and test evidence.
 It does not claim to reproduce a detector's anomaly or establish benign/malicious

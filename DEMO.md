@@ -1,4 +1,17 @@
-# Network Investigation Demo — current runbook
+# IronVeil Investigation — Start Here: operator runbook
+
+**This is the user-facing entry point for the full IronVeil workflow**, not just
+the triage stage. It performs triage and calls **IronVeil Historical Enrichment**
+then **IronVeil Recommendations** automatically, returning their analyst reports.
+The supporting agents are not separate starting points for normal users.
+
+**Proof of concept:** approved synthetic data only, AWS history unavailable,
+human review required, no response actions executed.
+
+Staging display names and descriptions were updated on 2026-11-12 without a new
+release or changes to IDs, source bundles, discovery metadata or behavior.
+Former names in historical evidence are Network Investigation Demo,
+Historical Enrichment POC and Recommendation Agent POC, respectively.
 
 Live release state rechecked during housekeeping; latest evaluation **2026-11-11 UTC**.
 ScaleGov staging / `platform`
@@ -8,9 +21,9 @@ ScaleGov staging / `platform`
 
 | Agent | ID | Active/latest | Retained source bundle |
 |---|---|---|---|
-| Network Investigation Demo (Triage entry) | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | 0.1.24 | `b06c9ba3-3223-4bdb-8281-61fba2bab92e` |
-| Historical Enrichment POC | `420e63bd-8220-48bd-bada-743f0daea46c` | 0.1.3 | `2eb071f0-fe65-4d6f-a477-17819787f720` |
-| Recommendation Agent POC | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | 0.1.4 | `eb82adf2-8f84-4008-9da8-48bdbe6b929b` |
+| **IronVeil Investigation — Start Here** (entry point) | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | 0.1.24 | `b06c9ba3-3223-4bdb-8281-61fba2bab92e` |
+| IronVeil Historical Enrichment (supporting) | `420e63bd-8220-48bd-bada-743f0daea46c` | 0.1.3 | `2eb071f0-fe65-4d6f-a477-17819787f720` |
+| IronVeil Recommendations (supporting) | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | 0.1.4 | `eb82adf2-8f84-4008-9da8-48bdbe6b929b` |
 
 Entry 0.1.24 promotes bounded read-only polling retries; both receivers were
 rebuilt unchanged after the operator-reported base-image fix. See
@@ -21,7 +34,7 @@ Only the entry application has the Donovan discovery tag `ps:donovan:chat`.
 
 ## Operator run
 
-1. Refresh Donovan; select **Network Investigation Demo** and start a fresh chat.
+1. Refresh Donovan staging; select **IronVeil Investigation — Start Here** and start a fresh chat.
 2. Attach `triage_agent/staging_input_verification.json` relative to this
    workspace. It is JSONL content despite the `.json` extension: 62,315 bytes,
    17 synthetic findings. This is the hash-verified preserved run2 input; the older

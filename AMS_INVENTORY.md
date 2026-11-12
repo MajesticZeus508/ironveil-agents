@@ -15,11 +15,16 @@ Platform defaults are inventoried, not silently recreated as project agents.
 
 ## Live agent inventory
 
+The three IronVeil staging display names/descriptions were updated and reread on
+2026-11-12. IDs, active versions, source references and discovery metadata were
+unchanged. Other inventory rows below retain the earlier housekeeping checkpoint.
+Historical records retain the former Demo/POC names.
+
 | Agent | AMS ID | Live state / version | Local coverage |
 |---|---|---|---|
-| Network Investigation Demo | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | active/latest **0.1.24** | Prepared staging release and provenance in `triage_agent/releases/`; historical downloaded 0.1.17 snapshot |
-| Historical Enrichment POC | `420e63bd-8220-48bd-bada-743f0daea46c` | active/latest **0.1.3** | `enrichment_agent/ams/`; root core freshness passed; no downloaded current snapshot |
-| Recommendation Agent POC | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | active/latest **0.1.4** | `recommendation_agent/ams/`; no downloaded current snapshot |
+| **IronVeil Investigation — Start Here** | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | active/latest **0.1.24** | Entry point, orchestration and triage; prepared staging release and provenance in `triage_agent/releases/`; historical downloaded 0.1.17 snapshot |
+| IronVeil Historical Enrichment | `420e63bd-8220-48bd-bada-743f0daea46c` | active/latest **0.1.3** | Supporting agent; `enrichment_agent/ams/`; root core freshness passed; no downloaded current snapshot |
+| IronVeil Recommendations | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | active/latest **0.1.4** | Supporting agent; `recommendation_agent/ams/`; no downloaded current snapshot |
 | VoF CTI Hunt Package | `fff45061-e9ac-43bf-973d-6024640db353` | inactive; highest listed **0.1.5**, not latest | **Missing source locally**; 0.1.3–0.1.5 share retained source ID below |
 | VoF IR Notables Review | `21865c96-2deb-41dc-b5c0-68ba826c55cc` | inactive; highest listed **0.1.8**, not latest | **Missing source locally**; 0.1.5–0.1.8 share retained source ID below |
 | Chat Agent (platform default) | `f45b29ad-06d0-4207-a9f7-318fe83697fb` | active **1.0.0** | Platform-owned; source not mirrored locally |

@@ -4,6 +4,40 @@ Network investigation proof-of-concept agents for alert triage, historical
 enrichment, and analyst recommendations. Each agent's source, tests, examples,
 and documentation live in its own directory.
 
+## Start here
+
+**Open IronVeil Investigation — Start Here in Donovan staging and upload your
+findings.** It performs triage, calls Historical Enrichment, then calls
+Recommendations automatically. You do not need to run the supporting agents
+separately. Follow the [operator runbook](DEMO.md) for the upload and prompt.
+
+**Proof of concept:** use approved synthetic data only. AWS history is not
+connected; human review is required and no response actions are executed.
+
+```text
+Findings upload
+      ↓
+IronVeil Investigation — Start Here
+      │  Triage and indicator extraction
+      ↓
+IronVeil Historical Enrichment       (called automatically)
+      ↓
+IronVeil Recommendations             (called automatically)
+      ↓
+Analyst reports returned through the entry point
+```
+
+### Where the code lives
+
+| Directory | Purpose |
+|---|---|
+| [`triage_agent/`](triage_agent/README.md) | **Entry point, orchestration, and triage implementation** |
+| [`enrichment_agent/`](enrichment_agent/README.md) | Supporting historical enrichment agent |
+| [`recommendation_agent/`](recommendation_agent/README.md) | Supporting analyst recommendations agent |
+
+Directory names are retained for stable paths. The entry point was formerly
+**Network Investigation Demo**; older release records retain that name.
+
 ## Team handoff
 
 ScaleGov **staging**, tenant **platform** (`6a1099f9e1ca37ee1216d8c3`).
@@ -12,9 +46,9 @@ through **2026-11-11 UTC**. Dates in older filenames are retained as evidence.
 
 | Agent | Active/latest | Local staging implementation | Role |
 |---|---|---|---|
-| Network Investigation Demo | **0.1.24** | `triage_agent/releases/staging_0_1_24/` | Entry; deterministic extraction and five-stage orchestration |
-| Historical Enrichment POC | **0.1.3** | `enrichment_agent/ams/` | History criteria; AWS **not configured** |
-| Recommendation Agent POC | **0.1.4** | `recommendation_agent/ams/` | Argon incident assessments; human review, no actions |
+| **IronVeil Investigation — Start Here** | **0.1.24** | `triage_agent/releases/staging_0_1_24/` | **User-facing entry point**; triage and full-workflow orchestration |
+| IronVeil Historical Enrichment | **0.1.3** | `enrichment_agent/ams/` | Supporting agent; history criteria; AWS **not configured** |
+| IronVeil Recommendations | **0.1.4** | `recommendation_agent/ams/` | Supporting agent; analyst assessments; human review, no actions |
 
 **Do not publish Triage's editable `plugins/alert_triage/` directly to staging:**
 it targets Dev receivers. The isolated staging release is retained separately.
@@ -48,5 +82,7 @@ history is unavailable and Triage narrative is intentionally deferred.
   and hosted output files still need binary-safe recovery; see the inventory.
 
 Historical reviews, release ledgers, snapshots and generated reports are retained.
-They describe their own checkpoints, not current deployment status. No deployment,
-metadata, credential or Git changes were made for this cleanup.
+They describe their own checkpoints, not current deployment status. On 2026-11-12,
+the three staging display names and descriptions were updated to clarify roles;
+agent IDs, versions, source bundles, discovery metadata and workflow behavior
+were unchanged. Dev names and historical release artifacts were not renamed.

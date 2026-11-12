@@ -1,6 +1,14 @@
-# Recommendation Agent
+# IronVeil Recommendations — supporting agent
 
-AMS staging live recheck: **Recommendation Agent POC 0.1.4**, active/latest
+**To run the full workflow, start with IronVeil Investigation — Start Here in
+Donovan**, not this receiver. The entry point calls this agent automatically
+after Historical Enrichment and returns its reports. See the [runbook](../DEMO.md).
+
+**Proof of concept:** human review required; no response actions executed.
+Former staging name: **Recommendation Agent POC**. The 2026-11-12 display-name/
+description update did not change IDs, versions or source bundles.
+
+AMS staging live recheck: **IronVeil Recommendations 0.1.4**, active/latest
 (unchanged-source rebuild after the operator-reported platform image fix).
 Agent ID: `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f`.
 Hosted acceptance passed: **7/7 incident analyses, 2/2 confirmed exports**.
@@ -96,7 +104,7 @@ filename search, free-text ID extraction, pasted JSON or stale-upload fallback.
 
 ### Test in AMS Invoke
 
-1. Open **Recommendation Agent POC → Invoke** in ScaleGov staging / `platform`.
+1. For a direct receiver test, open **IronVeil Recommendations → Invoke** in ScaleGov staging / `platform`.
 2. Select current published **0.1.4** (recheck active/latest first).
 3. Paste the following into **Input JSON** (no outer `input` wrapper).
 4. Invoke once and allow several minutes; incident analyses use at most two concurrent calls.

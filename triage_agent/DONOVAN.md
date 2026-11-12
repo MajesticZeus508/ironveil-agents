@@ -2,7 +2,12 @@
 
 ## Current target
 
-- **Network Investigation Demo**, ScaleGov staging, tenant `6a1099f9e1ca37ee1216d8c3`.
+- **IronVeil Investigation — Start Here**, ScaleGov staging, tenant `6a1099f9e1ca37ee1216d8c3`.
+- User-facing entry point: triage and automatic Historical Enrichment → Recommendations.
+  Supporting agents do not need to be selected separately. Proof of concept;
+  approved synthetic data only, human review required, no response actions.
+- Formerly **Network Investigation Demo**; renamed on 2026-11-12 without changing
+  IDs, versions, source bundles or discovery metadata.
 - Agent `d4ffbfc9-696f-4a5a-b174-75daaa1c993f`.
 - Latest active published release at live recheck: **0.1.24**, staging polling-fix
   promotion. See [current runbook](../DEMO.md) for full-chain IDs and security caveats.
