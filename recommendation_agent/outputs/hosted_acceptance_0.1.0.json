@@ -1,0 +1,33 @@
+{
+  "evidence_kind": "selected_fields_from_existing_AMS_invocation_and_stored_output",
+  "environment": "scalegov-staging",
+  "tenant_id": "6a1099f9e1ca37ee1216d8c3",
+  "agent_id": "934ba6f7-3dcc-4dfb-9454-acdc92f7a10f",
+  "version": "0.1.0",
+  "invocation_id": "inv_17cdd190-3eff-46ee-a09f-311e832a7e6c",
+  "thread_id": "2d9e2a64-8f54-4e8b-8ca7-4e78d1532727",
+  "platform_status": "completed",
+  "created_at": "2026-11-09T15:45:42.515529Z",
+  "started_at": "2026-11-09T15:45:48.823899Z",
+  "completed_at": "2026-11-09T15:49:19.798167Z",
+  "input_file_id": "ddd9fc6f-05e2-444f-8f2e-72d97374bff7",
+  "input_sha256": "238e8529b1dc38feffa315bb56a1d811156a5acd9343bd2673454fdf87d1f1f3",
+  "application_run": {"status": "partial", "incident_count": 7, "completed": 7, "failed": 0},
+  "export_status": "completed",
+  "exports": [
+    {"filename": "recommendation_results.json", "status": "created", "file_id": "52324851-2efd-4ef5-8a55-26fc87f5755b"},
+    {"filename": "recommendation_report.md", "status": "created", "file_id": "1b6a9096-a781-4a1f-ae0d-a7a287a2da05"}
+  ],
+  "public_output_channels": ["messages", "render_events"],
+  "tool_name": "run_recommendation",
+  "tool_status": "success",
+  "durable_file_blocks": 2,
+  "inline_report": null,
+  "final_reply": "Recommendation run: partial; 7/7 incident analyses completed. 2/2 exports confirmed. No actions executed. Download the report for the full analyst summary.",
+  "limitations": [
+    "AWS history was unavailable in the input export; partial is expected.",
+    "Hosted exported file bodies were not independently downloaded or audited during housekeeping.",
+    "Operator-confirmed AMS Invoke test is separate; its invocation ID was not supplied.",
+    "No Donovan UI compatibility or live AWS coverage is established by this record."
+  ]
+}

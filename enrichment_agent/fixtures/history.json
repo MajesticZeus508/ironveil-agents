@@ -1,0 +1,10 @@
+{
+  "schema": "historical-netflow/1", "dataset_id": "synthetic-history-demo", "synthetic": true,
+  "coverage": {"start": "2026-10-01T00:00:00Z", "end": "2026-11-04T00:00:00Z", "complete": true},
+  "fields": ["src", "dst", "protocol", "src_site", "dst_domain", "dst_country", "dst_company", "dst_asn", "dst_registered_org", "bytes_sent", "bytes_received"],
+  "records": [
+    {"record_id": "prior-same-activity", "start": "2026-10-20T10:00:00Z", "end": "2026-10-20T10:01:00Z", "src": "10.0.0.1", "dst": "203.0.113.10", "protocol": "tcp", "src_site": "alpha", "dst_domain": "transfer.example", "dst_country": "ZZ", "dst_company": "Example Network", "dst_asn": 64512, "dst_registered_org": "Example Registry Organization", "bytes_sent": 0, "bytes_received": 100},
+    {"record_id": "prior-other-source", "start": "2026-10-21T10:00:00Z", "end": "2026-10-21T10:01:00Z", "src": "10.0.0.2", "dst": "203.0.113.10", "protocol": "TCP", "src_site": "beta", "dst_domain": "transfer.example", "dst_country": "ZZ", "dst_company": "Example Network", "dst_asn": 64512, "dst_registered_org": "Example Registry Organization", "bytes_sent": 200, "bytes_received": 0},
+    {"record_id": "current-not-historical", "start": "2026-11-03T12:00:00Z", "end": "2026-11-03T12:01:00Z", "src": "10.0.0.1", "dst": "203.0.113.10", "protocol": "TCP", "src_site": "alpha", "dst_domain": "transfer.example", "dst_country": "ZZ", "dst_company": "Example Network", "dst_asn": 64512, "dst_registered_org": "Example Registry Organization", "bytes_sent": 1000, "bytes_received": 0}
+  ]
+}

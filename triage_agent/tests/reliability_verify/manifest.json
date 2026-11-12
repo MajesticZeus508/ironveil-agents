@@ -1,0 +1,14 @@
+{
+  "name": "reliability_verify",
+  "version": "0.1",
+  "description": "Local SDK reliability checks only. Never publish.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "reliability_verify",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}

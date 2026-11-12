@@ -1,0 +1,8 @@
+{
+  "schema": "enrichment-context/1",
+  "observations": [{
+    "observation_id": "observation-demo", "source": "synthetic operator-supplied example",
+    "dst_domain": "Transfer.Example.", "dst_asn": 64512,
+    "dst_registered_org": "Example Registry Organization"
+  }]
+}

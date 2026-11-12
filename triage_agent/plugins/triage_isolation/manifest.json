@@ -1,0 +1,14 @@
+{
+  "name": "triage_isolation",
+  "version": "0.1",
+  "description": "Local-only sequential incident latency diagnostic; not deployed.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "triage_isolation",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}

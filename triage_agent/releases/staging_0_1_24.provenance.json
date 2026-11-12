@@ -1,0 +1,75 @@
+{
+  "source": "plugins/alert_triage",
+  "target_environment": "scalegov-staging",
+  "tenant_id": "6a1099f9e1ca37ee1216d8c3",
+  "files": {
+    "agent.py": {
+      "source_sha256": "5f12a39b6978dd74dbe5b4d8e0acc93f2169ed43d1d13238485d76b5ba70b6a4",
+      "release_sha256": "5f12a39b6978dd74dbe5b4d8e0acc93f2169ed43d1d13238485d76b5ba70b6a4"
+    },
+    "context_contract.py": {
+      "source_sha256": "5f845c4438e6bfa139af904564c8052998ea3955a896e8f0266c00d5e9e2e1e7",
+      "release_sha256": "5f845c4438e6bfa139af904564c8052998ea3955a896e8f0266c00d5e9e2e1e7"
+    },
+    "contracts.py": {
+      "source_sha256": "2da5eee0f76966abbde4fa01eb821c4c6fb7dd2c507d46f05e77a8f964521d78",
+      "release_sha256": "2da5eee0f76966abbde4fa01eb821c4c6fb7dd2c507d46f05e77a8f964521d78"
+    },
+    "demo.py": {
+      "source_sha256": "61f46c2148448e07d2238dbac64fed6f30194f06643c03f012caa21c96a21b7a",
+      "release_sha256": "61f46c2148448e07d2238dbac64fed6f30194f06643c03f012caa21c96a21b7a"
+    },
+    "export.py": {
+      "source_sha256": "a9378058b9db62460fba514224d5f9bb2e96942a4fcd0d5cfbdcb13ed9bdfdcb",
+      "release_sha256": "a9378058b9db62460fba514224d5f9bb2e96942a4fcd0d5cfbdcb13ed9bdfdcb"
+    },
+    "file_first.py": {
+      "source_sha256": "a7b1bd8752236157254783416368f7cdb4d880f2ef257f107c14a6455b1229db",
+      "release_sha256": "a7b1bd8752236157254783416368f7cdb4d880f2ef257f107c14a6455b1229db"
+    },
+    "file_output.py": {
+      "source_sha256": "8702c8e47d115f0827286378b680c4fa0fde2ce91f0032001a648d9dfeb9269d",
+      "release_sha256": "8702c8e47d115f0827286378b680c4fa0fde2ce91f0032001a648d9dfeb9269d"
+    },
+    "graph.py": {
+      "source_sha256": "a9c11f73c1f683159ccdc002fc2c10d6227199e37fed8d5aef91bf28856758b2",
+      "release_sha256": "a9c11f73c1f683159ccdc002fc2c10d6227199e37fed8d5aef91bf28856758b2"
+    },
+    "handoff.py": {
+      "source_sha256": "0201e1c2c8aaff5c344a692cd89fcae001dbc9224b4462e46353c87d4c4633c8",
+      "release_sha256": "a4fd5f92b7e679c9a313a21ecbd090f5d43dff86168db04c2b77eb3453617851"
+    },
+    "hosted.py": {
+      "source_sha256": "97179bd75f3ebe3d26b55234fc20a5fe78e43d8c1a5fd310ec8f4c1b217ebeab",
+      "release_sha256": "97179bd75f3ebe3d26b55234fc20a5fe78e43d8c1a5fd310ec8f4c1b217ebeab"
+    },
+    "manifest.json": {
+      "source_sha256": "b28aa5c40c7984c7b466f571153539f06bb794c1c0aad2d1a6a92026eb583212",
+      "release_sha256": "b28aa5c40c7984c7b466f571153539f06bb794c1c0aad2d1a6a92026eb583212"
+    },
+    "model_compat.py": {
+      "source_sha256": "83bae1e52440f1e1938932717798087c11bfd66e3632f806d90dfda98c718c5d",
+      "release_sha256": "83bae1e52440f1e1938932717798087c11bfd66e3632f806d90dfda98c718c5d"
+    },
+    "persona.py": {
+      "source_sha256": "cb3e2e2d2f7936febf4f825f7a0691af2f7c8eeb8c7f61f54f01c6ec75276478",
+      "release_sha256": "cb3e2e2d2f7936febf4f825f7a0691af2f7c8eeb8c7f61f54f01c6ec75276478"
+    },
+    "progress.py": {
+      "source_sha256": "5b50069de720e5a9f8c08d5dde55f9e748a31eedd728a0f641dfcc60d66c424b",
+      "release_sha256": "5b50069de720e5a9f8c08d5dde55f9e748a31eedd728a0f641dfcc60d66c424b"
+    },
+    "requirements.txt": {
+      "source_sha256": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b",
+      "release_sha256": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b"
+    },
+    "stages.py": {
+      "source_sha256": "df0a477fb693ad339c154a688ba84585f1176e810dcf82bbcb907a96e78f8d5e",
+      "release_sha256": "f4223ac2bb240a804fd21a3a923f3c566ace30b0eda3d97dc99a987575c6397a"
+    },
+    "triage.py": {
+      "source_sha256": "5cf8fc4bc6fa80ace6ed08fabae783fa4d1e3facba21f47f49f190fde3b3846c",
+      "release_sha256": "5cf8fc4bc6fa80ace6ed08fabae783fa4d1e3facba21f47f49f190fde3b3846c"
+    }
+  }
+}

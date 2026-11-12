@@ -1,0 +1,334 @@
+{
+  "schema": "alert-recommendations/1",
+  "generated_at": "2026-11-09T15:42:32.172014+00:00",
+  "source_sha256": "d96cc680287bb52e5579bba6b5ad0f6dde075dc76c0108b12794d6a657ee6dec",
+  "upstream": {
+    "enrichment_run": {
+      "status": "partial",
+      "query_count": 5,
+      "outcomes": {
+        "not_configured": 5
+      },
+      "errors": []
+    },
+    "extraction": {
+      "status": "completed",
+      "accepted_findings": 1,
+      "incident_groups": 1,
+      "observation_count": 1,
+      "errors": []
+    },
+    "history_source": {
+      "adapter": "aws_not_configured",
+      "status": "not_configured"
+    }
+  },
+  "provenance": {
+    "model": "gemini/gemini-4-argon",
+    "generation_method": "model",
+    "knowledge_basis": "learned cybersecurity knowledge applied to supplied evidence; no live intelligence",
+    "prompt_sha256": "f299e2d05be0c6883f31771f528dc3426e1885dfc2eba0c9dffa97f33ed83ac9"
+  },
+  "run": {
+    "status": "partial",
+    "incident_count": 1,
+    "completed": 1,
+    "failed": 0
+  },
+  "human_review_required": true,
+  "actions_executed": [],
+  "incidents": [
+    {
+      "incident_id": "incident-demo",
+      "entity": {
+        "type": "host",
+        "id": "10.0.0.1",
+        "site": "alpha"
+      },
+      "time_window": {
+        "start": "2026-11-03T12:00:00Z",
+        "end": "2026-11-03T12:15:00Z"
+      },
+      "synthetic": true,
+      "review_priority": "high",
+      "disposition": "needs_review",
+      "upstream_context_status": "available",
+      "evidence_catalog": {
+        "incident": {
+          "source_path": "/input/incidents/0",
+          "value": {
+            "id": "incident-demo",
+            "incident_key": "synthetic-demo",
+            "entity": {
+              "type": "host",
+              "id": "10.0.0.1",
+              "site": "alpha"
+            },
+            "time_window": {
+              "start": "2026-11-03T12:00:00Z",
+              "end": "2026-11-03T12:15:00Z"
+            },
+            "analysis_status": "completed",
+            "context_status": "available",
+            "analysis_error": null,
+            "possible_explanations": [
+              "Hypothesis: scheduled transfer."
+            ],
+            "recommended_next_steps": [],
+            "limitations": [
+              "Synthetic fixture."
+            ],
+            "summary": "",
+            "review_priority": "high",
+            "disposition": "needs_review",
+            "source": [
+              "synthetic-test"
+            ],
+            "synthetic": true,
+            "data_quality_issues": []
+          },
+          "kind": "triage_context_not_independent_evidence"
+        },
+        "O1": {
+          "source_path": "/input/indicators/0",
+          "kind": "supplied_observation",
+          "value": {
+            "id": "observation-demo",
+            "incident_id": "incident-demo",
+            "src": "10.0.0.1",
+            "dst": "203.0.113.10",
+            "protocol": "TCP",
+            "bytes_sent": 0,
+            "bytes_received": null,
+            "country": "ZZ",
+            "company": "Example Network",
+            "src_site": "alpha",
+            "refs": [
+              {
+                "finding_id": "finding-demo",
+                "source": 1,
+                "evidence_index": 0,
+                "null_fields": [
+                  "bytes_received"
+                ]
+              }
+            ]
+          }
+        },
+        "H1": {
+          "source_path": "/results/0",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30",
+            "incident_id": "incident-demo",
+            "kind": "ip_prevalence",
+            "criteria": {
+              "endpoint_ip": "10.0.0.1"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "indicator_key": "eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768",
+            "address_classification": "non_global",
+            "status": "not_configured",
+            "search_complete": false,
+            "matched_record_count": null,
+            "first_seen": null,
+            "last_seen": null,
+            "samples": [],
+            "samples_truncated": false
+          }
+        },
+        "H2": {
+          "source_path": "/results/1",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_company": "Example Network"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "not_configured",
+            "search_complete": false,
+            "matched_record_count": null,
+            "first_seen": null,
+            "last_seen": null,
+            "samples": [],
+            "samples_truncated": false
+          }
+        },
+        "H3": {
+          "source_path": "/results/2",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec",
+            "incident_id": "incident-demo",
+            "kind": "ip_prevalence",
+            "criteria": {
+              "endpoint_ip": "203.0.113.10"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "indicator_key": "6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc",
+            "address_classification": "non_global",
+            "status": "not_configured",
+            "search_complete": false,
+            "matched_record_count": null,
+            "first_seen": null,
+            "last_seen": null,
+            "samples": [],
+            "samples_truncated": false
+          }
+        },
+        "H4": {
+          "source_path": "/results/3",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184",
+            "incident_id": "incident-demo",
+            "kind": "directed_activity_tuple",
+            "criteria": {
+              "src": "10.0.0.1",
+              "dst": "203.0.113.10",
+              "protocol": "TCP",
+              "src_site": "alpha"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "not_configured",
+            "search_complete": false,
+            "matched_record_count": null,
+            "first_seen": null,
+            "last_seen": null,
+            "samples": [],
+            "samples_truncated": false
+          }
+        },
+        "H5": {
+          "source_path": "/results/4",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_country": "ZZ"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "not_configured",
+            "search_complete": false,
+            "matched_record_count": null,
+            "first_seen": null,
+            "last_seen": null,
+            "samples": [],
+            "samples_truncated": false
+          }
+        }
+      },
+      "narrative": {
+        "summary": "In synthetic incident-demo, host 10.0.0.1 at site alpha had a TCP observation to 203.0.113.10 (labeled Example Network, country ZZ) with 0 bytes sent and null bytes received between 12:00 and 12:15 UTC on 2026-11-03. Because 0 bytes sent can reflect an unanswered connection attempt, blocked traffic, or probing, its security relevance depends on missing port, firewall, and endpoint context. Historical enrichment is unavailable because the AWS history source is not configured, leaving baseline recurrence unknown.",
+        "assessment": "Malicious hypothesis: unauthorized outbound connection attempt or probing from 10.0.0.1 toward 203.0.113.10. Benign hypothesis: an authorized service check, misconfigured client, or routine scheduled task attempting a TCP connection that failed or transferred no payload (the upstream scheduled-transfer hypothesis is uncorroborated). Discriminating between these requires destination port, TCP flags/firewall action, and the initiating process or scheduled job on 10.0.0.1, as well as local log history since AWS historical queries were not configured.",
+        "evidence": [
+          {
+            "claim": "Observation O1 records synthetic TCP activity from 10.0.0.1 (site alpha) to 203.0.113.10 (labeled Example Network, country ZZ) with bytes_sent=0 and bytes_received=null.",
+            "refs": [
+              "O1",
+              "incident"
+            ]
+          },
+          {
+            "claim": "All five 30-day historical queries (H1-H5) for endpoint IPs, destination attributes, and the directed TCP tuple returned status not_configured with search_complete=false.",
+            "refs": [
+              "H1",
+              "H2",
+              "H3",
+              "H4",
+              "H5"
+            ]
+          }
+        ],
+        "recommendations": [
+          {
+            "action": "Inspect firewall, flow, and DNS logs for 10.0.0.1 to 203.0.113.10 around 2026-11-03 12:00-12:15 UTC to identify destination port, TCP flags, and whether traffic was blocked or reset.",
+            "rationale": "O1 lacks port, session state, and bytes_received, which are needed to interpret a 0-byte TCP record.",
+            "decision_if": "If logs show expected service ports for an approved application or routine health check, document and close; if unexpected ports or repeated failed connection attempts appear, pivot to host investigation.",
+            "category": "investigate",
+            "requires_approval": false,
+            "refs": [
+              "O1",
+              "incident"
+            ]
+          },
+          {
+            "action": "Review endpoint telemetry on 10.0.0.1 (site alpha) for the process, user account, and scheduled tasks initiating TCP connections to 203.0.113.10 during the incident window.",
+            "rationale": "Host process lineage and task schedules directly test whether the connection came from an authorized job or suspicious execution.",
+            "decision_if": "If tied to a verified administrative or scheduled job with matching change records, treat as benign; if linked to an unknown binary, script, or unauthorized user, escalate for incident response.",
+            "category": "investigate",
+            "requires_approval": false,
+            "refs": [
+              "O1",
+              "incident"
+            ]
+          },
+          {
+            "action": "Query local SIEM or firewall archives manually for prior activity between 10.0.0.1 and 203.0.113.10 while the AWS historical adapter remains unconfigured.",
+            "rationale": "Automated 30-day history (H1-H5) was not configured, so novelty or recurrence cannot be inferred from enrichment output.",
+            "decision_if": "If local logs show unauthorized recurring attempts or additional internal hosts targeting 203.0.113.10, broaden scope and escalate; if historical records confirm a documented baseline, lower priority.",
+            "category": "monitor",
+            "requires_approval": false,
+            "refs": [
+              "H1",
+              "H3",
+              "H4"
+            ]
+          }
+        ],
+        "escalation_trigger": "Escalate to incident response and evaluate conditional egress filtering or host isolation (subject to business-impact review and human approval) if endpoint telemetry on 10.0.0.1 links the connection to 203.0.113.10 with an unauthorized process, persistence mechanism, or broader outbound probing.",
+        "limitations": [
+          "Incident and observation records are marked as synthetic test data.",
+          "Historical enrichment (H1-H5) is unavailable because the AWS history source is not configured; prior recurrence is unknown.",
+          "Observation O1 omits destination port, TCP flags, domain context, and bytes_received (null)."
+        ],
+        "target_observation_ids": [
+          "observation-demo"
+        ]
+      },
+      "analysis_status": "completed",
+      "analysis_error": null
+    }
+  ],
+  "limitations": [
+    "Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.",
+    "Training knowledge is not fresh threat intelligence or evidence of this incident.",
+    "No automatic actions. Confirm authority, business impact and evidence before response.",
+    "The v3 handoff omits full detector metrics/baselines, domains and registration inventory."
+  ]
+}

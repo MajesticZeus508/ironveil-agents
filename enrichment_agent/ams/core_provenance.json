@@ -1,0 +1,8 @@
+{
+  "source": "enrichment_agent core",
+  "sha256": {
+    "contracts.py": "a23f0a5179acc02bb3be640b7f7add8b955c39bd412bb92d78e8feedb25eda29",
+    "enrich.py": "d10d9f7f92009eeec83708d065935569ff1923dfbdf9cae90dee7e461432a9dc",
+    "history.py": "a5827fddab5d586565475735d40f61a1249232ed1c52e98c1496174fd62621dc"
+  }
+}

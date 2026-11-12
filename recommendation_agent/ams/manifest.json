@@ -1,0 +1,14 @@
+{
+  "name": "recommendation_agent",
+  "version": "0.1",
+  "description": "Evidence-grounded Argon cybersecurity summaries and human-reviewed response recommendations.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "recommendation_agent",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}

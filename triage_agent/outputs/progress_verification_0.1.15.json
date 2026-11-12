@@ -1,0 +1,1073 @@
+{
+  "started": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/InvokeAgentResponseBody.json",
+    "thread_id": "727f29c5-e52a-4a6b-8a61-c0f3110616f8",
+    "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec"
+  },
+  "record": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/InvocationResponse.json",
+    "id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+    "thread_id": "727f29c5-e52a-4a6b-8a61-c0f3110616f8",
+    "agent_id": "d4ffbfc9-696f-4a5a-b174-75daaa1c993f",
+    "agent_version": "0.1.15",
+    "status": "completed",
+    "created_by": "e717c04b-02a1-4084-bc2c-0792600af547",
+    "created_at": "2026-11-06T00:45:26.43321Z",
+    "started_at": "2026-11-06T00:45:32.707836Z",
+    "completed_at": "2026-11-06T00:47:09.772438Z",
+    "input": {
+      "task": {
+        "intent": "dispatch",
+        "payload": {
+          "parts": [
+            {
+              "text": "Extract indicators and create the handoff JSON.",
+              "type": "text"
+            },
+            {
+              "slot": "sources",
+              "type": "resource",
+              "resource": {
+                "id": "603b38f6-a61a-4941-a804-121e72330852",
+                "type": "file"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "output_checkpoint_id": "1f1d97b9-8fc3-6f96-8016-b8ec35bd7aca",
+    "output_finalized_at": "2026-11-06T00:47:09.770655Z",
+    "fork_eligible": true,
+    "is_fork_seed": false
+  },
+  "output": {
+    "render_events": [
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 0,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_fc119f42d7c135e6",
+        "actor": {
+          "id": "e717c04b-02a1-4084-bc2c-0792600af547",
+          "role": "user"
+        },
+        "op": "dispatch",
+        "payload": {
+          "message": null,
+          "files": [],
+          "inputs": {
+            "task": {
+              "intent": "dispatch",
+              "payload": {
+                "parts": [
+                  {
+                    "slot": null,
+                    "type": "text",
+                    "text": "Extract indicators and create the handoff JSON."
+                  },
+                  {
+                    "slot": "sources",
+                    "type": "resource",
+                    "resource": {
+                      "type": "file",
+                      "id": "603b38f6-a61a-4941-a804-121e72330852"
+                    }
+                  }
+                ]
+              }
+            },
+            "source_file_ids": []
+          },
+          "client_ref": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec"
+        }
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 8,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 9,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 12,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+        "actor": {
+          "id": "tool_92974319999c2e20d3ea",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "run_triage",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 13,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:file_first_e3bb952a2a164b2598eecab6effd5eed:tool_text:0",
+              "text": "{\"run\": {\"nonempty_lines\": 17, \"accepted_findings\": 17, \"input_format\": \"jsonl\", \"source_location_kind\": \"line\", \"accepted_source_lines\": 17, \"duplicate_lines\": 0, \"errors\": [], \"incident_groups\": 7, \"completed\": 7, \"failed\": 0, \"input_sha256\": \"6b205b4b32e8bb2807a3a98292ff8dd9b49183d2ef201b17175b22a201290a4a\", \"model\": \"gemini/gemini-4-argon\", \"status\": \"completed\", \"analysis_failures\": [], \"input_file_id\": \"603b38f6-a61a-4941-a804-121e72330852\", \"input_bytes\": 62315}, \"indicator_export\": {\"status\": \"created\", \"filename\": \"extracted_indicators.json\", \"file_id\": \"db737e2a-2613-46da-a032-1ca39dcf5440\", \"mime_type\": \"application/json\", \"schema\": \"alert-indicators/3\", \"observation_count\": 98}}",
+              "group": null
+            },
+            {
+              "type": "text",
+              "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+              "text": "[0s] Reading uploaded findings file.\n[1s] Validated 17 findings; 7 incident groups; 0 input issues.\n[1s] Extracted 98 indicator observations.\n[1s] Generating analyst context: group 1 of 7.\n[18s] Group 1 of 7: completed.\n[18s] Generating analyst context: group 2 of 7.\n[42s] Group 2 of 7: completed.\n[42s] Generating analyst context: group 3 of 7.\n[49s] Group 3 of 7: completed.\n[49s] Generating analyst context: group 4 of 7.\n[71s] Group 4 of 7: completed.\n[71s] Generating analyst context: group 5 of 7.\n[82s] Group 5 of 7: completed.\n[82s] Generating analyst context: group 6 of 7.\n[87s] Group 6 of 7: completed.\n[87s] Generating analyst context: group 7 of 7.\n[94s] Group 7 of 7: completed.\n[94s] Writing extracted_indicators.json.\n[95s] Indicator file created.\n",
+              "group": null
+            },
+            {
+              "type": "file",
+              "block_id": "block:file_first_e3bb952a2a164b2598eecab6effd5eed:tool_extension:indicator-export",
+              "file_id": "db737e2a-2613-46da-a032-1ca39dcf5440",
+              "name": "extracted_indicators.json",
+              "mime": "application/json"
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 17,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 18,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:generate_0bf1c89653414bfd8c7b:text:0",
+              "text": "Created extracted_indicators.json (alert-indicators/3). 17 accepted findings; 7 groups; 7 context analyses completed; 0 failed; 0 input errors. Run: completed.",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 19,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_fc119f42d7c135e6",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": "graph_completed"
+        },
+        "error": null
+      }
+    ],
+    "messages": [
+      {
+        "content": "Extract indicators and create the handoff JSON.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "ae9a1fcf-249c-4e1b-8aa7-ab8d80b9d7d2"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "74bbccc6-b725-45d1-a5db-a45d8cbffbe2",
+        "tool_calls": [
+          {
+            "name": "run_triage",
+            "args": {},
+            "id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"run\": {\"nonempty_lines\": 17, \"accepted_findings\": 17, \"input_format\": \"jsonl\", \"source_location_kind\": \"line\", \"accepted_source_lines\": 17, \"duplicate_lines\": 0, \"errors\": [], \"incident_groups\": 7, \"completed\": 7, \"failed\": 0, \"input_sha256\": \"6b205b4b32e8bb2807a3a98292ff8dd9b49183d2ef201b17175b22a201290a4a\", \"model\": \"gemini/gemini-4-argon\", \"status\": \"completed\", \"analysis_failures\": [], \"input_file_id\": \"603b38f6-a61a-4941-a804-121e72330852\", \"input_bytes\": 62315}, \"indicator_export\": {\"status\": \"created\", \"filename\": \"extracted_indicators.json\", \"file_id\": \"db737e2a-2613-46da-a032-1ca39dcf5440\", \"mime_type\": \"application/json\", \"schema\": \"alert-indicators/3\", \"observation_count\": 98}}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "run_triage",
+        "id": "1d3d34d4-89c0-4f11-af17-854639875999",
+        "tool_call_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+        "artifact": {
+          "indicator_export": {
+            "status": "created",
+            "filename": "extracted_indicators.json",
+            "file_id": "db737e2a-2613-46da-a032-1ca39dcf5440",
+            "mime_type": "application/json",
+            "schema": "alert-indicators/3",
+            "observation_count": 98
+          },
+          "triage_progress": {
+            "text": "[0s] Reading uploaded findings file.\n[1s] Validated 17 findings; 7 incident groups; 0 input issues.\n[1s] Extracted 98 indicator observations.\n[1s] Generating analyst context: group 1 of 7.\n[18s] Group 1 of 7: completed.\n[18s] Generating analyst context: group 2 of 7.\n[42s] Group 2 of 7: completed.\n[42s] Generating analyst context: group 3 of 7.\n[49s] Group 3 of 7: completed.\n[49s] Generating analyst context: group 4 of 7.\n[71s] Group 4 of 7: completed.\n[71s] Generating analyst context: group 5 of 7.\n[82s] Group 5 of 7: completed.\n[82s] Generating analyst context: group 6 of 7.\n[87s] Group 6 of 7: completed.\n[87s] Generating analyst context: group 7 of 7.\n[94s] Group 7 of 7: completed.\n[94s] Writing extracted_indicators.json.\n[95s] Indicator file created.\n"
+          }
+        },
+        "status": "success"
+      },
+      {
+        "content": "Created extracted_indicators.json (alert-indicators/3). 17 accepted findings; 7 groups; 7 context analyses completed; 0 failed; 0 input errors. Run: completed.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "2d9d223b-7b77-4e44-887a-3fb0520a5683",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      }
+    ]
+  },
+  "stream_events": [
+    {
+      "elapsed_seconds": 13.941,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "queued",
+        "phase": "queued"
+      }
+    },
+    {
+      "elapsed_seconds": 19.321,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "started",
+        "phase": "started"
+      }
+    },
+    {
+      "elapsed_seconds": 19.795,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "output_updated",
+        "output_checkpoint_id": "1f1d97b5-f894-6baf-8000-429a381bd17d",
+        "phase": "output_updated"
+      }
+    },
+    {
+      "elapsed_seconds": 19.802,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "ActionEvent",
+          "event_id": {
+            "step": 0,
+            "path": "dispatch",
+            "local": 0
+          },
+          "action_id": "act_fc119f42d7c135e6",
+          "actor": {
+            "id": "e717c04b-02a1-4084-bc2c-0792600af547",
+            "role": "user"
+          },
+          "op": "dispatch",
+          "payload": {
+            "message": null,
+            "files": [],
+            "inputs": {
+              "task": {
+                "intent": "dispatch",
+                "payload": {
+                  "parts": [
+                    {
+                      "slot": null,
+                      "type": "text",
+                      "text": "Extract indicators and create the handoff JSON."
+                    },
+                    {
+                      "slot": "sources",
+                      "type": "resource",
+                      "resource": {
+                        "type": "file",
+                        "id": "603b38f6-a61a-4941-a804-121e72330852"
+                      }
+                    }
+                  ]
+                }
+              },
+              "source_file_ids": []
+            },
+            "client_ref": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec"
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 20.008,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "ActionEvent",
+          "event_id": {
+            "step": 8,
+            "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+            "local": 0
+          },
+          "action_id": "generate_0e8ce9afecfd542e51a6",
+          "actor": {
+            "id": "model_4dd202f6f08f05988f75",
+            "role": "model"
+          },
+          "op": "generate",
+          "payload": {
+            "model": "gemini/gemini-4-argon"
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 20.059,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "OutcomeEvent",
+          "event_id": {
+            "step": 9,
+            "path": "('__pregel_pull', 'model')",
+            "local": 0
+          },
+          "action_id": "generate_0e8ce9afecfd542e51a6",
+          "payload": {
+            "blocks": [],
+            "structured": null,
+            "stop_reason": null
+          },
+          "error": null
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 20.059,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "ActionEvent",
+          "event_id": {
+            "step": 12,
+            "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+            "local": 0
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "actor": {
+            "id": "tool_92974319999c2e20d3ea",
+            "role": "agent"
+          },
+          "op": "tool",
+          "payload": {
+            "name": "run_triage",
+            "arguments": {}
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 20.059,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10000
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[0s] Reading uploaded findings file.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 21.061,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10002
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[1s] Validated 17 findings; 7 incident groups; 0 input issues.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 21.061,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10004
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[1s] Extracted 98 indicator observations.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 21.061,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10006
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[1s] Generating analyst context: group 1 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 38.408,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10008
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[18s] Group 1 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 38.408,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10010
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[18s] Generating analyst context: group 2 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 62.044,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10012
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[42s] Group 2 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 62.044,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10014
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[42s] Generating analyst context: group 3 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 68.552,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10016
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[49s] Group 3 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 68.602,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10018
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[49s] Generating analyst context: group 4 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 90.541,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10020
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[71s] Group 4 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 90.541,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10022
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[71s] Generating analyst context: group 5 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 102.052,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10024
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[82s] Group 5 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 102.052,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10026
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[82s] Generating analyst context: group 6 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 106.62,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10028
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[87s] Group 6 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 106.621,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10030
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[87s] Generating analyst context: group 7 of 7.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 114.47,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10032
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[94s] Group 7 of 7: completed.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 114.471,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10034
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[94s] Writing extracted_indicators.json.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 115.083,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "DeltaEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False):scope:triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+            "local": 10036
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "intent": "block_update",
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[95s] Indicator file created.\n"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 115.134,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "OutcomeEvent",
+          "event_id": {
+            "step": 13,
+            "path": "('__pregel_push', 0, False)",
+            "local": 0
+          },
+          "action_id": "file_first_e3bb952a2a164b2598eecab6effd5eed",
+          "payload": {
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "block:file_first_e3bb952a2a164b2598eecab6effd5eed:tool_text:0",
+                "text": "{\"run\": {\"nonempty_lines\": 17, \"accepted_findings\": 17, \"input_format\": \"jsonl\", \"source_location_kind\": \"line\", \"accepted_source_lines\": 17, \"duplicate_lines\": 0, \"errors\": [], \"incident_groups\": 7, \"completed\": 7, \"failed\": 0, \"input_sha256\": \"6b205b4b32e8bb2807a3a98292ff8dd9b49183d2ef201b17175b22a201290a4a\", \"model\": \"gemini/gemini-4-argon\", \"status\": \"completed\", \"analysis_failures\": [], \"input_file_id\": \"603b38f6-a61a-4941-a804-121e72330852\", \"input_bytes\": 62315}, \"indicator_export\": {\"status\": \"created\", \"filename\": \"extracted_indicators.json\", \"file_id\": \"db737e2a-2613-46da-a032-1ca39dcf5440\", \"mime_type\": \"application/json\", \"schema\": \"alert-indicators/3\", \"observation_count\": 98}}",
+                "group": null
+              },
+              {
+                "type": "text",
+                "block_id": "triage-progress:file_first_e3bb952a2a164b2598eecab6effd5eed",
+                "text": "[0s] Reading uploaded findings file.\n[1s] Validated 17 findings; 7 incident groups; 0 input issues.\n[1s] Extracted 98 indicator observations.\n[1s] Generating analyst context: group 1 of 7.\n[18s] Group 1 of 7: completed.\n[18s] Generating analyst context: group 2 of 7.\n[42s] Group 2 of 7: completed.\n[42s] Generating analyst context: group 3 of 7.\n[49s] Group 3 of 7: completed.\n[49s] Generating analyst context: group 4 of 7.\n[71s] Group 4 of 7: completed.\n[71s] Generating analyst context: group 5 of 7.\n[82s] Group 5 of 7: completed.\n[82s] Generating analyst context: group 6 of 7.\n[87s] Group 6 of 7: completed.\n[87s] Generating analyst context: group 7 of 7.\n[94s] Group 7 of 7: completed.\n[94s] Writing extracted_indicators.json.\n[95s] Indicator file created.\n",
+                "group": null
+              },
+              {
+                "type": "file",
+                "block_id": "block:file_first_e3bb952a2a164b2598eecab6effd5eed:tool_extension:indicator-export",
+                "file_id": "db737e2a-2613-46da-a032-1ca39dcf5440",
+                "name": "extracted_indicators.json",
+                "mime": "application/json"
+              }
+            ],
+            "structured": null,
+            "stop_reason": null
+          },
+          "error": null
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 115.134,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "ActionEvent",
+          "event_id": {
+            "step": 17,
+            "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+            "local": 0
+          },
+          "action_id": "generate_0bf1c89653414bfd8c7b",
+          "actor": {
+            "id": "model_4dd202f6f08f05988f75",
+            "role": "model"
+          },
+          "op": "generate",
+          "payload": {
+            "model": "gemini/gemini-4-argon"
+          }
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 115.134,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "OutcomeEvent",
+          "event_id": {
+            "step": 18,
+            "path": "('__pregel_pull', 'model')",
+            "local": 0
+          },
+          "action_id": "generate_0bf1c89653414bfd8c7b",
+          "payload": {
+            "blocks": [
+              {
+                "type": "text",
+                "block_id": "block:generate_0bf1c89653414bfd8c7b:text:0",
+                "text": "Created extracted_indicators.json (alert-indicators/3). 17 accepted findings; 7 groups; 7 context analyses completed; 0 failed; 0 input errors. Run: completed.",
+                "group": null
+              }
+            ],
+            "structured": null,
+            "stop_reason": null
+          },
+          "error": null
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 115.691,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "output_updated",
+        "output_checkpoint_id": "1f1d97b9-861b-6ecb-8015-631894e392e3",
+        "phase": "output_updated"
+      }
+    },
+    {
+      "elapsed_seconds": 116.128,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "payload": {
+          "type": "OutcomeEvent",
+          "event_id": {
+            "step": 19,
+            "path": "dispatch",
+            "local": 0
+          },
+          "action_id": "act_fc119f42d7c135e6",
+          "payload": {
+            "blocks": [],
+            "structured": null,
+            "stop_reason": "graph_completed"
+          },
+          "error": null
+        }
+      }
+    },
+    {
+      "elapsed_seconds": 116.133,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "output_updated",
+        "output_checkpoint_id": "1f1d97b9-8fc3-6f96-8016-b8ec35bd7aca",
+        "phase": "output_updated"
+      }
+    },
+    {
+      "elapsed_seconds": 116.304,
+      "data": {
+        "data": "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",
+        "index": 0,
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "output_chunk",
+        "output_checkpoint_id": "1f1d97b9-8fc3-6f96-8016-b8ec35bd7aca",
+        "phase": "output_chunk"
+      }
+    },
+    {
+      "elapsed_seconds": 116.306,
+      "data": {
+        "chunk_count": 1,
+        "inline": true,
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "output_finalized",
+        "output_bytes": 1753,
+        "output_checkpoint_id": "1f1d97b9-8fc3-6f96-8016-b8ec35bd7aca",
+        "phase": "output_finalized",
+        "sha256": "ae0e99fa442694bae7d36e678e1d1998ab33e0fb2388a20622792b5bb2f24153",
+        "uncompressed_size": 7716
+      }
+    },
+    {
+      "elapsed_seconds": 116.306,
+      "data": {
+        "invocation_id": "inv_dfd0e08f-d7fc-4924-bf7b-d74282d743ec",
+        "kind": "completed",
+        "phase": "completed"
+      }
+    }
+  ]
+}

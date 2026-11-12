@@ -1,0 +1,17 @@
+{
+  "environment": "scalegov-staging",
+  "tenant_id": "6a1099f9e1ca37ee1216d8c3",
+  "triage": {"agent_id": "d4ffbfc9-696f-4a5a-b174-75daaa1c993f", "version": "0.1.19", "active_latest": true, "source_file_id": "7529cf8a-a9c4-4578-9f49-2941fdb70c3b"},
+  "enrichment": {"agent_id": "420e63bd-8220-48bd-bada-743f0daea46c", "version": "0.1.0", "unchanged": true},
+  "local_tests": {"ran": 38, "passed": 35, "skipped_sdk": 3},
+  "enrichment_regression": {"ran": 24, "passed": 22, "skipped_sdk": 2, "core_fresh": true},
+  "package_check": {"ready": true, "blockers": [], "security_scan": "unknown_semgrep_unavailable"},
+  "local_probe": {"graph_imported": true, "turn_executed": false, "fault": "harness", "reason": "Probe sends messages, deployment requires task"},
+  "hosted_missing_input": {"invocation_id": "inv_2e07670b-6708-4e45-8413-8fc45b593e10", "thread_id": "7cc3d7d8-3748-4862-ac6d-0466bb4a7e87", "platform_status": "completed", "application_error": "missing_upload", "file_blocks": 0, "output_channels": ["messages", "render_events"]},
+  "hosted_sequence": {"invocation_id": "inv_c1274578-e198-49a3-9b1a-92a3323da108", "thread_id": "fba0dfa0-7ced-4d9e-910f-158892fed5f8", "input_file_id": "61827a37-3cb1-4a13-8445-cdf1e5ad8ded", "status": "completed", "acceptance": "passed", "triage_application_status": "partial", "accepted_findings": 17, "observations": 98, "context_completed": 6, "context_failed": 1,
+    "export_file_id": "53a024fc-ce09-43c9-88f2-2602c68746e0", "export_sha256": "ba6ec604f592b92dac2534f87e10f0ef0bb766ef74de3c3131f720796d0f5e36", "child_receipt_exact_match": true,
+    "child_invocation_id": "inv_39688264-d706-437f-baa6-2dca2cdaefe8", "child_thread_id": "1591e706-4f8f-46ba-aedd-4aa719357361", "child_version": "0.1.0", "child_platform_status": "completed", "child_application_status": "partial", "history_status": "not_configured", "query_count": 323, "not_configured_count": 323, "attempts": 1,
+    "child_files": ["49e98d14-257a-458f-b71d-c62478ec9544", "2eeb2391-eea7-4277-bbce-9cd476035cd1"], "child_file_metadata_http": [200, 200], "parent_file_blocks": 3, "child_file_blocks": 2, "paired_durable_events_verified": true, "output_channels": ["messages", "render_events"]},
+  "same_thread_no_stale_followup": {"invocation_id": "inv_d06eb5ed-fac2-4365-83c6-805235a1a89c", "status": "completed", "application_error": "missing_upload"},
+  "limitations": ["No distributed exactly-once guarantee across crash replay", "No AWS searches configured", "Three SDK tests not executed locally", "Donovan UI not tested", "Historical upload metadata MD5 differs from local fixture despite matching name/size; byte identity not assumed"]
+}

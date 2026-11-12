@@ -1,0 +1,14 @@
+{
+  "name": "historical_enrichment",
+  "version": "0.1",
+  "description": "Consumes Alert Triage handoffs and prepares historical network searches; AWS pending.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "historical_enrichment",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "alert-indicators/3",
+  "enrichment_status": "not_enriched",
+  "source": {"input_file_id": null, "input_sha256": "synthetic-example", "input_format": "jsonl", "source_location_kind": "line"},
+  "extraction": {"status": "completed", "accepted_findings": 1, "incident_groups": 1, "observation_count": 1, "errors": []},
+  "context_provenance": {"model": "test_stub", "interpretation": "Synthetic test data, not live analysis."},
+  "incidents": [{
+    "id": "incident-demo", "incident_key": "synthetic-demo",
+    "entity": {"type": "host", "id": "10.0.0.1", "site": "alpha"},
+    "time_window": {"start": "2026-11-03T12:00:00Z", "end": "2026-11-03T12:15:00Z"},
+    "analysis_status": "completed", "context_status": "available", "analysis_error": null,
+    "possible_explanations": ["Hypothesis: scheduled transfer."], "recommended_next_steps": [],
+    "limitations": ["Synthetic fixture."], "summary": "", "review_priority": "high",
+    "disposition": "needs_review", "source": ["synthetic-test"], "synthetic": true, "data_quality_issues": []
+  }],
+  "indicators": [{
+    "id": "observation-demo", "incident_id": "incident-demo",
+    "src": "10.0.0.1", "dst": "203.0.113.10", "protocol": "TCP",
+    "bytes_sent": 0, "bytes_received": null, "country": "ZZ",
+    "company": "Example Network", "src_site": "alpha",
+    "refs": [{"finding_id": "finding-demo", "source": 1, "evidence_index": 0, "null_fields": ["bytes_received"]}]
+  }]
+}

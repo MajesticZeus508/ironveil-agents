@@ -1,0 +1,471 @@
+{
+  "schema": "alert-recommendations/1",
+  "generated_at": "2026-11-09T15:40:59.360645+00:00",
+  "source_sha256": "d52ed10eed843dbbf99d1c7bc24560b917cc448af7ee2c3a4a2b2762ac0ec9a5",
+  "upstream": {
+    "enrichment_run": {
+      "status": "completed",
+      "query_count": 8,
+      "outcomes": {
+        "seen": 8
+      },
+      "errors": []
+    },
+    "extraction": {
+      "status": "completed",
+      "accepted_findings": 1,
+      "incident_groups": 1,
+      "observation_count": 1,
+      "errors": []
+    },
+    "history_source": {
+      "adapter": "local_history",
+      "dataset_id": "synthetic-history-demo",
+      "sha256": "3a2ad52d8f289a21cd17396dd8a41705aee3d0f43fb51f79c32ea50d194ea903",
+      "synthetic": true,
+      "coverage": {
+        "start": "2026-10-01T00:00:00Z",
+        "end": "2026-11-04T00:00:00Z",
+        "complete": true
+      },
+      "fields": [
+        "src",
+        "dst",
+        "protocol",
+        "src_site",
+        "dst_domain",
+        "dst_country",
+        "dst_company",
+        "dst_asn",
+        "dst_registered_org",
+        "bytes_sent",
+        "bytes_received"
+      ],
+      "valid_records": 3,
+      "duplicates_collapsed": 0,
+      "validation_errors": []
+    }
+  },
+  "provenance": {
+    "model": "gemini/gemini-4-argon",
+    "generation_method": "model",
+    "knowledge_basis": "learned cybersecurity knowledge applied to supplied evidence; no live intelligence",
+    "prompt_sha256": "f299e2d05be0c6883f31771f528dc3426e1885dfc2eba0c9dffa97f33ed83ac9"
+  },
+  "run": {
+    "status": "partial",
+    "incident_count": 1,
+    "completed": 0,
+    "failed": 1
+  },
+  "human_review_required": true,
+  "actions_executed": [],
+  "incidents": [
+    {
+      "incident_id": "incident-demo",
+      "entity": {
+        "type": "host",
+        "id": "10.0.0.1",
+        "site": "alpha"
+      },
+      "time_window": {
+        "start": "2026-11-03T12:00:00Z",
+        "end": "2026-11-03T12:15:00Z"
+      },
+      "synthetic": true,
+      "review_priority": "high",
+      "disposition": "needs_review",
+      "upstream_context_status": "available",
+      "evidence_catalog": {
+        "incident": {
+          "source_path": "/input/incidents/0",
+          "value": {
+            "id": "incident-demo",
+            "incident_key": "synthetic-demo",
+            "entity": {
+              "type": "host",
+              "id": "10.0.0.1",
+              "site": "alpha"
+            },
+            "time_window": {
+              "start": "2026-11-03T12:00:00Z",
+              "end": "2026-11-03T12:15:00Z"
+            },
+            "analysis_status": "completed",
+            "context_status": "available",
+            "analysis_error": null,
+            "possible_explanations": [
+              "Hypothesis: scheduled transfer."
+            ],
+            "recommended_next_steps": [],
+            "limitations": [
+              "Synthetic fixture."
+            ],
+            "summary": "",
+            "review_priority": "high",
+            "disposition": "needs_review",
+            "source": [
+              "synthetic-test"
+            ],
+            "synthetic": true,
+            "data_quality_issues": []
+          },
+          "kind": "triage_context_not_independent_evidence"
+        },
+        "O1": {
+          "source_path": "/input/indicators/0",
+          "kind": "supplied_observation",
+          "value": {
+            "id": "observation-demo",
+            "incident_id": "incident-demo",
+            "src": "10.0.0.1",
+            "dst": "203.0.113.10",
+            "protocol": "TCP",
+            "bytes_sent": 0,
+            "bytes_received": null,
+            "country": "ZZ",
+            "company": "Example Network",
+            "src_site": "alpha",
+            "refs": [
+              {
+                "finding_id": "finding-demo",
+                "source": 1,
+                "evidence_index": 0,
+                "null_fields": [
+                  "bytes_received"
+                ]
+              }
+            ]
+          }
+        },
+        "H1": {
+          "source_path": "/results/0",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30",
+            "incident_id": "incident-demo",
+            "kind": "ip_prevalence",
+            "criteria": {
+              "endpoint_ip": "10.0.0.1"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "indicator_key": "eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768",
+            "address_classification": "non_global",
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 1,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-20T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H2": {
+          "source_path": "/results/1",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_company": "Example Network"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H3": {
+          "source_path": "/results/2",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "57b1e14a12c85b490dd7e4ca096a49d2a64d9ebcb70bd7394661b528d448f240",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_registered_org": "Example Registry Organization"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H4": {
+          "source_path": "/results/3",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "5cb9575649624de672ef6fefa80951bdb952fcc82b0d5b86bea2c565628fa484",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_asn": 64512
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H5": {
+          "source_path": "/results/4",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec",
+            "incident_id": "incident-demo",
+            "kind": "ip_prevalence",
+            "criteria": {
+              "endpoint_ip": "203.0.113.10"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "indicator_key": "6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc",
+            "address_classification": "non_global",
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H6": {
+          "source_path": "/results/5",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184",
+            "incident_id": "incident-demo",
+            "kind": "directed_activity_tuple",
+            "criteria": {
+              "src": "10.0.0.1",
+              "dst": "203.0.113.10",
+              "protocol": "TCP",
+              "src_site": "alpha"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 1,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-20T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H7": {
+          "source_path": "/results/6",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "a4745e2d2426ccd5d03b0d83d2687a5e96715d694578de98bcd04a78ea1ec1bf",
+            "incident_id": "incident-demo",
+            "kind": "domain_prevalence",
+            "criteria": {
+              "dst_domain": "transfer.example"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "H8": {
+          "source_path": "/results/7",
+          "kind": "historical_result",
+          "value": {
+            "query_id": "f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5",
+            "incident_id": "incident-demo",
+            "kind": "attribute_prevalence",
+            "criteria": {
+              "dst_country": "ZZ"
+            },
+            "window": {
+              "start": "2026-10-04T12:00:00+00:00",
+              "end_exclusive": "2026-11-03T12:00:00+00:00"
+            },
+            "observation_ids": [
+              "observation-demo"
+            ],
+            "status": "seen",
+            "search_complete": true,
+            "matched_record_count": 2,
+            "first_seen": "2026-10-20T10:00:00+00:00",
+            "last_seen": "2026-10-21T10:01:00+00:00",
+            "samples": [
+              {
+                "record_id": "prior-same-activity",
+                "record_index": 1,
+                "start": "2026-10-20T10:00:00+00:00",
+                "end": "2026-10-20T10:01:00+00:00"
+              },
+              {
+                "record_id": "prior-other-source",
+                "record_index": 2,
+                "start": "2026-10-21T10:00:00+00:00",
+                "end": "2026-10-21T10:01:00+00:00"
+              }
+            ],
+            "samples_truncated": false
+          }
+        },
+        "C1": {
+          "source_path": "/supplemental_context/observations/0",
+          "kind": "operator_supplied_unverified_context",
+          "value": {
+            "observation_id": "observation-demo",
+            "source": "synthetic operator-supplied example",
+            "dst_domain": "Transfer.Example.",
+            "dst_asn": 64512,
+            "dst_registered_org": "Example Registry Organization"
+          }
+        }
+      },
+      "narrative": null,
+      "analysis_status": "failed",
+      "analysis_error": "validation_rejected"
+    }
+  ],
+  "limitations": [
+    "Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.",
+    "Training knowledge is not fresh threat intelligence or evidence of this incident.",
+    "No automatic actions. Confirm authority, business impact and evidence before response.",
+    "The v3 handoff omits full detector metrics/baselines, domains and registration inventory."
+  ]
+}

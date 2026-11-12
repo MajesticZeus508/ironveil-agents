@@ -1,0 +1,8 @@
+# Owned by the scaffold — never hand-write this file. Three dependencies:
+# SAK (the CompletionAgent), sling-agent
+# (the coding factory), and ripgrep (grep/glob). sling-agent==0.1.0 is
+# what this checkout declares and has never been released; 0.1.0.dev6 is
+# the newest wheel with a GitHub release asset.
+spark-agent-kit==0.50.0
+sling-agent==0.1.0.dev6
+ripgrep-bin==15.2.0

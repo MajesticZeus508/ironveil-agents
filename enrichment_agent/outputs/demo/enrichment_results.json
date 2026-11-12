@@ -1,0 +1,429 @@
+{
+  "schema": "alert-enrichment/1",
+  "generated_at": "2026-11-07T20:10:29.288913+00:00",
+  "input": {
+    "schema": "alert-indicators/3",
+    "enrichment_status": "not_enriched",
+    "source": {
+      "input_file_id": null,
+      "input_sha256": "synthetic-example",
+      "input_format": "jsonl",
+      "source_location_kind": "line"
+    },
+    "extraction": {
+      "status": "completed",
+      "accepted_findings": 1,
+      "incident_groups": 1,
+      "observation_count": 1,
+      "errors": []
+    },
+    "context_provenance": {
+      "model": "test_stub",
+      "interpretation": "Synthetic test data, not live analysis."
+    },
+    "incidents": [
+      {
+        "id": "incident-demo",
+        "incident_key": "synthetic-demo",
+        "entity": {
+          "type": "host",
+          "id": "10.0.0.1",
+          "site": "alpha"
+        },
+        "time_window": {
+          "start": "2026-11-03T12:00:00Z",
+          "end": "2026-11-03T12:15:00Z"
+        },
+        "analysis_status": "completed",
+        "context_status": "available",
+        "analysis_error": null,
+        "possible_explanations": [
+          "Hypothesis: scheduled transfer."
+        ],
+        "recommended_next_steps": [],
+        "limitations": [
+          "Synthetic fixture."
+        ],
+        "summary": "",
+        "review_priority": "high",
+        "disposition": "needs_review",
+        "source": [
+          "synthetic-test"
+        ],
+        "synthetic": true,
+        "data_quality_issues": []
+      }
+    ],
+    "indicators": [
+      {
+        "id": "observation-demo",
+        "incident_id": "incident-demo",
+        "src": "10.0.0.1",
+        "dst": "203.0.113.10",
+        "protocol": "TCP",
+        "bytes_sent": 0,
+        "bytes_received": null,
+        "country": "ZZ",
+        "company": "Example Network",
+        "src_site": "alpha",
+        "refs": [
+          {
+            "finding_id": "finding-demo",
+            "source": 1,
+            "evidence_index": 0,
+            "null_fields": [
+              "bytes_received"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "input_sha256": "47db40e90cfddd29843cf11a6c8af6031788f922e50857e70b546446c766fe63",
+  "supplemental_context": {
+    "schema": "enrichment-context/1",
+    "observations": [
+      {
+        "observation_id": "observation-demo",
+        "source": "synthetic operator-supplied example",
+        "dst_domain": "Transfer.Example.",
+        "dst_asn": 64512,
+        "dst_registered_org": "Example Registry Organization"
+      }
+    ]
+  },
+  "context_sha256": "7922530bfdad06a4fea9ad912115d0426319e4cc8d2361a0f35d8c34a7738e49",
+  "source": {
+    "adapter": "local_history",
+    "dataset_id": "synthetic-history-demo",
+    "sha256": "3a2ad52d8f289a21cd17396dd8a41705aee3d0f43fb51f79c32ea50d194ea903",
+    "synthetic": true,
+    "coverage": {
+      "start": "2026-10-01T00:00:00Z",
+      "end": "2026-11-04T00:00:00Z",
+      "complete": true
+    },
+    "fields": [
+      "src",
+      "dst",
+      "protocol",
+      "src_site",
+      "dst_domain",
+      "dst_country",
+      "dst_company",
+      "dst_asn",
+      "dst_registered_org",
+      "bytes_sent",
+      "bytes_received"
+    ],
+    "valid_records": 3,
+    "duplicates_collapsed": 0,
+    "validation_errors": []
+  },
+  "run": {
+    "status": "completed",
+    "query_count": 8,
+    "outcomes": {
+      "seen": 8
+    },
+    "errors": []
+  },
+  "policy": {
+    "lookback_days": 30,
+    "sample_limit": 5,
+    "history_interval": "[incident_start-lookback, incident_start); whole records only",
+    "activity_match": "directed src/dst + protocol + src_site; not anomaly recurrence"
+  },
+  "capabilities": {
+    "domain_input": "supplemental_context_only; full domain inventory absent from v3",
+    "registration_input": "supplemental_context_only; company is only a supplied label",
+    "location_input": "v3 destination country label only",
+    "aws": "not_connected"
+  },
+  "limitations": [
+    "Seen before does not establish benign activity or compromise.",
+    "Negative results apply only to declared complete history and the exact criteria/window.",
+    "Counts are matched records, not independent connections; incomplete counts are lower bounds.",
+    "Attribute prevalence does not establish that the same endpoint or behavior occurred.",
+    "IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.",
+    "V3 omits domains, related-only indicators and full registration attributes.",
+    "Current input hypotheses are untrusted context and do not drive queries."
+  ],
+  "results": [
+    {
+      "query_id": "00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30",
+      "incident_id": "incident-demo",
+      "kind": "ip_prevalence",
+      "criteria": {
+        "endpoint_ip": "10.0.0.1"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "indicator_key": "eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768",
+      "address_classification": "non_global",
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 1,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-20T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235",
+      "incident_id": "incident-demo",
+      "kind": "attribute_prevalence",
+      "criteria": {
+        "dst_company": "Example Network"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "57b1e14a12c85b490dd7e4ca096a49d2a64d9ebcb70bd7394661b528d448f240",
+      "incident_id": "incident-demo",
+      "kind": "attribute_prevalence",
+      "criteria": {
+        "dst_registered_org": "Example Registry Organization"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "5cb9575649624de672ef6fefa80951bdb952fcc82b0d5b86bea2c565628fa484",
+      "incident_id": "incident-demo",
+      "kind": "attribute_prevalence",
+      "criteria": {
+        "dst_asn": 64512
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec",
+      "incident_id": "incident-demo",
+      "kind": "ip_prevalence",
+      "criteria": {
+        "endpoint_ip": "203.0.113.10"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "indicator_key": "6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc",
+      "address_classification": "non_global",
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184",
+      "incident_id": "incident-demo",
+      "kind": "directed_activity_tuple",
+      "criteria": {
+        "src": "10.0.0.1",
+        "dst": "203.0.113.10",
+        "protocol": "TCP",
+        "src_site": "alpha"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 1,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-20T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "a4745e2d2426ccd5d03b0d83d2687a5e96715d694578de98bcd04a78ea1ec1bf",
+      "incident_id": "incident-demo",
+      "kind": "domain_prevalence",
+      "criteria": {
+        "dst_domain": "transfer.example"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    },
+    {
+      "query_id": "f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5",
+      "incident_id": "incident-demo",
+      "kind": "attribute_prevalence",
+      "criteria": {
+        "dst_country": "ZZ"
+      },
+      "window": {
+        "start": "2026-10-04T12:00:00+00:00",
+        "end_exclusive": "2026-11-03T12:00:00+00:00"
+      },
+      "observation_ids": [
+        "observation-demo"
+      ],
+      "status": "seen",
+      "search_complete": true,
+      "matched_record_count": 2,
+      "first_seen": "2026-10-20T10:00:00+00:00",
+      "last_seen": "2026-10-21T10:01:00+00:00",
+      "samples": [
+        {
+          "record_id": "prior-same-activity",
+          "record_index": 1,
+          "start": "2026-10-20T10:00:00+00:00",
+          "end": "2026-10-20T10:01:00+00:00"
+        },
+        {
+          "record_id": "prior-other-source",
+          "record_index": 2,
+          "start": "2026-10-21T10:00:00+00:00",
+          "end": "2026-10-21T10:01:00+00:00"
+        }
+      ],
+      "samples_truncated": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "domain": "Example.ORG.",
+  "hostname": "Updates.Example.Org",
+  "url": "https://UPDATES.EXAMPLE.ORG/path",
+  "dns_name": "bad..example.org",
+  "company": "AMAZON.COM INC",
+  "asn": 64512,
+  "registered_organization": "Supplied test organization"
+}

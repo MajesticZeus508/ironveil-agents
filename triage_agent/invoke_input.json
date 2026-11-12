@@ -1,0 +1,21 @@
+{
+  "task": {
+    "intent": "dispatch",
+    "payload": {
+      "parts": [
+        {
+          "type": "text",
+          "text": "Extract indicators and create the handoff JSON."
+        },
+        {
+          "type": "resource",
+          "slot": "sources",
+          "resource": {
+            "type": "file",
+            "id": "61827a37-3cb1-4a13-8445-cdf1e5ad8ded"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "task": {
+    "intent": "dispatch",
+    "payload": {
+      "parts": [
+        {
+          "type": "text",
+          "text": "Enrich the supplied triage handoff."
+        },
+        {
+          "type": "resource",
+          "slot": "sources",
+          "resource": {
+            "type": "file",
+            "id": "9b7d4c41-52ca-45ce-85fc-51d7d0440189"
+          }
+        }
+      ]
+    }
+  }
+}
+

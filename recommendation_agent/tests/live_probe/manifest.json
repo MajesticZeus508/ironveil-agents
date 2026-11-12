@@ -1,0 +1,14 @@
+{
+  "name": "recommendation_verification",
+  "version": "0.1",
+  "description": "Local-only Recommendation Agent acceptance probe; never publish.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "recommendation_verification",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}
