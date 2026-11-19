@@ -1,5 +1,25 @@
 # Dev migration — 2026-11-10
 
+**SGP v8 follow-up (2026-11-19 UTC):** configuration-only releases active/latest as
+Triage **0.1.31**, Enrichment **0.1.6**, Recommendation **0.1.10**, reusing the same
+source bundles with explicit `platform-sgp-runtime-http-v8` access. Dev names now
+match staging: **IronVeil Investigation — Start Here**, **IronVeil Historical
+Enrichment**, **IronVeil Recommendations**. Policy pinning confirmed; see
+[deployment and verification evidence](DEV_SGP_V8_RELEASE_2026_11_19.md) for status.
+All five expected export types were created across the Triage test and direct
+receiver tests; [downstream receipts and file IDs](DEV_DOWNSTREAM_WRITES_2026_11_19.md).
+Automatic Dev orchestration remains blocked by `structured_handoff_unavailable`;
+this is file-write acceptance, not full-chain acceptance. Staging unchanged.
+
+**Prior diagnostic release (operator-local 2026-11-18 / AMS 2026-11-19 UTC):**
+Triage **0.1.30**, Enrichment **0.1.5**, Recommendation **0.1.9**, all active/latest
+before one synthetic LUX chain. Existing Dev names preserved; staging unchanged.
+Both structured handoffs completed, but all three managed writes report
+`missing_sgp_configuration`, request_may_have_been_sent=false; **zero attachments**.
+Recommendation analysis failed 0/1 (`model_request_failed`). Exact IDs, bundles,
+receipts, diagnostics and verification limits:
+[Dev diagnostic release evidence](DEV_DIAGNOSTIC_RELEASE_2026_11_18.md).
+
 **Polling retry follow-up:** see [bounded polling release evidence](POLLING_RETRIES_2026-11-10.md)
 for entry 0.1.25; the migration checkpoint below is retained as history.
 

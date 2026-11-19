@@ -1,5 +1,14 @@
 # Current IronVeil workflow and handoffs
 
+**Dev checkpoint (2026-11-19):** Triage **0.1.31**, Enrichment **0.1.6**,
+Recommendations **0.1.10**, all published and active/latest. Explicit SGP v8
+policy attachment enabled confirmed exports: one Triage file plus four files
+from separately invoked file-mode receivers. The automatic Dev LUX chain stops
+at `submit_enrichment` with `structured_handoff_unavailable`; do not equate direct
+receiver success with repaired orchestration. See [Dev release](DEV_SGP_V8_RELEASE_2026_11_19.md)
+and [downstream evidence](DEV_DOWNSTREAM_WRITES_2026_11_19.md). Staging checkpoint
+below is historical and was not changed or freshly tested by this work.
+
 Checkpoint: **2026-11-18**, ScaleGov staging / platform. Entry **0.1.30**,
 Enrichment **0.1.5**, Recommendations (also called Reporting) **0.1.9**.
 See [release evidence](DIAGNOSTIC_RELEASE_2026_11_18.md),

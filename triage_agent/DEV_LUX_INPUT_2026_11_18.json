@@ -1,0 +1,38 @@
+{
+  "task": {
+    "intent": "dispatch",
+    "payload": {
+      "parts": [{
+        "type": "form",
+        "slot": "lux_event",
+        "params": {
+          "event": {
+            "entity": {"id": null, "site": null, "type": "unknown"},
+            "schema": "swoop-ueba-finding/1",
+            "source": "swoop/valhalla/simulated",
+            "z_score": 28.660076761934885,
+            "baseline": {"mean": 0.0625, "std_dev": 0.24206145913796356, "windows": 16, "zero_variance": false},
+            "detector": "to AMS egress_volume",
+            "evidence": [
+              {"dst": "45.19.162.246", "src": "192.168.75.251", "time": "2026-11-13T15:21:00.390+0000", "company": "DIGITALOCEAN LLC", "country": "SINGAPORE", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 27624271461, "egress_band": "large", "bytes_received": 32931, "bytes_sent_z_score": null},
+              {"dst": "209.140.95.36", "src": "192.168.75.251", "time": "2026-11-13T15:27:25.366+0000", "company": "DIGITALOCEAN LLC", "country": "CANADA", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 19970070334, "egress_band": "large", "bytes_received": 6909394, "bytes_sent_z_score": null},
+              {"dst": "47.74.147.130", "src": "192.168.75.251", "time": "2026-11-13T15:24:34.080+0000", "company": "DIGITALOCEAN LLC", "country": "UNITED STATES", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 21502427989, "egress_band": "large", "bytes_received": 1666491, "bytes_sent_z_score": null},
+              {"dst": "7.226.124.164", "src": "192.168.75.251", "time": "2026-11-13T15:24:13.633+0000", "company": "DIGITALOCEAN LLC", "country": "GERMANY", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 28293982282, "egress_band": "large", "bytes_received": 8837583, "bytes_sent_z_score": null},
+              {"dst": "31.28.242.253", "src": "192.168.75.251", "time": "2026-11-13T15:20:24.965+0000", "company": "DIGITALOCEAN LLC", "country": "UNITED STATES", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 9367433532, "egress_band": "large", "bytes_received": 1100643, "bytes_sent_z_score": null},
+              {"dst": "184.126.60.157", "src": "192.168.75.251", "time": "2026-11-13T15:25:15.034+0000", "company": "DIGITALOCEAN LLC", "country": "UNITED KINGDOM", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 8472554780, "egress_band": "large", "bytes_received": 6320983, "bytes_sent_z_score": null},
+              {"dst": "146.93.235.197", "src": "192.168.75.251", "time": "2026-11-13T15:26:33.591+0000", "company": "LINODE LLC", "country": "SWEDEN", "protocol": "TCP", "src_site": "Minnehaha", "bytes_sent": 1350049203, "egress_band": "large", "bytes_received": 5122127, "bytes_sent_z_score": null}
+            ],
+            "measures": "unknown",
+            "observed": 7,
+            "severity": "high",
+            "finding_id": "53e709b3-388f-4fc2-ac4f-ed09bbec912c",
+            "time_window": {"end": "2026-11-13T15:29:59.999Z", "start": "2026-11-13T15:15:00.000Z"},
+            "incident_key": "unknown:None@2026-11-13T15:15:00.000Z",
+            "normalcy_score": 1.2005821151984008e-180,
+            "related_entities": ["146.93.235.197", "184.126.60.157", "192.168.75.251", "209.140.95.36", "31.28.242.253", "45.19.162.246", "47.74.147.130", "7.226.124.164"]
+          }
+        }
+      }]
+    }
+  }
+}

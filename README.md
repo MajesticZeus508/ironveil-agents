@@ -6,6 +6,18 @@ and documentation live in its own directory.
 
 ## Start here
 
+**Dev update (2026-11-19):** IronVeil Triage **0.1.31**, Enrichment **0.1.6**,
+Recommendations **0.1.10** are published and freshly rechecked active/latest in
+Dev tenant `69dfa4b844ff488d98b2674f`. Explicit platform-managed
+`platform-sgp-runtime-http-v8` access cleared the tested file-write blocker:
+Triage created one file and direct receiver tests created all four downstream
+exports, with confirmed attachments and metadata/readback evidence. **Automatic
+Dev orchestration is not fixed:** the LUX chain stopped before Enrichment with
+`structured_handoff_unavailable`. Staging was not changed or freshly retested.
+See [Dev release](triage_agent/DEV_SGP_V8_RELEASE_2026_11_19.md),
+[Triage acceptance](triage_agent/DEV_SGP_V8_ACCEPTANCE_2026_11_19.md), and
+[downstream verification](triage_agent/DEV_DOWNSTREAM_WRITES_2026_11_19.md).
+
 **Open IronVeil Investigation — Start Here in Donovan staging and upload your
 findings.** It performs triage, calls Historical Enrichment, then calls
 Recommendations automatically. You do not need to run the supporting agents
@@ -105,4 +117,5 @@ Historical reviews, release ledgers, snapshots and generated reports are retaine
 They describe their own checkpoints, not current deployment status. On 2026-11-12,
 the three staging display names and descriptions were updated to clarify roles;
 agent IDs, versions, source bundles, discovery metadata and workflow behavior
-were unchanged. Dev names and historical release artifacts were not renamed.
+were unchanged. On 2026-11-19 the three Dev display names were aligned with
+staging; historical release artifacts retain their original names.
