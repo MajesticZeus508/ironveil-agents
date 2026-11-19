@@ -1,4 +1,107 @@
-# Recommendation Agent verification — 2026-11-09
+# Recommendation Agent verification ledger
+
+## Diagnostic release — 2026-11-18
+
+**0.1.9 active/latest**, source 50a2c135-0e1c-4a79-a015-ead7e6a3bbc2. Hosted
+child inv_6b4b2937-7f9f-4305-8ad0-394a83f75a02 completed 1/1 analyses;
+file write stopped before dispatch: missing_sgp_configuration, ValueError,
+request_may_have_been_sent=false. No attachment claimed. Suite 26/26 passed.
+See [joint release](../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
+## Historical implementation checkpoint — diagnostics before publication
+
+Added pod-owned `ams/file_writes.py` and per-export/top-level safe diagnostics.
+Existing source receipt, reports and inference unchanged; no raw error text,
+automatic retry or false attachment. SDK 0.50.0 suite **26/26 passed**; cross-pod
+diagnostic and five-stage tests in Triage passed. No deployed update.
+See [diagnostic contract](../triage_agent/FILE_WRITE_DIAGNOSTICS.md).
+
+## SDK/full-chain follow-up — 2026-11-17
+
+Installed Agent Kit 0.50.0 runtime executes **26/26 tests, no skips**. Actual
+five-stage SDK/checkpoint chain with real receivers and stub inference/storage
+passes despite both intermediate file writes failing. Source uploaded as
+`30f2a1dc-34cb-4ff2-ae3b-c04557a29d1b`; one 0.1.8 publish request failed at
+staging ARP outbound-policy authentication dependency (503). Read-only
+reconciliation still shows 0.1.7 active/latest, no 0.1.8. No retry. Hosted
+inference/storage/Donovan acceptance blocked. See
+[joint ledger](../triage_agent/STRUCTURED_CHAIN_RELEASE_2026_11_17.md).
+
+## Structured receiver — 2026-11-17 (unpublished)
+
+Receiver-only implementation in `recommendation_agent/`: explicit full-enrichment
+Harness form alongside existing managed files, exactly one input mode, finite
+bounded JSON, current-turn replacement and canonical payload-hash tool receipt.
+Existing model/prompt/core, output report schemas, history availability, human
+review and no-action/no-retry rules unchanged by this pass. Existing LUX edits
+preserved. No Enrichment/Triage forwarding change, release snapshot edit or publish.
+
+Baseline: 20 discovered, 19 passed, one SDK skip. Final local regression:
+**26 discovered, 24 passed, two SDK skips**; `git diff --check` passed.
+New stub-only tests cover mode
+ambiguity, prose/non-JSON/nonfinite/oversized/deep input, existing semantic
+joins/counts/coverage guards before inference, canonical receipts, file/form
+report equivalence, real local LUX/Enrichment unknown-identity data, independent
+requests and no stale fallback, and uncertain writes without retry. SDK envelope
+roundtrip/reset/output-channel checks are included but require Agent Kit.
+No live model, real managed storage, hosted invocation, new scaffold, package
+check or managed probe run; old package/release evidence does not certify these
+bytes. SDK/checkpointer/hosted acceptance and security/package checks remain
+release gates, with explicit operator approval required before publication.
+
+See [exact form and hash contract](CONTRACT.md#structured-receiver-local-unpublished).
+
+**2026-11-17 rebuild result:** **0.1.7 active/latest**; unchanged uploaded source,
+original display name verified. Fresh hosted invocation completed with expected
+`missing_enrichment`; prior serializer startup blocker cleared. This is readiness,
+not full-chain/inference acceptance. See [recovery evidence](../triage_agent/STAGING_SERIALIZER_RECHECK_2026_11_17.md).
+
+**2026-11-17 recheck:** fresh invocation of 0.1.6 still fails at the Harness
+serializer startup guard. Operator authorized unchanged-source rebuild **0.1.7**;
+see [rebuild and readiness record](../triage_agent/STAGING_SERIALIZER_RECHECK_2026_11_17.md).
+No application/dependency changes made for this rebuild.
+
+**2026-11-16 publication approved:** **0.1.6** is active/latest on the existing
+staging agent with display name **IronVeil Recommendations** verified intact.
+See [joint release evidence](../triage_agent/STAGING_LUX_RELEASE_0_1_27.md).
+The local-only statements below describe the preceding implementation pass.
+
+**2026-11-16 local follow-up:** fixed prompt generalized unknown-measure guidance
+to the newly reviewed site/company labels. Real local Triage/Enrichment → stub
+Recommendation regressions pass. Plain CLI: 20 tests, 19 passed/one SDK skip.
+No publish. See [diagnosis and verification](../triage_agent/LUX_COMPATIBILITY_2026_11_16.md).
+
+## LUX compatibility follow-up — 2026-11-13
+
+**Approved release follow-up:** **0.1.5** publication submitted on the existing
+staging agent, explicitly retaining **IronVeil Recommendations**. Now active/latest;
+hosted missing-input smoke passed. See [joint release status](../triage_agent/STAGING_LUX_RELEASE_0_1_26.md).
+The no-publication statements below describe the preceding local test pass.
+
+Local-only update authorized after inspection of the captured staging payload.
+Changed `ams/core.py` validation, fixed prompt, partial-status handling and report
+warnings. Exact unresolved synthetic shape only; no inferred host/site, metric
+alias, schema migration, new source, dependency/API change, retry or action.
+
+The new integration test runs the captured seven-row finding through real local
+Triage extraction/export, real Enrichment with `UnconfiguredAWSHistory`, then
+Recommendation packet validation, stub narrative validation and stub managed-file
+exports. It checks original entity/catalog/quality values, no input mutation,
+partial status, both reports and zero actions. Additional tests reject malformed
+unknown shapes/sources and retain warnings on model failure. Existing known-entity
+regressions still pass. No Enrichment source changed.
+
+Managed local `builder_probe(triage_agent/tests/reliability_verify)` returned
+`SDK tests and five-stage checkpoint workflow passed`: **72 Triage + 19
+Recommendation tests passed, zero skips**, in the pinned 0.50.0 runtime.
+Suite durations: 143.702s / 0.079s. Probe recorded 12 gateway calls, zero refusals;
+Recommendation compatibility narratives use stubs, not fresh Argon semantic
+acceptance. Existing checkpoint future-registration warning remains.
+
+`builder_check(recommendation_agent/ams)`: ready=true, zero blockers; Semgrep
+unavailable, security scan unknown. Production fixture/pins unchanged. No publish,
+hotswap, live rule mutation, hosted invocation or Git commit. Hosted event-path
+acceptance and live narrative assessment remain separate approval gates.
 
 **Staging rebuild 2026-11-10:** unchanged source published as 0.1.4, active/latest;
 hosted missing-enrichment check passed. See

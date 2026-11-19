@@ -1,6 +1,15 @@
 # Build verification
 
-## Current housekeeping checkpoint
+## Current checkpoint — 2026-11-18
+
+Staging entry **0.1.30**, Enrichment **0.1.5**, Reporting **0.1.9** active/latest.
+Full SDK suites **91/34/26 passed, zero skips**. Both structured handoffs and
+1/1 live incident analysis completed; no files confirmed. All writes stopped
+before dispatch with missing_sgp_configuration. [Exact release evidence](DIAGNOSTIC_RELEASE_2026_11_18.md),
+[current workflow](WORKFLOW.md), [evaluation](../EVALUATION.md).
+No code/release/model test performed for the documentation-only pass.
+
+## Historical housekeeping checkpoint — 0.1.24
 
 Live AMS: entry **0.1.24**, Enrichment **0.1.3**, Recommendation **0.1.4**, all
 active/latest. Fresh CLI Triage regression **60 discovered / 44 passed / 16 skipped**,

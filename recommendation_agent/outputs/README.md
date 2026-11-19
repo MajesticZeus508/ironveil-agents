@@ -26,7 +26,12 @@ Hosted receipt/status/attachment evidence is summarized in
 [`../VERIFICATION.md`](../VERIFICATION.md). It is a selected non-secret evidence
 record from API inspection, not a raw thread dump or downloaded report-content audit.
 
-Latest hosted five-run results are indexed in the
+Historical hosted five-run results are indexed in the
 [staging ledger](../../triage_agent/STAGING_PERFORMANCE_2026-11-11.md), not these
 older one-incident local examples. The 25 hosted files are not fully downloaded
 into this workspace; [recovery gaps](../../AMS_INVENTORY.md) remain explicit.
+
+Latest diagnostic release (0.1.9, Nov 18) completed 1/1 analysis through the
+structured chain but created no confirmed files: missing staging SGP runtime
+configuration prevented dispatch. No files from that run are claimed recovered
+here. See [diagnostic ledger](../../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).

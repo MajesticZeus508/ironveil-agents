@@ -3,6 +3,11 @@ from copy import deepcopy
 import hashlib
 import json
 
+if __package__:
+    from .file_writes import write_once
+else:
+    from file_writes import write_once
+
 
 def build_triage_context(group, run):
     # incident_key alone is not unique: grouping also includes entity and window.
@@ -111,22 +116,16 @@ def build_indicator_export(results):
             "incidents": incidents, "indicators": indicators}
 
 
-async def save_indicator_export(results, store):
-    export = build_indicator_export(results)
+async def save_indicator_export(results, store, *, handoff=None):
+    export = build_indicator_export(results) if handoff is None else handoff
     filename = "extracted_indicators.json"
     content = json.dumps(export, separators=(",", ":"), ensure_ascii=False, allow_nan=False) + "\n"
-    try:
-        response = await store.write_file(filename, content, mime_type="application/json")
-        body = getattr(response, "body", None)
-        file_id = body.get("id") if isinstance(body, dict) else None
-        if not isinstance(file_id, str) or not file_id:
-            return {"status": "failed", "filename": filename, "error": "indicator_file_write_failed",
-                    "http_status": getattr(response, "status", None)}
-        return {"status": "created", "filename": filename, "file_id": file_id,
-                "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
-                "mime_type": "application/json", "schema": export["schema"],
-                "observation_count": len(export["indicators"])}
-    except Exception:
-        # Upload may have succeeded before a lost response; never automatically retry.
+    file_id, failure = await write_once(store, filename, content, "application/json")
+    if failure is not None:
         return {"status": "failed", "filename": filename, "error": "indicator_file_write_unconfirmed",
+                "http_status": failure["http_status"], "write_diagnostic": failure,
                 "message": "No automatic retry; file creation may have occurred. Deterministic results remain available."}
+    return {"status": "created", "filename": filename, "file_id": file_id,
+            "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+            "mime_type": "application/json", "schema": export["schema"],
+            "observation_count": len(export["indicators"])}

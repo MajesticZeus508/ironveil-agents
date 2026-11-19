@@ -1,0 +1,14 @@
+{
+  "name": "alert_triage",
+  "version": "0.1",
+  "description": "Grounded synthetic UEBA alert triage with deterministic indicators and validated reports.",
+  "contributions": {
+    "agents": [
+      {
+        "name": "alert_triage",
+        "kind": "pod",
+        "graph": "graph"
+      }
+    ]
+  }
+}

@@ -124,8 +124,15 @@ def validate(data):
         key = text(incident.get("id"))
         require(key not in by_id, "duplicate_incident")
         require(isinstance(incident.get("entity"), dict), "invalid_entity")
-        text(incident["entity"].get("id"))
-        require(incident["entity"].get("type") in {"host", "external_service", "site"}, "invalid_entity_type")
+        entity = incident["entity"]
+        if entity.get("type") == "unknown":
+            require(set(entity) == {"type", "id", "site"} and entity["id"] is None and entity["site"] is None,
+                    "invalid_unresolved_entity")
+            require(incident.get("synthetic") is True and incident.get("source") == ["swoop/valhalla/simulated"],
+                    "unsupported_unresolved_entity_source")
+        else:
+            text(entity.get("id"))
+            require(entity.get("type") in {"host", "external_service", "site"}, "invalid_entity_type")
         window(incident.get("time_window"))
         require(incident.get("review_priority") in PRIORITIES, "invalid_priority")
         require(type(incident.get("synthetic")) is bool, "invalid_synthetic")
@@ -272,6 +279,16 @@ Sample bytes are not incident totals; direction is assumed relative to src. Zero
 is not missing. Missing detector/baseline/ports/DNS/endpoint/business context must not
 be reconstructed from incident names or remembered examples. Fanout is not proven
 scanning, high outbound bytes not proven exfiltration, shared destinations not proven C2.
+
+An entity with type 'unknown' and null id/site is unresolved. Do not promote an
+observation src, dst, src_site, related value or placeholder incident key into entity
+identity, even when every observation agrees. Propose authorized identity verification
+as a human check, not as an accomplished fact. Supplied observation IPs remain leads.
+For any detector with measures 'unknown' (including 'to AMS egress_volume',
+'to AMS site_volume', and 'to AMS company_spread'), units, upload threshold
+and detector semantics are unknown. Preserve these labels as data; do not alias to
+canonical detectors, infer host/company/destination counts or bytes from observed, or reconstruct meaning
+from sampled traffic. Preserve unknown_entity/unknown_measure_semantics quality issues.
 
 Return ONLY JSON with EXACT keys:
 summary: 2-3 concise sentences, <=700 characters: what is observed, security relevance,
@@ -466,6 +483,11 @@ async def recommend(data, client, digest=None, *, concurrency=2):
         await asyncio.gather(*tasks, return_exceptions=True)
         raise
     upstream_partial = (data["run"]["status"] != "completed" or data["input"]["extraction"]["status"] != "completed" or bool(data["input"]["extraction"]["errors"]) or any(p["incident"]["context_status"] != "available" for p in prepared))
+    # Successful advice does not resolve missing entity identity.
+    upstream_partial = upstream_partial or any(
+        p["incident"]["entity"]["type"] == "unknown" or any(
+            isinstance(q, dict) and q.get("kind") == "unknown_measure_semantics"
+            for q in p["incident"].get("data_quality_issues", [])) for p in prepared)
     failed = sum(r["analysis_status"] == "failed" for r in output)
     return {"schema": "alert-recommendations/1", "generated_at": datetime.now(timezone.utc).isoformat(),
             "source_sha256": digest, "upstream": {"enrichment_run": deepcopy(data["run"]),
@@ -500,6 +522,12 @@ def render_report(result):
     for index, row in enumerate(result["incidents"], 1):
         lines += ["", f"## {index}. {escape(row['entity']['id'])} — {row['review_priority'].upper()} review priority",
                   f"{escape(row['time_window']['start'])} → {escape(row['time_window']['end'])} · Synthetic: {row['synthetic']}"]
+        if row["entity"]["type"] == "unknown":
+            lines[-2] = f"## {index}. Unresolved entity (identity unknown) — {row['review_priority'].upper()} review priority"
+            lines += ["", "**Identity unresolved:** supplied entity ID/site are null. Evidence source IPs/sites are observations, not established host identity. Verify identity using authorized context before any targeted response."]
+        issues = row["evidence_catalog"]["incident"]["value"].get("data_quality_issues", [])
+        if any(isinstance(q, dict) and q.get("kind") == "unknown_measure_semantics" for q in issues):
+            lines += ["", "**Measure semantics unknown:** supplied detector/measure labels are retained in the JSON evidence catalog. Do not infer units, upload threshold or reported destination counts from sampled evidence."]
         if row["narrative"] is None:
             lines += ["", "Analysis unavailable; original evidence retained in JSON. Error: " + row["analysis_error"]]
             continue

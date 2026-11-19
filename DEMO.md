@@ -13,7 +13,7 @@ release or changes to IDs, source bundles, discovery metadata or behavior.
 Former names in historical evidence are Network Investigation Demo,
 Historical Enrichment POC and Recommendation Agent POC, respectively.
 
-Live release state rechecked during housekeeping; latest evaluation **2026-11-11 UTC**.
+Release/hosted checkpoint **2026-11-18 UTC**; no new invocation for this documentation pass.
 ScaleGov staging / `platform`
 (`6a1099f9e1ca37ee1216d8c3`). Deployment state is a checkpoint, not a guarantee.
 
@@ -21,18 +21,24 @@ ScaleGov staging / `platform`
 
 | Agent | ID | Active/latest | Retained source bundle |
 |---|---|---|---|
-| **IronVeil Investigation — Start Here** (entry point) | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | 0.1.24 | `b06c9ba3-3223-4bdb-8281-61fba2bab92e` |
-| IronVeil Historical Enrichment (supporting) | `420e63bd-8220-48bd-bada-743f0daea46c` | 0.1.3 | `2eb071f0-fe65-4d6f-a477-17819787f720` |
-| IronVeil Recommendations (supporting) | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | 0.1.4 | `eb82adf2-8f84-4008-9da8-48bdbe6b929b` |
+| **IronVeil Investigation — Start Here** (entry point) | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | 0.1.30 | `d93d02ff-4ae9-40c9-bb96-c3f0acc19e8d` |
+| IronVeil Historical Enrichment (supporting) | `420e63bd-8220-48bd-bada-743f0daea46c` | 0.1.5 | `c7a914e7-f679-4266-967e-f451bd5bf74a` |
+| IronVeil Recommendations (supporting) | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | 0.1.9 | `50a2c135-0e1c-4a79-a015-ead7e6a3bbc2` |
 
-Entry 0.1.24 promotes bounded read-only polling retries; both receivers were
-rebuilt unchanged after the operator-reported base-image fix. See
-[release evidence](triage_agent/STAGING_RELEASE_2026-11-10.md).
-Local staging entry source is `triage_agent/releases/staging_0_1_24/`;
+These releases add safe managed-write diagnostics to the structured-chain
+implementation released as 0.1.29 / 0.1.4 / 0.1.8. See
+[release evidence](triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+Local staging entry source is `triage_agent/releases/staging_0_1_30/`;
 `plugins/alert_triage/` targets Dev. See [backup scope](AMS_INVENTORY.md).
 Only the entry application has the Donovan discovery tag `ps:donovan:chat`.
 
 ## Operator run
+
+**Current limitation:** staging managed exports are blocked by missing runtime SGP
+configuration. A run can finish both handoffs and incident analysis but still
+return INVESTIGATION INCOMPLETE and no files. Do not run expecting five downloads
+until platform owners restore configuration and a fresh acceptance test confirms
+storage. This is not a confirmed storage-backend outage or a production diagnosis.
 
 1. Refresh Donovan staging; select **IronVeil Investigation — Start Here** and start a fresh chat.
 2. Attach `triage_agent/staging_input_verification.json` relative to this
@@ -42,12 +48,18 @@ Only the entry application has the Donovan discovery tag `ps:donovan:chat`.
    JSON, NDJSON or plain-text upload metadata.
 3. Ask: **Run the network investigation and produce analyst recommendations.**
 4. Allow several minutes. Do not resubmit to poll a running request.
-5. Open `recommendation_report.md`. Expected attachments: Triage JSON,
-   Enrichment JSON/Markdown, Recommendation JSON/Markdown (five total).
+5. Inspect final status, analysis counts and write diagnostics. When storage is
+   healthy, open `recommendation_report.md`: the intended output is Triage JSON,
+   Enrichment JSON/Markdown, Recommendation JSON/Markdown (five files total).
+   Only confirmed creations become attachments; none were confirmed in the latest test.
 
 Upload original findings, not `extracted_indicators.json` or
 `enrichment_results.json`. Missing/malformed/wrong-stage input does not fall back
-to samples or stale attachments. Fresh requests require explicit uploads.
+to samples or stale attachments. Fresh UI requests require explicit uploads.
+API/event callers can instead supply one explicit `lux_event` form containing a
+finding object; do not mix file and form modes or paste JSON as prose. The exact
+[event envelope](triage_agent/WORKFLOW.md#entry-input) is deployed. Agent-side
+acceptance does not establish that a live LUX Events rule is configured.
 
 ## Implemented behavior and controls
 
@@ -78,9 +90,15 @@ and confirmed attachments can persist before the next stage.
   collection, 1/2/4s backoff within the existing deadline; bounded Retry-After.
   Integrity/schema/auth errors are not retried. This never resubmits a child or
   retries inference or file writes. See [policy](triage_agent/POLLING_RETRIES_2026-11-10.md).
-- Current-run exact file IDs, byte SHA-256 receipts, schemas and action-scoped
-  FileBlocks are checked before downstream files are trusted/projected. Children
-  use latest published versions, not fixed semvers.
+- Both internal submissions use explicit forms: `triage_handoff` carrying
+  `alert-indicators/3`, then `enrichment_handoff` carrying the full
+  `alert-enrichment/1`. Six-field canonical-hash receipts are verified. Enrichment's
+  output hash, upstream receipt and run must agree before forwarding. No file read
+  is required between stages, no prose reconstruction or automatic file fallback.
+- Managed files remain separate exports. File-mode receipts hash exact bytes;
+  structured receipts hash the complete canonical object. Confirmed export IDs
+  must agree with action-scoped FileBlocks before projection. Children use latest
+  published versions, not fixed semvers. [Full transport contract](triage_agent/WORKFLOW.md).
 - Completed upstream files survive downstream errors; incomplete stages are
   labeled **INVESTIGATION INCOMPLETE**. Platform completion and application partial
   status are separate. There is no distributed exactly-once or automatic
@@ -89,7 +107,31 @@ and confirmed attachments can persist before the next stage.
   model hypotheses are not independent corroboration. Data-marking propagation
   remains unresolved: use approved synthetic demo data only.
 
-## Latest evaluation and known failure
+## Latest diagnostic result and troubleshooting
+
+On 2026-11-18 the 0.1.30 → 0.1.5 → 0.1.9 chain completed all five stages and
+1/1 incident analysis. All three report `missing_sgp_configuration`, `ValueError`,
+`http_status=null`, `request_may_have_been_sent=false`. No upload was dispatched.
+Parent: `inv_7ae33958-b73c-4260-a837-c63b3ba8cf6f`.
+
+- Platform owners: verify matched SGP runtime policy attachment and URL injection
+  (`SGP_API_URL`). Do not hard-code an endpoint, copy credentials, or create a
+  lookalike custom policy to bypass platform-managed identity/routing.
+- A healthy operator SGP upload forward proves bundle-upload access, not in-pod
+  file-service configuration. Reconnecting the laptop alone does not fix this.
+- Inspect durable `indicator_export.write_diagnostic` and child
+  `export_diagnostics`, not only the generic “unconfirmed” prose. A null request
+  flag means uncertainty; false in this test specifically means not sent.
+- Reconcile invocation IDs using read-only status/output queries. Never resubmit
+  a running request to poll it; no automatic submission/model/write retries.
+- After platform repair, obtain approval for one fresh synthetic acceptance run;
+  verify both receipts, all five confirmed files and permitted readback. Do not
+  replay earlier uncertain writes. Production impact remains untested.
+
+See [diagnostic evidence](triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md) and
+[diagnostic fields](triage_agent/FILE_WRITE_DIAGNOSTICS.md).
+
+## Historical evaluation and guarded file-mode failure
 
 The five sequential staging runs on 2026-11-11 completed every stage and returned
 five files each, but only **28/35 analyses succeeded** (six timeouts, one validation
@@ -147,13 +189,18 @@ semantic auditing is not claimed. One success is not a latency/reliability SLA.
 
 ## Verification and security boundaries
 
-Latest recorded managed regression: 60 Triage + 15 Recommendation tests passed
+Latest recorded SDK regression (2026-11-18): **91 Triage + 34 Enrichment + 26
+Reporting = 151 passed, zero skips**, Agent Kit 0.50.0; local sling-agent 0.1.0
+differs from unchanged deployed pin 0.1.0.dev6. No suite rerun for this docs pass.
+All three package checks ready=true; Semgrep unavailable, scan unknown.
+
+Historical managed regression: 60 Triage + 15 Recommendation tests passed
 without skips, plus a mocked five-stage graph/checkpointer run with five file
 blocks. This is distinct from hosted acceptance. Ordinary CLI may skip SDK checks.
 Local packaging reported ready=true; Semgrep was unavailable, so local security
 scan status is unknown. See each agent's verification/reliability documents.
 
-Fresh ordinary-CLI regression: Triage **60 / 44 / 16 skipped**, Enrichment
+Historical ordinary-CLI regression: Triage **60 / 44 / 16 skipped**, Enrichment
 **24 / 22 / two**, Recommendation **15 / 14 / one**. Total **99 discovered,
 80 passed, 19 skipped**, zero failures after correcting test-only fixture paths.
 Python 3.9.6 is below the documented 3.11+ support floor; SDK/httpx checks skip.

@@ -15,16 +15,17 @@ Platform defaults are inventoried, not silently recreated as project agents.
 
 ## Live agent inventory
 
-The three IronVeil staging display names/descriptions were updated and reread on
-2026-11-12. IDs, active versions, source references and discovery metadata were
-unchanged. Other inventory rows below retain the earlier housekeeping checkpoint.
+The three IronVeil release rows reflect the **2026-11-18** publication and hosted
+verification checkpoint. Display names remain those set Nov 12. Other inventory
+rows retain the earlier housekeeping checkpoint; no fresh seven-agent audit is
+claimed by this documentation pass.
 Historical records retain the former Demo/POC names.
 
 | Agent | AMS ID | Live state / version | Local coverage |
 |---|---|---|---|
-| **IronVeil Investigation — Start Here** | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | active/latest **0.1.24** | Entry point, orchestration and triage; prepared staging release and provenance in `triage_agent/releases/`; historical downloaded 0.1.17 snapshot |
-| IronVeil Historical Enrichment | `420e63bd-8220-48bd-bada-743f0daea46c` | active/latest **0.1.3** | Supporting agent; `enrichment_agent/ams/`; root core freshness passed; no downloaded current snapshot |
-| IronVeil Recommendations | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | active/latest **0.1.4** | Supporting agent; `recommendation_agent/ams/`; no downloaded current snapshot |
+| **IronVeil Investigation — Start Here** | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` | active/latest **0.1.30** | Entry point, structured orchestration; `triage_agent/releases/staging_0_1_30/` and provenance; historical downloaded 0.1.17 snapshot |
+| IronVeil Historical Enrichment | `420e63bd-8220-48bd-bada-743f0daea46c` | active/latest **0.1.5** | Structured receiver/result; `enrichment_agent/ams/`; root core freshness passed; no downloaded current snapshot |
+| IronVeil Recommendations | `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f` | active/latest **0.1.9** | Structured receiver, also called Reporting; `recommendation_agent/ams/`; no downloaded current snapshot |
 | VoF CTI Hunt Package | `fff45061-e9ac-43bf-973d-6024640db353` | inactive; highest listed **0.1.5**, not latest | **Missing source locally**; 0.1.3–0.1.5 share retained source ID below |
 | VoF IR Notables Review | `21865c96-2deb-41dc-b5c0-68ba826c55cc` | inactive; highest listed **0.1.8**, not latest | **Missing source locally**; 0.1.5–0.1.8 share retained source ID below |
 | Chat Agent (platform default) | `f45b29ad-06d0-4207-a9f7-318fe83697fb` | active **1.0.0** | Platform-owned; source not mirrored locally |
@@ -39,6 +40,9 @@ from the absence of a current compromise flag.
 
 | Agent/version | SGP source file ID | Metadata read |
 |---|---|---|
+| Entry 0.1.30 | `d93d02ff-4ae9-40c9-bb96-c3f0acc19e8d` | Nov 18 publish receipt; isolated source/provenance retained, no downloaded bundle comparison |
+| Enrichment 0.1.5 | `c7a914e7-f679-4266-967e-f451bd5bf74a` | Nov 18 publish receipt; no downloaded bundle comparison |
+| Recommendation 0.1.9 | `50a2c135-0e1c-4a79-a015-ead7e6a3bbc2` | Nov 18 publish receipt; no downloaded bundle comparison |
 | Entry 0.1.24 | `b06c9ba3-3223-4bdb-8281-61fba2bab92e` | Content GET 200, but tool decoded ZIP as lossy text; **not saved** |
 | Enrichment 0.1.3 | `2eb071f0-fe65-4d6f-a477-17819787f720` | 200; 15,600 bytes; MD5 `6fda30a9ce2eb6eac8b16868ce3fd0a9` |
 | Recommendation 0.1.4 | `eb82adf2-8f84-4008-9da8-48bdbe6b929b` | 200; 16,177 bytes; MD5 `05032e40adc741ec6b6aa5c32d9d8ed0` |
@@ -48,12 +52,13 @@ from the absence of a current compromise flag.
 
 MD5 values are API metadata, not independently calculated local integrity proof.
 No lossy tool response was reconstructed into a ZIP. No credentials, environment
-values or signed URLs were exported. No agent was republished or restored.
+values or signed URLs were exported. The earlier inventory-only pass did not
+publish/restore agents; the separately authorized Nov 18 releases are recorded above.
 
 ## Local source distinction
 
 - `triage_agent/plugins/alert_triage/` targets **Dev** receiver IDs.
-- `triage_agent/releases/staging_0_1_24/` is the isolated staging source; associated
+- `triage_agent/releases/staging_0_1_30/` is the current isolated staging source; associated
   `.provenance.json` records file hashes and the three receiver-ID replacements.
 - `triage_agent/ams_snapshots/0.1.17/` is an older downloaded source snapshot,
   preserved unchanged. Its historical byte equality does not apply to today's code.
@@ -69,9 +74,9 @@ Use the supported binary-safe pull path from the project root with AMS connected
 to **scalegov-staging**. Never overwrite editable source or add `--force`:
 
 ```sh
-sling ams pull d4ffbfc9-696f-4a5a-b174-75daaa1c993f --version 0.1.24 -o ./triage_agent/ams_snapshots/0.1.24/alert_triage
-sling ams pull 420e63bd-8220-48bd-bada-743f0daea46c --version 0.1.3 -o ./enrichment_agent/ams_snapshots/0.1.3/ams
-sling ams pull 934ba6f7-3dcc-4dfb-9454-acdc92f7a10f --version 0.1.4 -o ./recommendation_agent/ams_snapshots/0.1.4/ams
+sling ams pull d4ffbfc9-696f-4a5a-b174-75daaa1c993f --version 0.1.30 -o ./triage_agent/ams_snapshots/0.1.30/alert_triage
+sling ams pull 420e63bd-8220-48bd-bada-743f0daea46c --version 0.1.5 -o ./enrichment_agent/ams_snapshots/0.1.5/ams
+sling ams pull 934ba6f7-3dcc-4dfb-9454-acdc92f7a10f --version 0.1.9 -o ./recommendation_agent/ams_snapshots/0.1.9/ams
 sling ams pull fff45061-e9ac-43bf-973d-6024640db353 --version 0.1.5 -o ./vof_cti_hunt_package/ams_snapshots/0.1.5
 sling ams pull 21865c96-2deb-41dc-b5c0-68ba826c55cc --version 0.1.8 -o ./vof_ir_notables_review/ams_snapshots/0.1.8
 ```
@@ -87,6 +92,12 @@ drafts need separate preservation if “everything” includes platform-owned/hi
 rather than current project source. No claim of those backups is made.
 
 ## Evaluation/output recovery
+
+Nov 18 diagnostic run produced **no confirmed files**: missing sandbox SGP URL
+configuration prevented dispatch. Do not invent file IDs or regenerate that run's
+reports as recovered evidence. Its structured results/IDs are recorded in the
+[diagnostic ledger](triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md). This runtime
+blocker is distinct from the healthy operator forward used for source uploads.
 
 The [five-run ledger](triage_agent/STAGING_PERFORMANCE_2026-11-11.md) records all
 25 confirmed file IDs. Download original Triage, Enrichment and Recommendation

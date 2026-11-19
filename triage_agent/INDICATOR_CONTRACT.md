@@ -1,6 +1,16 @@
 # Current handoff: alert-indicators/3
 
-Current staging AMS release: **0.1.24**, retaining `alert-indicators/3`.
+Current staging checkpoint: **0.1.30** (2026-11-18), retaining `alert-indicators/3`.
+The entry passes the code-owned object through `triage_handoff`; the managed
+`extracted_indicators.json` export is no longer a submission prerequisite. Exact
+[envelopes, canonical hashes and receipts](WORKFLOW.md) apply to both handoffs.
+Structured input source file ID is null; source input hash refers to the documented
+event serialization for LUX mode, not original HTTP transport bytes. Internal
+canonical payload hashes are separate from that source hash.
+
+Reviewed unknown/null synthetic identity and opaque LUX labels remain unchanged,
+with quality issues and unavailable semantics explicit. Do not alias a label or
+infer entity identity from evidence. See [compatibility](LUX_COMPATIBILITY_2026_11_16.md).
 Default hosted Triage is extraction-only: narrative is explicitly
 `narrative_deferred`, context unavailable, no Triage inference. Optional live
 Triage context remains available via `TRIAGE_EXTRACTION_ONLY=false`.

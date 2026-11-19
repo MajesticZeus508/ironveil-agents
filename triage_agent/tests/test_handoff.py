@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "plugins" / "alert_triage"))
 from agent import StubClient
 from hosted import analyze_uploaded, status_message
 from handoff import dispatch_input, invoke_enrichment, verified_result
+from structured_handoff import prepare_handoff, structured_dispatch
 
 
 def projection(export):
@@ -20,6 +21,9 @@ def projection(export):
     result = {"run": {"status": "partial"}, "history_status": "not_configured",
               "handoff_receipt": {"file_id": export["file_id"], "sha256": export["sha256"], "schema": "alert-indicators/3"},
               "exports": [item], "export_status": "partial"}
+    if export.get("input_mode") == "structured":
+        result["handoff_receipt"] = {key: export[key] for key in (
+            "file_id", "sha256", "schema", "input_mode", "payload_sha256", "canonicalization")}
     return {"messages": [{"type": "tool", "name": "run_enrichment", "tool_call_id": "child-call", "content": json.dumps(result)}],
             "render_events": [{"type": "OutcomeEvent", "action_id": "child-call", "payload": {"blocks": [
                 {"type": "file", "file_id": "child-json"}]}}]}
@@ -43,16 +47,18 @@ class HandoffTests(unittest.TestCase):
     def setUpClass(cls):
         cls.raw = (ROOT / "staging_input_verification.json").read_bytes()
 
-    def test_exact_file_and_repeated_requests(self):
+    def test_exact_structured_payload_and_repeated_requests(self):
         store, calls = Store(self.raw), []
         async def child(export, **kwargs):
             calls.append(deepcopy(export))
-            self.assertEqual(export["sha256"], hashlib.sha256(store.writes[-1].encode()).hexdigest())
-            self.assertNotEqual(export["file_id"], "original-findings")
+            self.assertEqual(export["handoff"], json.loads(store.writes[-1]))
+            self.assertEqual(export["sha256"], prepare_handoff(json.loads(store.writes[-1]))["sha256"])
+            self.assertIsNone(export["file_id"])
             return {"platform_status": "completed", **verified_result(projection(export), export)}
         for expected in ("fresh-1", "fresh-2"):
             output = asyncio.run(analyze_uploaded(["original-findings"], store, StubClient(), downstream=child))
-            self.assertEqual(calls[-1]["file_id"], expected)
+            self.assertEqual(output["indicator_export"]["file_id"], expected)
+            self.assertEqual(calls[-1]["handoff"]["source"]["input_file_id"], "original-findings")
             self.assertEqual(output["downstream"]["application_status"], "partial")
             self.assertIn("not_configured", status_message(output))
         before = len(calls)
@@ -61,15 +67,21 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(len(calls), before)
         self.assertEqual(store.reads, ["original-findings", "original-findings"])
 
-    def test_invalid_empty_and_failed_export_do_not_dispatch(self):
+    def test_invalid_empty_do_not_dispatch_but_failed_export_does(self):
         async def forbidden(*args, **kwargs):
             self.fail("must not invoke")
         for raw in (b"invalid", b"", b"\xff"):
             asyncio.run(analyze_uploaded(["current"], Store(raw), StubClient(), downstream=forbidden))
         store = Store(self.raw, failure=True)
-        output = asyncio.run(analyze_uploaded(["current"], store, StubClient(), downstream=forbidden))
+        calls = []
+        async def child(prepared, **kwargs):
+            calls.append(prepared)
+            return {"platform_status": "completed", **verified_result(projection(prepared), prepared)}
+        output = asyncio.run(analyze_uploaded(["current"], store, StubClient(), downstream=child))
         self.assertEqual(output["indicator_export"]["status"], "failed")
         self.assertEqual(len(store.writes), 1)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(output["downstream"]["history_status"], "not_configured")
 
     def test_partial_context_and_input_preserved_on_downstream_failure(self):
         class Broken:
@@ -95,7 +107,9 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(verified_result(values, export)["exports"], [])
 
     def test_remote_timeout_failure_and_no_retry(self):
-        export = {"status": "created", "file_id": "fresh", "sha256": "hash"}
+        from export import build_indicator_export
+        from triage import analyze, ExtractionOnlyClient
+        export = prepare_handoff(build_indicator_export(asyncio.run(analyze(self.raw.decode(), ExtractionOnlyClient()))))
         for mode in ("success", "failure", "timeout", "unacknowledged"):
             class Remote:
                 last_thread_id = None
@@ -119,7 +133,7 @@ class HandoffTests(unittest.TestCase):
             with patch.dict("os.environ", {"AMS_API_URL": "https://managed"}):
                 output = asyncio.run(invoke_enrichment(export, factory=lambda base: remote, status_reader=status, timeout=.02))
             self.assertEqual(remote.calls, 1)
-            self.assertEqual(remote.asserted_input, dispatch_input("fresh"))
+            self.assertEqual(remote.asserted_input, structured_dispatch(export))
             self.assertNotIn("SECRET", json.dumps(output))
             self.assertEqual(output["platform_status"], {"success": "completed", "failure": "failed", "timeout": "running", "unacknowledged": "unknown"}[mode])
             if mode != "unacknowledged":

@@ -5,6 +5,11 @@
 > follow [DEMO.md](../DEMO.md) for current budgets, versions and run instructions.
 > The policy below is preserved as implementation history, not the current runbook.
 
+**Transport superseded:** current internal handoffs use explicit hashed forms and
+do not wait for intermediate managed files. See [WORKFLOW.md](WORKFLOW.md) and
+[latest diagnostic release](DIAGNOSTIC_RELEASE_2026_11_18.md). The file gates and
+budgets below are preserved historical decisions, not current prerequisites.
+
 ## Policy defined before implementation (2026-11-09)
 
 - Direction is Triage → Historical Enrichment (`420e63bd-8220-48bd-bada-743f0daea46c`, latest published). No receiver change or schema migration.

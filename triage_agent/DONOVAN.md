@@ -9,8 +9,9 @@
 - Formerly **Network Investigation Demo**; renamed on 2026-11-12 without changing
   IDs, versions, source bundles or discovery metadata.
 - Agent `d4ffbfc9-696f-4a5a-b174-75daaa1c993f`.
-- Latest active published release at live recheck: **0.1.24**, staging polling-fix
-  promotion. See [current runbook](../DEMO.md) for full-chain IDs and security caveats.
+- Latest active published release at 2026-11-18 checkpoint: **0.1.30**; Enrichment
+  0.1.5 / Reporting 0.1.9. Both handoffs use verified structured forms. See
+  [current runbook](../DEMO.md) for IDs, storage blocker and security caveats.
 - Discovery tag `ps:donovan:chat` was configured and verified earlier in the session.
 
 ## Run
@@ -31,11 +32,17 @@ Failures remain explicit. The operator confirmed the full-chain presentation wor
 the builder did not independently interact with a browser. These are code-generated
 status updates, not exposed private reasoning.
 
-The final result is five managed attachments: `extracted_indicators.json`
+When storage is healthy the intended result is five managed attachments: `extracted_indicators.json`
 (`alert-indicators/3`), Enrichment JSON/Markdown and Recommendation JSON/Markdown.
 Open `recommendation_report.md` for analyst advice. File writes create new files,
 even if names match. Enrichment plans history criteria but executes no AWS searches.
 No autonomous response action is performed.
+
+**Current staging blocker:** all three managed writes fail before dispatch with
+missing SGP URL configuration. Latest hosted chain completed both handoffs and
+1/1 analysis but returned no confirmed files, INVESTIGATION INCOMPLETE. Do not
+expect downloads until platform repair and fresh acceptance. Small inline report
+text is not a saved-file confirmation. Production impact is untested.
 
 ## Interpret failures
 
@@ -44,6 +51,10 @@ No autonomous response action is performed.
 - Context timeout/invalid response: extracted observations retained, incident context
   unavailable, final run partial. Export may still succeed.
 - File write uncertain/failed: no attachment claimed and no automatic write retry.
+- `missing_sgp_configuration` / request_may_have_been_sent=false: upload was not
+  sent. Platform-owned sandbox routing/configuration needs repair; reconnecting
+  the laptop's bundle-upload forward does not establish deployed file access.
+- Receipt/output hash mismatch: fail closed, no bypass or automatic file fallback.
 - A completed AMS invocation is not proof that every incident's context succeeded.
 - `narrative_deferred` is intentional in default Triage mode, not lost extraction.
 - Downstream failure: **INVESTIGATION INCOMPLETE**, prior files retained; reconcile
@@ -77,8 +88,9 @@ Current-request source IDs are application-controlled, not chosen by the model.
 
 ## Verification evidence
 
-Latest evaluation: five chains/five files each, 28/35 validated analyses, six
-timeouts and one validation rejection; see [team summary](../EVALUATION.md).
+Latest diagnostic: [Nov 18 release](DIAGNOSTIC_RELEASE_2026_11_18.md), both handoffs,
+1/1 analysis, no files. Historical five-run evaluation: five files each, 28/35
+validated analyses, six timeouts and one rejection; see [team summary](../EVALUATION.md).
 Historical operator-confirmed full chain: `inv_b394de1e-5e49-4616-8495-f936041f9844`,
 206.181s end-to-end, 7/7 recommendations, five confirmed file blocks. Historical
 standalone presentation evidence follows; it does not describe current stage routing.

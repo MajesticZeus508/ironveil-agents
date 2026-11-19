@@ -1,0 +1,41 @@
+{
+  "note": "Representative synthetic payload metadata and evidence excerpts copied from AMS invocation inputs. Evidence excerpts are explicitly reduced test fixtures, not full original payloads. Full payloads were reviewed live; no transport hash is claimed for these excerpts.",
+  "cases": [
+    {
+      "invocation_id": "inv_1387c4b6-cfa2-44c1-9d5b-0fb780c43446",
+      "original_evidence_rows": 10,
+      "finding": {
+        "entity": {"id": null, "site": null, "type": "unknown"},
+        "schema": "swoop-ueba-finding/1", "source": "swoop/valhalla/simulated",
+        "z_score": 5.414669340578113,
+        "baseline": {"mean": 9.1875, "std_dev": 1.0734727523323542, "windows": 16, "zero_variance": false},
+        "detector": "to AMS site_volume", "measures": "unknown", "observed": 15,
+        "severity": "low", "finding_id": "d422faa4-a580-456c-b9a4-f672aa0bd189",
+        "time_window": {"end": "2026-11-16T09:14:59.999Z", "start": "2026-11-16T09:00:00.000Z"},
+        "incident_key": "unknown:None@2026-11-16T09:00:00.000Z", "normalcy_score": 6.14020684319515e-08,
+        "evidence": [
+          {"dst": "32.57.11.124", "src": "192.168.79.170", "time": "2026-11-16T09:01:48.421+0000", "company": "DIGITALOCEAN LLC", "country": "FRANCE", "protocol": "TCP", "src_site": "Nicollet Island", "bytes_sent": 271317, "egress_band": "small", "bytes_received": 3505992, "bytes_sent_z_score": null},
+          {"dst": "176.166.51.190", "src": "192.168.129.171", "time": "2026-11-16T09:13:16.172+0000", "company": "AKAMAI TECHNOLOGIES", "country": "FRANCE", "protocol": "TCP", "src_site": "Nicollet Island", "bytes_sent": 215823, "egress_band": "small", "bytes_received": 1231003, "bytes_sent_z_score": null}
+        ]
+      }
+    },
+    {
+      "invocation_id": "inv_925b8ccc-44c4-45fd-90a5-f59848196615",
+      "original_evidence_rows": 10,
+      "finding": {
+        "entity": {"id": null, "site": null, "type": "unknown"},
+        "schema": "swoop-ueba-finding/1", "source": "swoop/valhalla/simulated",
+        "z_score": 9.819805060619657,
+        "baseline": {"mean": 2.75, "std_dev": 1.14564392373896, "windows": 16, "zero_variance": false},
+        "detector": "to AMS company_spread", "measures": "unknown", "observed": 14,
+        "severity": "medium", "finding_id": "1aad8418-09fb-4ffc-b21e-02495c4936d1",
+        "time_window": {"end": "2026-11-16T05:14:59.999Z", "start": "2026-11-16T05:00:00.000Z"},
+        "incident_key": "unknown:None@2026-11-16T05:00:00.000Z", "normalcy_score": 9.252228763377307e-23,
+        "evidence": [
+          {"dst": "62.15.220.39", "src": "10.10.34.177", "time": "2026-11-16T05:12:16.152+0000", "company": "HETZNER ONLINE GMBH", "country": "UNITED KINGDOM", "protocol": "TCP", "src_site": "Lake Minnetonka", "bytes_sent": 369, "egress_band": "small", "bytes_received": 1083262, "bytes_sent_z_score": null},
+          {"dst": "93.21.167.201", "src": "10.10.34.177", "time": "2026-11-16T05:12:56.543+0000", "company": "AKAMAI TECHNOLOGIES", "country": "SWEDEN", "protocol": "TCP", "src_site": "Lake Minnetonka", "bytes_sent": 382, "egress_band": "small", "bytes_received": 5599772, "bytes_sent_z_score": null}
+        ]
+      }
+    }
+  ]
+}

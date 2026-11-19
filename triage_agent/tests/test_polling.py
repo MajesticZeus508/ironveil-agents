@@ -81,6 +81,23 @@ class PollingTests(unittest.TestCase):
                 self.assertEqual(result["attempts"], 1)  # submission count unchanged
                 self.assertTrue(all(url.startswith("https://managed/v1/invocations/inv-child") for url, _ in self.calls))
 
+    def test_structured_ticket_collection_and_receipt_mismatch_no_retry(self):
+        self.ticket.update(file_id=None, input_mode="structured", payload_sha256=self.ticket["sha256"],
+                           schema="alert-indicators/3", canonicalization="canonical-json/1")
+        result = self.run_collect(self.success())
+        self.assertEqual(result["application_status"], "partial")
+        self.assertEqual(result["handoff_receipt"]["payload_sha256"], self.ticket["sha256"])
+        self.assertEqual(len(result["exports"]), 1)
+        self.calls = []
+        bad = projection(self.ticket)
+        content = json.loads(bad["messages"][0]["content"])
+        content["handoff_receipt"]["payload_sha256"] = "0" * 64
+        bad["messages"][0]["content"] = json.dumps(content)
+        result = self.run_collect([self.response(data={"status": "completed"}), self.response(data=bad)])
+        self.assertEqual(result["exports"], [])
+        self.assertEqual(result["polling_diagnostics"]["retry_attempts"], 0)
+        self.assertEqual(len(self.calls), 2)
+
     def test_retry_exhaustion_is_collection_wide_not_reset_by_success(self):
         result = self.run_collect([httpx.ReadTimeout("SECRET"), self.response(data={"status": "running"}),
                                    *[self.response(503) for _ in range(3)]])
@@ -231,9 +248,13 @@ class PollingTests(unittest.TestCase):
                 self.last_thread_id = outer.ticket["thread_id"]
                 yield {}
         remote = Remote()
+        from structured_handoff import prepare_handoff
+        prepared = prepare_handoff({"schema": "alert-indicators/3", "extraction": {"accepted_findings": 1},
+                                    "incidents": [], "indicators": []})
         with patch.dict(os.environ, {"AMS_API_URL": "https://managed"}):
-            ticket = asyncio.run(submit(self.ticket, factory=lambda base: remote))
-        result = self.run_collect([self.response(503), *self.success()], ticket=ticket)
+            ticket = asyncio.run(submit(prepared, factory=lambda base: remote))
+        result = self.run_collect([self.response(503), self.response(data={"status": "completed"}),
+                                   self.response(data=projection(ticket))], ticket=ticket)
         self.assertEqual(remote.calls, 1)
         self.assertNotIn("error", result)
         self.assertEqual(result["thread_id"], self.ticket["thread_id"])

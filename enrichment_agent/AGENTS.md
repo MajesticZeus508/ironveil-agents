@@ -8,6 +8,11 @@ Read `README.md`, `S3_INTEGRATION.md`, `HISTORICAL_SEARCH.md` and
 `AMS_RELEASE.md` before implementation. `DESIGN.md` is a superseded initial
 proposal, not authorization for external enrichment services.
 
+Nov 18 staging checkpoint: **0.1.5**. Structured v3 input/full hashed output and
+Triage forwarding to Reporting are deployed. Managed exports fail before dispatch
+for missing SGP runtime configuration; no bypass or automatic retry. See
+`../triage_agent/WORKFLOW.md` and `../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md`.
+
 ## Preserve boundaries
 
 - Keep this agent's work here. Do not modify `../triage_agent/` or its snapshots
@@ -32,7 +37,8 @@ proposal, not authorization for external enrichment services.
 - After core edits run `python3 prepare_pod.py`, then the tests, then
   `python3 prepare_pod.py --check`. The freshness test intentionally detects drift.
 - Edit hosted-specific `ams/hosted.py`, `ams/input_contract.py`, `ams/routing.py`
-  and `ams/graph.py` directly. Keep the strict Harness resource-file input; a
+  and `ams/graph.py` directly. Keep strict Harness input: exactly one managed file
+  or explicit `triage_handoff` form as documented in `AMS_HANDOFF.md`; a
   messages-only probe mismatch is not a reason to weaken it.
 - Keep scaffold-owned requirements pins; do not hand-edit `ams/requirements.txt`.
   Follow version-matched Agent Kit docs/source before changing SDK calls.
@@ -52,6 +58,6 @@ python3 -m unittest discover -s tests -v
 python3 prepare_pod.py --check
 ```
 
-The plain CLI environment currently skips two SDK tests. Hosted acceptance is
-recorded separately in `AMS_RELEASE.md`; passing local tests does not prove AWS
-or Donovan UI integration.
+Latest full SDK suite passed **34/34, zero skips**; ordinary CLI without SDK can
+skip contract checks and must not be presented as equivalent. Hosted acceptance
+is recorded separately; passing local tests does not prove storage, AWS or UI behavior.

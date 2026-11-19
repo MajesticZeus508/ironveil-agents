@@ -2,16 +2,18 @@
 
 This describes the implemented POC, not a new producer schema or a comprehensive
 formal JSON Schema. `ams/core.py` is the executable validation contract.
-Current staging 0.1.4 retains the original schemas/prompt with concurrency bounded to two
-and additive elapsed/stage diagnostics; source was released in 0.1.2.
+Current staging checkpoint: **0.1.9**, 2026-11-18. Structured input and safe-write
+diagnostics are deployed. Output schemas remain unchanged; reviewed LUX prompt
+compatibility, concurrency two and bounded incident diagnostics are retained.
 
 ## Input
 
-One UTF-8 JSON managed file: `alert-enrichment/1`, containing the original
+Exactly one explicit structured form or UTF-8 JSON managed file:
+`alert-enrichment/1`, containing the original
 `alert-indicators/3` object under `input`. Accept the Enrichment JSON export,
 not raw findings, a Triage export alone, or a Markdown report. Hosted dispatch
 and a copy/paste AMS request are in [README.md](README.md#test-in-ams-invoke).
-Only current-request `sources` file references are used. User prose cannot select
+Only current-request `sources` references or `enrichment_handoff` form are used. User prose cannot select
 a local path, alternate source, model, lookup service or response tool.
 
 | Bound | Current value |
@@ -35,6 +37,99 @@ historical query result, optional explicitly linked supplemental context, source
 policy, capabilities, extraction status and limitations. There is no enrichment
 lookup or autonomous action. Upstream suggestions remain untrusted model context.
 
+<a id="structured-receiver-local-unpublished"></a>
+
+## Structured receiver
+
+Enrichment structured output and Triage forwarding are deployed and hosted-verified;
+the initial ARP publish blocker was resolved on an authorized retry. SDK suite
+26/26 passes. Raw graph input, using Python notation where
+`enrichment` is the complete code-owned object:
+
+```python
+{
+    "task": {
+        "intent": "dispatch",
+        "payload": {
+            "parts": [{
+                "type": "form",
+                "slot": "enrichment_handoff",
+                "params": {"enrichment": enrichment},
+            }]
+        },
+    }
+}
+```
+
+`params.enrichment.schema` must be `alert-enrichment/1`; `input.schema` inside it
+must be `alert-indicators/3`. This is **not** just an indicator list, JSON string,
+Markdown report or original LUX alert. AMS HTTP bodies wrap the graph input once
+under `input`; graph clients receive the graph input itself. Optional text parts
+are prose only, never parsed for data/IDs. Params permits only `enrichment`.
+
+Exactly one file in `sources` **or** one `enrichment_handoff` form is required.
+Mixed/repeated modes, missing input, `task:null`, messages-only and text-only
+requests fail validation before analysis. (The old file-only version's
+text-only `missing_enrichment` response is historical behavior.) Each accepted
+dispatch replaces both `source_file_ids` and `structured_enrichment`, clearing
+the unused mode and creating a fresh turn boundary. No prior input recovery,
+sample/filename fallback, automatic mode downgrade or retry.
+
+Structured JSON uses exact built-in JSON types, string keys and finite numbers;
+no coercion of tuples, bytes, custom objects or numeric keys. Bounds: 20,000,000
+canonical serialized ASCII bytes, depth 40, 10,000 characters per key/string and
+2,000,000 visited values/keys. The existing semantic validator and packet builder
+enforce all incident/observation/query/coverage/reference and per-incident model
+packet limits before inference/export. Unknown fields remain in the snapshot and
+hash; original catalog values/provenance/unknowns are not rewritten. Output keeps
+the existing selective evidence/upstream projection, not a new full-input echo.
+
+Managed files retain their existing received UTF-8 byte limit and strict parser,
+including duplicate-key rejection. A decoded object cannot represent duplicate
+keys: the producer/HTTP decoder must reject those before constructing the object.
+
+The code-owned `run_recommendation` tool result adds `handoff_receipt`:
+
+```json
+{
+  "schema": "alert-enrichment/1",
+  "input_mode": "structured",
+  "file_id": null,
+  "sha256": "CANONICAL_PAYLOAD_SHA256",
+  "payload_sha256": "CANONICAL_PAYLOAD_SHA256",
+  "canonicalization": "canonical-json/1"
+}
+```
+
+`canonical-json/1` = SHA-256 hex over ASCII (equivalently UTF-8) bytes of
+`json.dumps(enrichment, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+allow_nan=False)`, with no trailing newline. Not RFC 8785: there is no timestamp,
+Unicode/IP or numeric normalization. Arrays retain order, and `1`/`1.0` can hash
+differently. All fields of the full enrichment object, including `generated_at`,
+unknown extensions and any upstream receipt, participate; the Harness wrapper
+does not. `ams.structured_input.canonical_payload` validates/snapshots and returns
+the digest.
+
+File receipts use `input_mode="file"`, exact managed `file_id`, `sha256` of the
+stored bytes and `payload_sha256` from the same canonical algorithm. Existing
+`received_file_id` and `source_sha256` retain file semantics; structured mode
+returns null and canonical hash respectively. `alert-recommendations/1` exports
+remain unchanged; their existing `source_sha256` is canonical in structured mode.
+The transport receipt lives in tool status, not a new report schema field.
+
+Triage verifies all six receipt fields against its pre-submission hash before
+trusting outputs; action-scoped FileBlocks still attest only confirmed writes.
+Both intermediate-file dependencies are removed. Hosted SDK/checkpoint processing
+and 1/1 live narrative succeeded on the latest releases, but files are blocked by
+missing staging runtime SGP configuration before dispatch. No lookups/actions or
+model retries added. See [workflow](../triage_agent/WORKFLOW.md) and
+[diagnostic release](../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
+Agent Kit 0.50.0 describes: “A form carries typed parameters.”
+[Forms](https://scaleapi.github.io/spark-agent-kit/how-to/input-schemas/harness/#forms).
+Implementation follows the pinned Harness `FormPart`/task preparation pattern
+already checked at `v0.50.0:src/spark_agent_kit/api_contracts/harness/input/{contract,channel}.py`.
+
 ## Evidence references
 
 Each output incident has a code-owned `evidence_catalog`:
@@ -57,7 +152,8 @@ interpret source position using `upstream.triage_source.source_location_kind`.
 
 `recommendation_results.json` contains:
 
-- `schema`, UTC `generated_at`, and `source_sha256` of the received file bytes.
+- `schema`, UTC `generated_at`, and `source_sha256`: exact received file bytes in
+  file mode, canonical full input payload in structured mode.
 - `upstream`: Enrichment run/source, extraction, triage source/context provenance,
   policy, capabilities and Enrichment limitations, retained separately from advice.
 - `provenance`: configured model, generation method, knowledge basis and fixed
@@ -109,10 +205,29 @@ the traceable source for full evidence; the readable report only highlights clai
   negative applies only to that criterion/window, not “never seen.”
 - Hosted `export_status` is separate: two confirmed writes mean `completed`, even
   when analysis is partial. Uncertain writes stop further exports and are not retried.
-- Inline report is omitted above 18,000 characters (`report=null`); files remain
-  available. Only confirmed managed creations produce attachment blocks.
+- Safe `exports[].write_diagnostic` and `export_diagnostics` are tool status, not
+  report schema fields. Current staging: `missing_sgp_configuration`, ValueError,
+  HTTP null, request_may_have_been_sent=false; no upload dispatched or file confirmed.
+- Inline report is omitted above 18,000 characters (`report=null`); a file is
+  available only if its managed write succeeded. Only confirmed creations produce blocks.
 
 ## Compatibility and scope
+
+### Deployed LUX compatibility (reviewed 2026-11-13 and 2026-11-16)
+
+Accept the exact entity `{type: "unknown", id: null, site: null}` only for
+incidents with `synthetic: true` and source `["swoop/valhalla/simulated"]`.
+All three keys are required; other unknown shapes and null IDs on known types
+remain invalid. Original entity, quality issues, metrics supplied inside those
+issues, and all observations are preserved in the evidence catalog. No source
+IP/site, related value or placeholder incident key establishes entity identity.
+
+The fixed prompt forbids aliasing `to AMS egress_volume` / `unknown` to canonical
+egress semantics or deriving units/thresholds from samples. The readable report
+adds code-owned identity/measure warnings, even on narrative failure. Unknown
+entity or `unknown_measure_semantics` keeps application status `partial` despite
+successful narrative. Schemas, input limits, response controls and retries are
+unchanged. These checks are not a semantic guarantee about model prose.
 
 No schema v4 inference, domain invention, live reputation lookup, AWS search,
 automatic downstream invocation, threat verdict or alert closure is implemented.

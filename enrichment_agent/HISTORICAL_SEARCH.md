@@ -1,5 +1,12 @@
 # Historical NetFlow search contract
 
+Current hosted transport: [AMS_HANDOFF.md](AMS_HANDOFF.md), exactly one v3 file
+or explicit structured form, full hashed result returned to the entry. Historical
+matching/coverage semantics below are unchanged. Latest staging 0.1.5 performs no
+AWS searches; managed writes are blocked before dispatch by missing runtime SGP
+configuration. This document's offline-build scope does not imply the automatic
+three-agent workflow is absent. [Current workflow](../triage_agent/WORKFLOW.md).
+
 ## Scope and decisions for the offline build
 
 The operator selected historical network data in a forthcoming S3 bucket as the
@@ -66,7 +73,8 @@ and input hashes identify the dataset. No byte totals are asserted.
 
 ## Result contract
 
-The output preserves the input handoff once under `input`, with its SHA-256,
+The output preserves the input handoff once under `input`, with its SHA-256
+(exact file bytes for file input, canonical payload for hosted structured input),
 upstream extraction/context statuses, original IDs, references, nulls and zeros.
 Optional metadata is preserved separately. `source` states dataset ID/hash,
 synthetic flag, coverage and searchable fields, or `not_configured` for AWS.

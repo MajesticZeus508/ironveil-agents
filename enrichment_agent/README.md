@@ -1,5 +1,17 @@
 # IronVeil Historical Enrichment — supporting agent
 
+**2026-11-18 checkpoint: staging 0.1.5 active/latest.** Accepts exactly one
+managed file or explicit `triage_handoff` v3 object form. Returns a full
+canonical-hashed `structured_result`; the entry verifies and forwards it to
+Reporting without reading an intermediate file. Prose JSON is not input.
+See [envelope and receipts](AMS_HANDOFF.md) and
+[complete workflow](../triage_agent/WORKFLOW.md).
+
+Hosted structured processing succeeded; output writes stop before dispatch with
+`missing_sgp_configuration`, ValueError, request_may_have_been_sent=false. Missing
+staging runtime SGP URL configuration is confirmed; production untested. No
+attachments claimed, no write retry. [Diagnostic release](../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
 **To run the full workflow, start with IronVeil Investigation — Start Here in
 Donovan**, not this receiver. The entry point calls this agent automatically
 after triage, then calls IronVeil Recommendations. See the [runbook](../DEMO.md).
@@ -8,12 +20,10 @@ after triage, then calls IronVeil Recommendations. See the [runbook](../DEMO.md)
 synthetic. Former staging name: **Historical Enrichment POC**. The 2026-11-12
 display-name/description update did not change IDs, versions or source bundles.
 
-> **Current staging: 0.1.3 active/latest**, independently rechecked in AMS.
-> Rebuilt after the operator-reported platform fix; its recorded image digest
-> differs from the flagged predecessor. **Remediation is not independently
-> attested** without a final-image scan/SBOM. Earlier takedown evidence is retained.
-> See [release retry evidence](AMS_RELEASE.md) and
-> [image security investigation](IMAGE_SECURITY_2026-11-10.md).
+**Security remediation is not independently attested** without a final-image
+scan/SBOM. Active status and packaging readiness do not establish a clean image.
+Earlier [release](AMS_RELEASE.md) and [security evidence](IMAGE_SECURITY_2026-11-10.md)
+are retained; never restore an insecure image as a documentation-driven rollback.
 
 Consumes the Alert Triage agent's `alert-indicators/3` handoff and searches
 historical network records to answer **whether an indicator or a defined activity
@@ -22,15 +32,16 @@ tuple was seen before**. The original triage agent is preserved.
 This version is operational against local JSON historical-data fixtures/subsets.
 AWS is not connected. The history-adapter boundary is ready for an S3-backed query
 implementation once storage format, field mapping, access and coverage are known.
-The deployed receiver source is in `ams/`. **IronVeil Historical Enrichment 0.1.3**
-is active/latest at live recheck; v3 receipt and managed outputs are
-verified. See [AMS_RELEASE.md](AMS_RELEASE.md) for agent ID and test evidence.
+The deployed receiver source is in `ams/`. **IronVeil Historical Enrichment 0.1.5**
+is active/latest at the Nov 18 checkpoint; structured v3 receipt/output verified,
+managed writes blocked. See [AMS_RELEASE.md](AMS_RELEASE.md) for release evidence.
 It does not claim to reproduce a detector's anomaly or establish benign/malicious
 activity. No model or external intelligence service is required.
 
-Fresh offline regression: **24 discovered, 22 passed, two SDK skips**; core
-freshness passed. Latest five-chain hosted evaluation retained history unavailable
-and confirmed both Enrichment exports each time. See [team evaluation](../EVALUATION.md)
+Latest full SDK regression: **34 passed, zero skips**; core freshness passed.
+Latest hosted LUX chain retained 23 not-configured criteria and no confirmed files.
+The historical five-chain evaluation confirmed files on older versions, not today.
+See [team evaluation](../EVALUATION.md)
 and [local backup gaps](../AMS_INVENTORY.md). No fresh source-bundle byte comparison is claimed.
 
 ## Returning to this project

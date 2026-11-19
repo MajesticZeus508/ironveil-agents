@@ -1,5 +1,17 @@
 # Historical Enrichment POC — AMS release
 
+## Current release checkpoint — 2026-11-18
+
+**IronVeil Historical Enrichment 0.1.5 active/latest**, source
+`c7a914e7-f679-4266-967e-f451bd5bf74a`. Structured receiver/full result and
+Triage → Reporting forwarding are deployed, hosted receipt verified. SDK suite
+34/34, zero skips. Writes stop before dispatch with missing_sgp_configuration;
+no confirmed files. [Latest release/diagnosis](../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+Production untested; scan unknown. The earlier release/security checkpoints below
+retain historical statements, not instructions to roll back or reimplement handoffs.
+
+## Historical 0.1.3 rebuild and earlier releases
+
 **New rebuild:** 0.1.3 is active/latest after the operator-reported staging fix;
 hosted missing-handoff check passed. Source unchanged. See
 [release evidence](../triage_agent/STAGING_RELEASE_2026-11-10.md).
@@ -95,7 +107,7 @@ its file metadata MD5 matches local `extracted_indicators (3).json`
 No direct downstream Donovan discovery tag is needed; the entry projects verified
 files. Original direct-receiver UI verification was not claimed.
 
-## Current evaluation and preservation
+## Historical 0.1.3 evaluation and preservation
 
 Live recheck confirms **0.1.3 active/latest**, source
 `2eb071f0-fe65-4d6f-a477-17819787f720` (file metadata GET 200).

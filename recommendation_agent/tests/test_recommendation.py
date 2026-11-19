@@ -53,6 +53,109 @@ class Store:
 
 
 class Tests(unittest.TestCase):
+    def lux_enrichment(self, event=None):
+        # Captured synthetic payload stays owned by Triage's tests, never the pod.
+        sys.path.insert(0, str(ROOT.parent))
+        from triage_agent.plugins.alert_triage.triage import analyze, ExtractionOnlyClient
+        from triage_agent.plugins.alert_triage.export import build_indicator_export
+        from enrichment_agent.enrich import enrich
+        from enrichment_agent.history import UnconfiguredAWSHistory
+        if event is None:
+            event = json.loads((ROOT.parent / "triage_agent/tests/fixtures/lux_staging_2026_11_13.json").read_text())
+        triage = asyncio.run(analyze(json.dumps(event), ExtractionOnlyClient()))
+        return enrich(build_indicator_export(triage), UnconfiguredAWSHistory())
+
+    def test_site_and_company_labels_through_real_local_pipeline(self):
+        cases = json.loads((ROOT.parent / "triage_agent/tests/fixtures/lux_2026_11_16_review.json").read_text())["cases"]
+        class ReviewedStub(Stub):
+            async def analyze(self, packet):
+                value = await super().analyze(packet)
+                value["target_observation_ids"] = []
+                value["evidence"] = [{"claim": "TEST STUB: supplied observation retained.", "refs": ["O1"]}]
+                return value
+        for case in cases:
+            with self.subTest(detector=case["finding"]["detector"]):
+                data = self.lux_enrichment(case["finding"])
+                result = asyncio.run(recommend(data, ReviewedStub()))
+                self.assertEqual(result["run"]["completed"], 1)
+                self.assertEqual(result["run"]["status"], "partial")
+                incident = result["incidents"][0]
+                self.assertEqual(incident["entity"], case["finding"]["entity"])
+                issues = incident["evidence_catalog"]["incident"]["value"]["data_quality_issues"]
+                metric = next(q["raw_value"] for q in issues if q["kind"] == "unknown_measure_semantics")
+                self.assertEqual(metric["detector"], case["finding"]["detector"])
+                self.assertIn("**Measure semantics unknown:**", render_report(result))
+
+    def test_lux_actual_local_handoff_preserves_unknowns_and_exports(self):
+        data = self.lux_enrichment()
+        original = deepcopy(data)
+        packet = packets(data)[0]
+        self.assertEqual(len([k for k in packet["catalog"] if k.startswith("O")]), 7)
+        class LuxStub(Stub):
+            async def analyze(self, packet):
+                n = await super().analyze(packet)
+                n["summary"] = "TEST STUB: entity identity and reported measure semantics remain unknown."
+                n["evidence"] = [{"claim": "Entity ID/site are null; supplied measure is unknown.", "refs": ["incident"]}]
+                n["target_observation_ids"] = [packet["catalog"]["O1"]["value"]["id"]]
+                return n
+        result = asyncio.run(recommend(data, LuxStub()))
+        self.assertEqual(data, original)
+        self.assertEqual(result["run"], {"status": "partial", "incident_count": 1, "completed": 1, "failed": 0})
+        row = result["incidents"][0]
+        self.assertEqual(row["entity"], {"type": "unknown", "id": None, "site": None})
+        self.assertEqual(row["evidence_catalog"]["incident"]["value"], data["input"]["incidents"][0])
+        self.assertTrue({"unknown_entity", "unknown_measure_semantics"} <= {
+            q["kind"] for q in row["evidence_catalog"]["incident"]["value"]["data_quality_issues"]})
+        report = render_report(result)
+        self.assertIn("Unresolved entity (identity unknown)", report)
+        self.assertIn("**Measure semantics unknown:**", report)
+        self.assertNotIn("1. None", report)
+        self.assertEqual(result["actions_executed"], [])
+        store = Store(data)
+        hosted = asyncio.run(process_uploaded(["current-lux-enrichment"], store, LuxStub()))
+        self.assertEqual(hosted["export_status"], "completed")
+        self.assertEqual(len(store.writes), 2)
+        saved = json.loads(store.writes[0][1])
+        self.assertEqual(saved["incidents"][0]["entity"], row["entity"])
+
+    def test_unresolved_shape_allowlist_and_source_are_strict(self):
+        data = self.lux_enrichment()
+        for entity in (None, {"type": "host", "id": None, "site": None},
+                       {"type": "arbitrary", "id": "x", "site": None},
+                       {"type": "unknown", "id": "192.168.75.251", "site": None},
+                       {"type": "unknown", "id": None, "site": "Minnehaha"},
+                       {"type": "unknown", "id": None},
+                       {"type": "unknown", "id": None, "site": None, "extra": True}):
+            bad = deepcopy(data)
+            bad["input"]["incidents"][0]["entity"] = entity
+            with self.subTest(entity=entity), self.assertRaises(ValidationError):
+                validate(bad)
+        for field, value in (("synthetic", False), ("source", ["other"])):
+            bad = deepcopy(data)
+            bad["input"]["incidents"][0][field] = value
+            with self.assertRaises(ValidationError):
+                validate(bad)
+
+    def test_unknown_identity_report_survives_model_failure(self):
+        class Broken(Stub):
+            async def analyze(self, packet):
+                raise RuntimeError("PRIVATE")
+        result = asyncio.run(recommend(self.lux_enrichment(), Broken()))
+        report = render_report(result)
+        self.assertIn("**Identity unresolved:**", report)
+        self.assertIn("**Measure semantics unknown:**", report)
+        self.assertIsNone(result["incidents"][0]["entity"]["id"])
+        self.assertNotIn("PRIVATE", json.dumps(result))
+
+    def test_unresolved_identity_keeps_otherwise_successful_run_partial(self):
+        data = fixture()
+        incident = data["input"]["incidents"][0]
+        incident.update(entity={"type": "unknown", "id": None, "site": None},
+                        synthetic=True, source=["swoop/valhalla/simulated"])
+        result = asyncio.run(recommend(data, Stub()))
+        self.assertEqual(result["run"]["completed"], 1)
+        self.assertEqual(result["run"]["status"], "partial")
+
     def test_concurrency_bound_order_and_independent_failure(self):
         data = fixture("uploaded_handoff_compatibility")
         class Controlled:
@@ -198,8 +301,8 @@ class Tests(unittest.TestCase):
             from ams.input_contract import RecommendationDispatch, RecommendationInput
         except ImportError:
             self.skipTest("Agent Kit unavailable in plain CLI environment")
-        task = RecommendationDispatch.model_validate({"intent": "dispatch", "payload": {"parts": [{"type": "text", "text": "Analyze"}]}})
-        self.assertEqual(task.prepare_state_update()["source_file_ids"], [])
+        with self.assertRaises(ValueError):
+            RecommendationDispatch.model_validate({"intent": "dispatch", "payload": {"parts": [{"type": "text", "text": "Analyze"}]}})
         with self.assertRaises(ValueError):
             RecommendationInput.model_validate({"messages": []})
 

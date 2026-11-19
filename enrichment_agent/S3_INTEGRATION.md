@@ -1,21 +1,22 @@
 # Resume here: historical S3/query integration
 
-## 1. Current checkpoint — 2026-11-10 UTC
+## 1. Current checkpoint — 2026-11-18 UTC
 
 **Ready to pause. There is no unfinished deployment to wait on.**
 
 | Concern | State |
 |---|---|
-| AMS | Historical Enrichment POC **0.1.3**, active/latest at live recheck; image remediation unverified |
+| AMS | IronVeil Historical Enrichment **0.1.5**, active/latest checkpoint; image remediation unverified |
 | Agent ID | `420e63bd-8220-48bd-bada-743f0daea46c` |
 | Environment / tenant | ScaleGov staging / platform (`6a1099f9e1ca37ee1216d8c3`) |
-| Hosted v3 test | 98 observations / seven incidents → 323 logical query plans; two managed output files |
+| Hosted v3 test | Latest LUX chain: seven observations / one incident → 23 not-configured criteria; structured receipt/result verified |
 | Actual AWS searches | **None.** Every planned search was `not_configured`; application status `partial` |
 | Local historical search | Implemented and tested against synthetic JSON history |
 | Database / SQL | **Not defined or implemented.** Local JSON schema is a test contract, not an AWS table requirement |
-| Triage → Enrichment | Automatic handoff implemented by entry, then Recommendation; receiver calls no other agent |
-| Donovan | Operator-confirmed full-chain run/five attachments through entry; no downstream discovery tag needed |
-| Tests | Last recorded 24 tests: 22 passed, two SDK-only tests skipped; hosted acceptance separately passed |
+| Triage → Enrichment | Explicit structured v3 form; full hashed result forwarded by entry to Reporting; receiver invokes no agents |
+| Managed storage | Latest writes not dispatched: missing_sgp_configuration; staging runtime URL/policy repair needed; production untested |
+| Donovan | Earlier operator-confirmed five attachments; current attachments blocked; downstream discovery tag unnecessary |
+| Tests | Latest full SDK suite 34/34, zero skips; hosted diagnostic acceptance separately recorded |
 | Security | Local Semgrep unavailable; package ready=true is not a clean-scan attestation |
 
 Release IDs, input-file identity and hosted evidence: `AMS_RELEASE.md`.
@@ -27,7 +28,7 @@ Do not assume this last-observed deployment state is permanent; recheck when res
 ## 2. Decisions already made versus still open
 
 **Keep unless explicitly revised:** deterministic code owns query planning/results;
-v3 input, `alert-enrichment/1` output; exact managed-file receipt; no invented
+v3 input, `alert-enrichment/1` output; canonical structured or exact managed-file receipt; no invented
 indicators; no public intelligence services; no automatic compromise verdict.
 Default lookback is 30 days before each incident start, with current incident
 excluded. IP prevalence and activity tuple recurrence are different questions.
@@ -174,9 +175,9 @@ python3 prepare_pod.py --check
 ```
 
 Use fresh output directories for CLI examples; existing evidence is not overwritten.
-The two skipped SDK tests still need execution in an appropriate managed runtime.
+Latest recorded full SDK suite passed without skips; rerun after new code changes.
 The typed local probe's messages-only input mismatch is documented; use raw
-Harness file dispatch for representative hosted acceptance instead of loosening
+Harness file-or-form dispatch for representative hosted acceptance instead of loosening
 the receiver schema.
 
 ### New adapter tests (no cloud credentials in fixtures)
@@ -211,9 +212,10 @@ the receiver schema.
 
 ## 7. Integration status and separately authorized future work
 
-- **Triage caller (implemented):** invokes Enrichment only after confirmed creation, using the
-  actual exported handoff ID, not `source.input_file_id` (the original findings ID).
-  Current stages retain child IDs, verify receipts and preserve partial status;
+- **Triage caller (deployed):** sends the original v3 object through `triage_handoff`,
+  independent of export success. File clients use the actual handoff ID, never
+  nested `source.input_file_id`. Stages retain child IDs, verify canonical receipts
+  and the full Enrichment output hash, and preserve partial status;
   no automatic submission retry or distributed exactly-once guarantee.
 - **Donovan (entry configured):** entry discovery and full-chain attachments are
   operator-confirmed. Direct downstream listing is unnecessary; markings remain open.
@@ -228,7 +230,8 @@ the receiver schema.
 > Resume the Enrichment Agent in enrichment_agent/. Read AGENTS.md, README.md,
 > S3_INTEGRATION.md, HISTORICAL_SEARCH.md, AMS_HANDOFF.md and AMS_RELEASE.md first.
 > Preserve triage_agent and existing release evidence. Recheck current Enrichment
-> state (last checkpoint 0.1.3 active; image fix unverified) and ../DEMO.md.
+> state (Nov 18 checkpoint 0.1.5 active; staging exports blocked by missing SGP
+> runtime configuration, image fix unverified) and ../DEMO.md.
 > Automatic handoffs are implemented; AWS remains disabled. We now have data schema, query engine,
 > redacted samples, coverage policy and approved IAM/egress details: [provide these,
 > not credentials]. Review the mapping and query-cost plan before implementing the

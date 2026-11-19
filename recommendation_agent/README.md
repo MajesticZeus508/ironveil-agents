@@ -1,5 +1,16 @@
 # IronVeil Recommendations — supporting agent
 
+**2026-11-18 checkpoint: staging 0.1.9 active/latest.** This is also called the
+Reporting agent; it is not a fourth agent. The entry passes the full verified
+Enrichment object through `enrichment_handoff`, with a canonical-hash receipt.
+Exactly one managed file or form is accepted; intermediate file storage is not
+required. [Workflow](../triage_agent/WORKFLOW.md), [contract](CONTRACT.md).
+
+Hosted chain: **1/1 incident analysis completed**, no confirmed attachments.
+Writes stop before dispatch: `missing_sgp_configuration`, ValueError,
+request_may_have_been_sent=false. Staging runtime URL configuration needs repair;
+production untested. [Diagnostic release](../triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
 **To run the full workflow, start with IronVeil Investigation — Start Here in
 Donovan**, not this receiver. The entry point calls this agent automatically
 after Historical Enrichment and returns its reports. See the [runbook](../DEMO.md).
@@ -8,20 +19,18 @@ after Historical Enrichment and returns its reports. See the [runbook](../DEMO.m
 Former staging name: **Recommendation Agent POC**. The 2026-11-12 display-name/
 description update did not change IDs, versions or source bundles.
 
-AMS staging live recheck: **IronVeil Recommendations 0.1.4**, active/latest
-(unchanged-source rebuild after the operator-reported platform image fix).
+AMS staging checkpoint: **IronVeil Recommendations 0.1.9**, active/latest.
 Agent ID: `934ba6f7-3dcc-4dfb-9454-acdc92f7a10f`.
-Hosted acceptance passed: **7/7 incident analyses, 2/2 confirmed exports**.
-The operator also confirmed the AMS Invoke workflow works. Overall `partial`
-correctly retains unavailable AWS history. See [verification](VERIFICATION.md).
-The entry agent now invokes this receiver automatically and projects its files
-into Donovan; operator-confirmed full-chain acceptance succeeded. Direct Donovan
-listing for this downstream agent is not configured or required. See [runbook](../DEMO.md).
+Earlier acceptance passed 7/7 analyses and 2/2 exports on older versions; that
+does not establish current storage. Overall `partial` retains unavailable AWS
+history. The entry invokes this receiver automatically and projects only confirmed
+files. Direct Donovan discovery is not required. See [verification](VERIFICATION.md)
+and [current runbook](../DEMO.md).
 
-**Latest evaluation:** five chains on 0.1.4 produced **28/35 validated analyses**,
+**Historical five-run evaluation:** five chains on 0.1.4 produced **28/35 validated analyses**,
 six timeouts and one validation rejection; only one run achieved 7/7. Both files
 were exported each time. Historical acceptance above is not a reliability claim.
-Fresh CLI: **15 discovered, 14 passed, one SDK skip**. See [team evaluation](../EVALUATION.md)
+Latest full SDK suite: **26 passed, zero skips**. See [team evaluation](../EVALUATION.md)
 and [backup gaps](../AMS_INVENTORY.md).
 
 ## Returning to this agent
@@ -53,13 +62,28 @@ For each incident, ordered by the original review priority:
 `recommendation_report.md` is the readable report; `recommendation_results.json`
 uses `alert-recommendations/1` and retains the supporting evidence catalog.
 Hosted mode also returns the report in chat when under 18,000 characters; larger
-reports remain available as files rather than being silently truncated.
+reports require a confirmed managed-file export rather than being silently
+truncated. Current staging storage failure can therefore leave no downloadable
+report; inline text is not proof that the file was saved.
 This first version produces incident briefs, not a separate portfolio executive
 summary. Review priority remains the upstream severity rule, not model risk scoring.
 
 ## Input and limits
 
-Supply **one `enrichment_results.json`**, schema `alert-enrichment/1`, with its
+**Deployed structured receiver:** accepts an explicit
+`enrichment_handoff` Harness form containing the full `alert-enrichment/1` object,
+or the existing managed file, never both. See the exact
+[envelope and receipt](CONTRACT.md#structured-receiver).
+Enrichment output and Triage forwarding are wired and hosted-verified. This does
+not fix final-report storage. Model, reports and no-action policy are unchanged.
+
+**Deployed LUX compatibility:** unknown/null synthetic entity identity
+is accepted under the [exact compatibility rule](CONTRACT.md#compatibility-and-scope).
+Original values remain intact; reports explicitly flag unresolved identity and
+unknown measure semantics. No evidence-to-host inference is enabled. See the
+[local verification follow-up](VERIFICATION.md#lux-compatibility-follow-up--2026-11-13).
+
+For file mode supply **one `enrichment_results.json`**, schema `alert-enrichment/1`, with its
 embedded `alert-indicators/3` input. The Markdown enrichment report and raw Triage
 handoff are not substitutes. Maximum input is 20 MB, 100 incidents, 10,000
 observations and 100,000 search results. Full evidence packets exceeding the
@@ -99,13 +123,13 @@ Existing outputs are not overwritten. Exit 0 = completed, 2 = partial/empty,
 
 Source lives in `ams/`; scaffold-owned requirements pin Agent Kit 0.50.0,
 sling-agent 0.1.0.dev6 and ripgrep-bin 15.2.0. Production fixtures remain empty.
-Only the current invocation's explicit managed resource ID can be read. No
+Only the current invocation's explicit managed resource ID or structured form is used. No
 filename search, free-text ID extraction, pasted JSON or stale-upload fallback.
 
 ### Test in AMS Invoke
 
 1. For a direct receiver test, open **IronVeil Recommendations → Invoke** in ScaleGov staging / `platform`.
-2. Select current published **0.1.4** (recheck active/latest first).
+2. Select published **0.1.9** at the documented checkpoint (recheck active/latest first).
 3. Paste the following into **Input JSON** (no outer `input` wrapper).
 4. Invoke once and allow several minutes; incident analyses use at most two concurrent calls.
 
@@ -130,12 +154,14 @@ subject to the invoking user's permissions. Replace its ID with your current
 Enrichment JSON export for another test. Each invocation creates new output files;
 do not resubmit simply because a multi-minute run has not finished.
 
-Expected baseline: `7/7 incident analyses completed`, `2/2 exports confirmed`,
+Historical baseline (not the current staging export expectation): `7/7 incident analyses completed`, `2/2 exports confirmed`,
 and `partial` because history is unavailable—not because the model necessarily
 failed. Download both attachments; reports over 18,000 characters are file-only.
 The verified baseline took **217.28 seconds** submission-to-completion, one
-observation rather than a latency guarantee. Missing-file input returns
-`missing_enrichment`; reattach the file on every fresh request.
+observation rather than a latency guarantee. Current missing/mixed input fails the
+strict dispatch boundary; supply the file or form explicitly on each fresh request.
+Current staging writes fail before dispatch; do not invoke expecting saved files
+until repaired and tested. The form example is in [CONTRACT.md](CONTRACT.md#structured-receiver).
 
 Generic raw graph input (a direct HTTP invocation body wraps it once under `input`):
 
@@ -189,7 +215,9 @@ Neither prior agent nor its snapshots/deployment is modified by this build.
 |---|---|
 | `ams/core.py` | Validator, packet builder, Argon prompt/client, output validation/report |
 | `ams/hosted.py` | Managed input receipt, report creation and confirmed exports |
-| `ams/input_contract.py` | Invocation-scoped Harness file references |
+| `ams/input_contract.py` | Exactly one current-request Harness file or enrichment form |
+| `ams/structured_input.py` | Bounded snapshot and canonical payload digest |
+| `ams/file_writes.py` | Single-attempt writes and safe failure diagnostics |
 | `ams/routing.py` | One processing tool per fresh turn, status and attachment events |
 | `ams/graph.py` | Module-level deployment graph; explicit tool list |
 | `recommend.py` | Optional live CLI; imports the same core, no separate implementation |

@@ -1,14 +1,34 @@
 """Current-request managed-file input, confirmed exports and concise chat report."""
 import json
+import hashlib
 from typing import Annotated
 
 if __package__:
     from .core import ArgonClient, LIMIT, ValidationError, parse, recommend, render_report
+    from .structured_input import canonical_payload
+    from .file_writes import write_once
 else:
     from core import ArgonClient, LIMIT, ValidationError, parse, recommend, render_report
+    from structured_input import canonical_payload
+    from file_writes import write_once
 
 
 async def process_uploaded(ids, store, client=None):
+    return await process_input(ids, None, store, client)
+
+
+async def process_input(ids, enrichment, store, client=None):
+    """No prose parsing, stale input, automatic fallback or additive retries."""
+    if not isinstance(ids, list):
+        return {"error": "invalid_input_mode", "message": "File references must be a list."}
+    if enrichment is not None:
+        if ids:
+            return {"error": "ambiguous_enrichment", "message": "Supply a file or enrichment form, not both."}
+        try:
+            data, digest = canonical_payload(enrichment)
+        except ValidationError:
+            return {"error": "invalid_enrichment", "message": "Structured input failed bounded alert-enrichment/1 validation; no analysis or export performed."}
+        return await process_data(data, digest, None, digest, "structured", store, client)
     if not isinstance(ids, list) or len(ids) != 1:
         return {"error": "missing_enrichment", "message": "Attach exactly one enrichment_results.json (alert-enrichment/1). No previous upload is reused."}
     if not isinstance(ids[0], str) or not ids[0].strip() or len(ids[0]) > 256 or any(ord(c) < 32 for c in ids[0]):
@@ -21,6 +41,19 @@ async def process_uploaded(ids, store, client=None):
         return {"error": "file_read_failed", "message": "Enrichment file could not be read. No fallback used."}
     try:
         data, digest = parse(response.body)
+        # Preserve existing UTF-8 file byte limits rather than imposing the
+        # structured channel's ASCII-escaped serialization limit on files.
+        payload_digest = hashlib.sha256(json.dumps(data, sort_keys=True, separators=(",", ":"),
+            ensure_ascii=True, allow_nan=False).encode("ascii")).hexdigest()
+    except ValidationError:
+        return {"error": "invalid_enrichment", "message": "Input failed alert-enrichment/1 validation; no analysis or export performed."}
+    return await process_data(data, digest, ids[0], payload_digest, "file", store, client)
+
+
+async def process_data(data, digest, file_id, payload_digest, mode, store, client):
+    receipt = {"schema": "alert-enrichment/1", "input_mode": mode, "file_id": file_id,
+               "sha256": digest, "payload_sha256": payload_digest, "canonicalization": "canonical-json/1"}
+    try:
         result = await recommend(data, client or ArgonClient(), digest)
     except ValidationError:
         return {"error": "invalid_enrichment", "message": "Input failed alert-enrichment/1 validation; no analysis or export performed."}
@@ -32,17 +65,17 @@ async def process_uploaded(ids, store, client=None):
     exports = []
     for filename, content, mime in documents:
         item = {"filename": filename, "mime_type": mime, "status": "unconfirmed"}
-        try:
-            response = await store.write_file(filename, content, mime_type=mime)
-            body = getattr(response, "body", None)
-            if type(getattr(response, "status", None)) is int and 200 <= response.status < 300 and isinstance(body, dict) and isinstance(body.get("id"), str) and body["id"].strip():
-                item.update(status="created", file_id=body["id"])
-        except Exception:
-            pass  # Additive write may have occurred; never automatically retry.
+        created_id, failure = await write_once(store, filename, content, mime)
+        if failure is None:
+            item.update(status="created", file_id=created_id)
+        else:
+            item["write_diagnostic"] = failure
         exports.append(item)
         if item["status"] != "created":
             break
-    return {"run": result["run"], "source_sha256": digest, "received_file_id": ids[0],
+    return {"run": result["run"], "source_sha256": digest, "received_file_id": file_id,
+            "export_diagnostics": [e["write_diagnostic"] for e in exports if "write_diagnostic" in e],
+            "handoff_receipt": receipt,
             "exports": exports, "report": report if len(report) <= 18000 else None,
             "export_status": "completed" if len(exports) == 2 and all(x["status"] == "created" for x in exports) else "partial"}
 
@@ -66,7 +99,8 @@ def make_recommendation_tool():
         from spark_agent_kit import SGPResourceClient
         state = runtime.state if runtime is not None else {}
         ids = state.get("source_file_ids", []) if isinstance(state, dict) else getattr(state, "source_file_ids", [])
-        output = await process_uploaded(ids, SGPResourceClient())
+        data = state.get("structured_enrichment") if isinstance(state, dict) else getattr(state, "structured_enrichment", None)
+        output = await process_input(ids, data, SGPResourceClient())
         return json.dumps(output, allow_nan=False), {"exports": output.get("exports", [])}
 
     return StructuredTool.from_function(coroutine=run_recommendation, name="run_recommendation",

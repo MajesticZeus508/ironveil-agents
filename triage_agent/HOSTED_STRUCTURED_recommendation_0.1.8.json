@@ -1,0 +1,477 @@
+{
+  "agent_id": "934ba6f7-3dcc-4dfb-9454-acdc92f7a10f",
+  "version": "0.1.8",
+  "status": "completed",
+  "started": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/InvokeAgentResponseBody.json",
+    "thread_id": "77ce5cad-a0f5-4bfe-a2f6-5efa1c6cb158",
+    "invocation_id": "inv_2c73bec8-2b98-4475-80b2-178ccdd92e71",
+    "agent_version": "0.1.8"
+  },
+  "terminal": {
+    "status": "completed",
+    "failure_code": null,
+    "failure_phase": null,
+    "version": null
+  },
+  "output": {
+    "render_events": [
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 0,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_587735aa90510920",
+        "actor": {
+          "id": "e717c04b-02a1-4084-bc2c-0792600af547",
+          "role": "user"
+        },
+        "op": "dispatch",
+        "payload": {
+          "message": null,
+          "files": [],
+          "inputs": {
+            "task": {
+              "intent": "dispatch",
+              "payload": {
+                "parts": [
+                  {
+                    "slot": "enrichment_handoff",
+                    "type": "form",
+                    "params": {
+                      "enrichment": {
+                        "capabilities": {
+                          "aws": "not_connected",
+                          "domain_input": "supplemental_context_only; full domain inventory absent from v3",
+                          "location_input": "v3 destination country label only",
+                          "registration_input": "supplemental_context_only; company is only a supplied label"
+                        },
+                        "context_sha256": null,
+                        "generated_at": "2026-11-17T19:23:38.158382+00:00",
+                        "input": {
+                          "context_provenance": {
+                            "interpretation": "Synthetic test data, not live analysis.",
+                            "model": "test_stub"
+                          },
+                          "enrichment_status": "not_enriched",
+                          "extraction": {
+                            "accepted_findings": 1,
+                            "errors": [],
+                            "incident_groups": 1,
+                            "observation_count": 1,
+                            "status": "completed"
+                          },
+                          "incidents": [
+                            {
+                              "analysis_error": null,
+                              "analysis_status": "completed",
+                              "context_status": "available",
+                              "data_quality_issues": [],
+                              "disposition": "needs_review",
+                              "entity": {
+                                "id": "10.0.0.1",
+                                "site": "alpha",
+                                "type": "host"
+                              },
+                              "id": "incident-demo",
+                              "incident_key": "synthetic-demo",
+                              "limitations": [
+                                "Synthetic fixture."
+                              ],
+                              "possible_explanations": [
+                                "Hypothesis: scheduled transfer."
+                              ],
+                              "recommended_next_steps": [],
+                              "review_priority": "high",
+                              "source": [
+                                "synthetic-test"
+                              ],
+                              "summary": "",
+                              "synthetic": true,
+                              "time_window": {
+                                "end": "2026-11-03T12:15:00Z",
+                                "start": "2026-11-03T12:00:00Z"
+                              }
+                            }
+                          ],
+                          "indicators": [
+                            {
+                              "bytes_received": null,
+                              "bytes_sent": 0,
+                              "company": "Example Network",
+                              "country": "ZZ",
+                              "dst": "203.0.113.10",
+                              "id": "observation-demo",
+                              "incident_id": "incident-demo",
+                              "protocol": "TCP",
+                              "refs": [
+                                {
+                                  "evidence_index": 0,
+                                  "finding_id": "finding-demo",
+                                  "null_fields": [
+                                    "bytes_received"
+                                  ],
+                                  "source": 1
+                                }
+                              ],
+                              "src": "10.0.0.1",
+                              "src_site": "alpha"
+                            }
+                          ],
+                          "schema": "alert-indicators/3",
+                          "source": {
+                            "input_file_id": null,
+                            "input_format": "jsonl",
+                            "input_sha256": "synthetic-example",
+                            "source_location_kind": "line"
+                          }
+                        },
+                        "input_sha256": null,
+                        "limitations": [
+                          "Seen before does not establish benign activity or compromise.",
+                          "Negative results apply only to declared complete history and the exact criteria/window.",
+                          "Counts are matched records, not independent connections; incomplete counts are lower bounds.",
+                          "Attribute prevalence does not establish that the same endpoint or behavior occurred.",
+                          "IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.",
+                          "V3 omits domains, related-only indicators and full registration attributes.",
+                          "Current input hypotheses are untrusted context and do not drive queries."
+                        ],
+                        "policy": {
+                          "activity_match": "directed src/dst + protocol + src_site; not anomaly recurrence",
+                          "history_interval": "[incident_start-lookback, incident_start); whole records only",
+                          "lookback_days": 30,
+                          "sample_limit": 5
+                        },
+                        "results": [
+                          {
+                            "address_classification": "non_global",
+                            "criteria": {
+                              "endpoint_ip": "10.0.0.1"
+                            },
+                            "first_seen": null,
+                            "incident_id": "incident-demo",
+                            "indicator_key": "eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768",
+                            "kind": "ip_prevalence",
+                            "last_seen": null,
+                            "matched_record_count": null,
+                            "observation_ids": [
+                              "observation-demo"
+                            ],
+                            "query_id": "00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30",
+                            "samples": [],
+                            "samples_truncated": false,
+                            "search_complete": false,
+                            "status": "not_configured",
+                            "window": {
+                              "end_exclusive": "2026-11-03T12:00:00+00:00",
+                              "start": "2026-10-04T12:00:00+00:00"
+                            }
+                          },
+                          {
+                            "criteria": {
+                              "dst_company": "Example Network"
+                            },
+                            "first_seen": null,
+                            "incident_id": "incident-demo",
+                            "kind": "attribute_prevalence",
+                            "last_seen": null,
+                            "matched_record_count": null,
+                            "observation_ids": [
+                              "observation-demo"
+                            ],
+                            "query_id": "0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235",
+                            "samples": [],
+                            "samples_truncated": false,
+                            "search_complete": false,
+                            "status": "not_configured",
+                            "window": {
+                              "end_exclusive": "2026-11-03T12:00:00+00:00",
+                              "start": "2026-10-04T12:00:00+00:00"
+                            }
+                          },
+                          {
+                            "address_classification": "non_global",
+                            "criteria": {
+                              "endpoint_ip": "203.0.113.10"
+                            },
+                            "first_seen": null,
+                            "incident_id": "incident-demo",
+                            "indicator_key": "6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc",
+                            "kind": "ip_prevalence",
+                            "last_seen": null,
+                            "matched_record_count": null,
+                            "observation_ids": [
+                              "observation-demo"
+                            ],
+                            "query_id": "81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec",
+                            "samples": [],
+                            "samples_truncated": false,
+                            "search_complete": false,
+                            "status": "not_configured",
+                            "window": {
+                              "end_exclusive": "2026-11-03T12:00:00+00:00",
+                              "start": "2026-10-04T12:00:00+00:00"
+                            }
+                          },
+                          {
+                            "criteria": {
+                              "dst": "203.0.113.10",
+                              "protocol": "TCP",
+                              "src": "10.0.0.1",
+                              "src_site": "alpha"
+                            },
+                            "first_seen": null,
+                            "incident_id": "incident-demo",
+                            "kind": "directed_activity_tuple",
+                            "last_seen": null,
+                            "matched_record_count": null,
+                            "observation_ids": [
+                              "observation-demo"
+                            ],
+                            "query_id": "8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184",
+                            "samples": [],
+                            "samples_truncated": false,
+                            "search_complete": false,
+                            "status": "not_configured",
+                            "window": {
+                              "end_exclusive": "2026-11-03T12:00:00+00:00",
+                              "start": "2026-10-04T12:00:00+00:00"
+                            }
+                          },
+                          {
+                            "criteria": {
+                              "dst_country": "ZZ"
+                            },
+                            "first_seen": null,
+                            "incident_id": "incident-demo",
+                            "kind": "attribute_prevalence",
+                            "last_seen": null,
+                            "matched_record_count": null,
+                            "observation_ids": [
+                              "observation-demo"
+                            ],
+                            "query_id": "f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5",
+                            "samples": [],
+                            "samples_truncated": false,
+                            "search_complete": false,
+                            "status": "not_configured",
+                            "window": {
+                              "end_exclusive": "2026-11-03T12:00:00+00:00",
+                              "start": "2026-10-04T12:00:00+00:00"
+                            }
+                          }
+                        ],
+                        "run": {
+                          "errors": [],
+                          "outcomes": {
+                            "not_configured": 5
+                          },
+                          "query_count": 5,
+                          "status": "partial"
+                        },
+                        "schema": "alert-enrichment/1",
+                        "source": {
+                          "adapter": "aws_not_configured",
+                          "status": "not_configured"
+                        },
+                        "supplemental_context": null
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "source_file_ids": []
+          },
+          "client_ref": "inv_2c73bec8-2b98-4475-80b2-178ccdd92e71"
+        }
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 8,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 9,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 12,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "recommendation_dba8e99a9ab04c999e414d70ae2ce2d6",
+        "actor": {
+          "id": "tool_f8f4010d25e4e5754766",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "run_recommendation",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 13,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "recommendation_dba8e99a9ab04c999e414d70ae2ce2d6",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:recommendation_dba8e99a9ab04c999e414d70ae2ce2d6:tool_text:0",
+              "text": "{\"run\": {\"status\": \"partial\", \"incident_count\": 1, \"completed\": 1, \"failed\": 0}, \"source_sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"received_file_id\": null, \"handoff_receipt\": {\"schema\": \"alert-enrichment/1\", \"input_mode\": \"structured\", \"file_id\": null, \"sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"payload_sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"canonicalization\": \"canonical-json/1\"}, \"exports\": [{\"filename\": \"recommendation_results.json\", \"mime_type\": \"application/json\", \"status\": \"unconfirmed\"}], \"report\": \"# Analyst recommendations\\n\\nRun: **partial** \\u00b7 Human review required \\u00b7 No actions executed\\n\\nLearned cybersecurity analysis of supplied evidence\\u2014not live threat intelligence.\\nDecision gate: do not close or de-escalate from a familiar port, signed job or historical match alone. Corroborate authorization, scope and absence of conflicting evidence.\\nHistorical source: aws\\\\_not\\\\_configured; enrichment: partial.\\n\\n## 1. 10.0.0.1 \\u2014 HIGH review priority\\n2026-11-03T12:00:00Z \\u2192 2026-11-03T12:15:00Z \\u00b7 Synthetic: True\\n\\nA synthetic incident involving host 10.0.0.1 \\\\(site alpha\\\\) recorded a TCP observation to 203.0.113.10 \\\\(labeled Example Network, country ZZ\\\\) with 0 bytes sent and null bytes received. Because the historical data source is not configured, prior prevalence and directed activity history are unavailable, leaving the purpose and authorization of this connection attempt unknown.\\n\\n**Assessment:** Hypothesis 1 \\\\(Malicious\\\\): An unauthorized process on 10.0.0.1 attempted outbound TCP communication or C2 probing to 203.0.113.10 that failed or was blocked at handshake. Hypothesis 2 \\\\(Benign\\\\): A legitimate scheduled service, health check, or misconfigured application on 10.0.0.1 attempted to reach an unreachable or filtered external endpoint \\\\(including upstream&\\\\#x27;s unverified scheduled transfer hypothesis\\\\). Discriminating between these requires host process telemetry, firewall disposition logs, and asset owner verification for 10.0.0.1.\\n\\n**Key evidence**\\n- Observation observation-demo records TCP traffic from host 10.0.0.1 at site alpha to 203.0.113.10 \\\\(labeled Example Network, ZZ\\\\) with 0 bytes\\\\_sent and null bytes\\\\_received. [O1, incident]\\n- Historical enrichment queries for 10.0.0.1, 203.0.113.10, Example Network, country ZZ, and the directed TCP tuple returned status not\\\\_configured because the AWS history source is not connected. [H1, H2, H3, H4, H5]\\n- The incident record is marked synthetic from source synthetic-test and includes an unverified upstream hypothesis of a scheduled transfer. [incident]\\n\\n**Recommended analyst actions**\\n1. Inspect endpoint process, socket, and scheduled task telemetry on host 10.0.0.1 \\\\(site alpha\\\\) between 2026-11-03T12:00:00Z and 12:15:00Z to identify the binary and user initiating TCP traffic to 203.0.113.10.\\n   - Why: Zero bytes sent with null bytes received provides no payload context; host telemetry is necessary to determine whether a legitimate task or unauthorized binary initiated the connection.\\n   - Decision (subject to the review gate): If tied to a known, authorized application or documented job with no anomalous child processes, document and close; if tied to an unknown binary or unauthorized script, escalate for incident response.\\n2. Review firewall, proxy, and DNS logs for 10.0.0.1 around 2026-11-03T12:00:00Z\\u201312:15:00Z to determine the destination port, DNS query preceding connections to 203.0.113.10, and whether traffic was blocked or reset.\\n   - Why: The supplied observation lacks destination port, DNS context, and connection disposition needed to interpret a 0-byte outbound TCP record.\\n   - Decision (subject to the review gate): If logs show repeated unauthorized connection attempts or suspicious domain resolutions, prioritize host investigation; if a single expected connection to a documented partner, lower priority.\\n3. If host and network checks confirm unauthorized or malicious activity from 10.0.0.1 to 203.0.113.10, apply a targeted outbound block to 203.0.113.10 or isolate host 10.0.0.1 after business-impact review.\\n   - Why: Targeted containment prevents potential C2 or unauthorized communication once malicious behavior is corroborated, while avoiding premature disruption.\\n   - Decision (subject to the review gate): Execute only if investigation confirms unauthorized binary execution or malicious indicators on 10.0.0.1 and an authorized human approves the change.\\n   - Explicit authorized human approval required; review business impact.\\n\\n**Escalate if:** Escalate to incident response and seek approval for host containment if endpoint telemetry reveals an unauthorized or unsigned process on 10.0.0.1 initiating connections to 203.0.113.10, persistence mechanisms, or concurrent anomalous outbound activity.\\n\\n**Limits:** Historical enrichment is completely unavailable \\\\(AWS adapter not\\\\_configured\\\\); novelty or prior recurrence cannot be inferred. The incident and context are explicitly marked as synthetic test data. Observation O1 lacks destination port, DNS resolution, bytes\\\\_received value, and detector baseline semantics.\\n\\nEvidence keys resolve to original IDs, JSON paths and findings in recommendation_results.json.\\n\\n## Review boundaries\\n- Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.\\n- Training knowledge is not fresh threat intelligence or evidence of this incident.\\n- No automatic actions. Confirm authority, business impact and evidence before response.\\n- The v3 handoff omits full detector metrics/baselines, domains and registration inventory.\\n\", \"export_status\": \"partial\"}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 17,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 18,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:generate_0bf1c89653414bfd8c7b:text:0",
+              "text": "Recommendation run: partial; 1/1 incident analyses completed. 0/2 exports confirmed. No actions executed. Unconfirmed writes are not retried automatically.\n\n# Analyst recommendations\n\nRun: **partial** \u00b7 Human review required \u00b7 No actions executed\n\nLearned cybersecurity analysis of supplied evidence\u2014not live threat intelligence.\nDecision gate: do not close or de-escalate from a familiar port, signed job or historical match alone. Corroborate authorization, scope and absence of conflicting evidence.\nHistorical source: aws\\_not\\_configured; enrichment: partial.\n\n## 1. 10.0.0.1 \u2014 HIGH review priority\n2026-11-03T12:00:00Z \u2192 2026-11-03T12:15:00Z \u00b7 Synthetic: True\n\nA synthetic incident involving host 10.0.0.1 \\(site alpha\\) recorded a TCP observation to 203.0.113.10 \\(labeled Example Network, country ZZ\\) with 0 bytes sent and null bytes received. Because the historical data source is not configured, prior prevalence and directed activity history are unavailable, leaving the purpose and authorization of this connection attempt unknown.\n\n**Assessment:** Hypothesis 1 \\(Malicious\\): An unauthorized process on 10.0.0.1 attempted outbound TCP communication or C2 probing to 203.0.113.10 that failed or was blocked at handshake. Hypothesis 2 \\(Benign\\): A legitimate scheduled service, health check, or misconfigured application on 10.0.0.1 attempted to reach an unreachable or filtered external endpoint \\(including upstream&\\#x27;s unverified scheduled transfer hypothesis\\). Discriminating between these requires host process telemetry, firewall disposition logs, and asset owner verification for 10.0.0.1.\n\n**Key evidence**\n- Observation observation-demo records TCP traffic from host 10.0.0.1 at site alpha to 203.0.113.10 \\(labeled Example Network, ZZ\\) with 0 bytes\\_sent and null bytes\\_received. [O1, incident]\n- Historical enrichment queries for 10.0.0.1, 203.0.113.10, Example Network, country ZZ, and the directed TCP tuple returned status not\\_configured because the AWS history source is not connected. [H1, H2, H3, H4, H5]\n- The incident record is marked synthetic from source synthetic-test and includes an unverified upstream hypothesis of a scheduled transfer. [incident]\n\n**Recommended analyst actions**\n1. Inspect endpoint process, socket, and scheduled task telemetry on host 10.0.0.1 \\(site alpha\\) between 2026-11-03T12:00:00Z and 12:15:00Z to identify the binary and user initiating TCP traffic to 203.0.113.10.\n   - Why: Zero bytes sent with null bytes received provides no payload context; host telemetry is necessary to determine whether a legitimate task or unauthorized binary initiated the connection.\n   - Decision (subject to the review gate): If tied to a known, authorized application or documented job with no anomalous child processes, document and close; if tied to an unknown binary or unauthorized script, escalate for incident response.\n2. Review firewall, proxy, and DNS logs for 10.0.0.1 around 2026-11-03T12:00:00Z\u201312:15:00Z to determine the destination port, DNS query preceding connections to 203.0.113.10, and whether traffic was blocked or reset.\n   - Why: The supplied observation lacks destination port, DNS context, and connection disposition needed to interpret a 0-byte outbound TCP record.\n   - Decision (subject to the review gate): If logs show repeated unauthorized connection attempts or suspicious domain resolutions, prioritize host investigation; if a single expected connection to a documented partner, lower priority.\n3. If host and network checks confirm unauthorized or malicious activity from 10.0.0.1 to 203.0.113.10, apply a targeted outbound block to 203.0.113.10 or isolate host 10.0.0.1 after business-impact review.\n   - Why: Targeted containment prevents potential C2 or unauthorized communication once malicious behavior is corroborated, while avoiding premature disruption.\n   - Decision (subject to the review gate): Execute only if investigation confirms unauthorized binary execution or malicious indicators on 10.0.0.1 and an authorized human approves the change.\n   - Explicit authorized human approval required; review business impact.\n\n**Escalate if:** Escalate to incident response and seek approval for host containment if endpoint telemetry reveals an unauthorized or unsigned process on 10.0.0.1 initiating connections to 203.0.113.10, persistence mechanisms, or concurrent anomalous outbound activity.\n\n**Limits:** Historical enrichment is completely unavailable \\(AWS adapter not\\_configured\\); novelty or prior recurrence cannot be inferred. The incident and context are explicitly marked as synthetic test data. Observation O1 lacks destination port, DNS resolution, bytes\\_received value, and detector baseline semantics.\n\nEvidence keys resolve to original IDs, JSON paths and findings in recommendation_results.json.\n\n## Review boundaries\n- Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.\n- Training knowledge is not fresh threat intelligence or evidence of this incident.\n- No automatic actions. Confirm authority, business impact and evidence before response.\n- The v3 handoff omits full detector metrics/baselines, domains and registration inventory.\n",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 19,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_587735aa90510920",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": "graph_completed"
+        },
+        "error": null
+      }
+    ],
+    "messages": [
+      {
+        "content": "Analyze the supplied enrichment handoff.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "b2abca8c-0297-46d1-819d-7536d51ea4d1"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "d9a2b1a4-f722-4605-a2af-9aedb5f5f870",
+        "tool_calls": [
+          {
+            "name": "run_recommendation",
+            "args": {},
+            "id": "recommendation_dba8e99a9ab04c999e414d70ae2ce2d6",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"run\": {\"status\": \"partial\", \"incident_count\": 1, \"completed\": 1, \"failed\": 0}, \"source_sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"received_file_id\": null, \"handoff_receipt\": {\"schema\": \"alert-enrichment/1\", \"input_mode\": \"structured\", \"file_id\": null, \"sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"payload_sha256\": \"89e6cff654b3babe66c88c2d24ba4f5559c18c2d44b3658a035f9bd66d098661\", \"canonicalization\": \"canonical-json/1\"}, \"exports\": [{\"filename\": \"recommendation_results.json\", \"mime_type\": \"application/json\", \"status\": \"unconfirmed\"}], \"report\": \"# Analyst recommendations\\n\\nRun: **partial** \\u00b7 Human review required \\u00b7 No actions executed\\n\\nLearned cybersecurity analysis of supplied evidence\\u2014not live threat intelligence.\\nDecision gate: do not close or de-escalate from a familiar port, signed job or historical match alone. Corroborate authorization, scope and absence of conflicting evidence.\\nHistorical source: aws\\\\_not\\\\_configured; enrichment: partial.\\n\\n## 1. 10.0.0.1 \\u2014 HIGH review priority\\n2026-11-03T12:00:00Z \\u2192 2026-11-03T12:15:00Z \\u00b7 Synthetic: True\\n\\nA synthetic incident involving host 10.0.0.1 \\\\(site alpha\\\\) recorded a TCP observation to 203.0.113.10 \\\\(labeled Example Network, country ZZ\\\\) with 0 bytes sent and null bytes received. Because the historical data source is not configured, prior prevalence and directed activity history are unavailable, leaving the purpose and authorization of this connection attempt unknown.\\n\\n**Assessment:** Hypothesis 1 \\\\(Malicious\\\\): An unauthorized process on 10.0.0.1 attempted outbound TCP communication or C2 probing to 203.0.113.10 that failed or was blocked at handshake. Hypothesis 2 \\\\(Benign\\\\): A legitimate scheduled service, health check, or misconfigured application on 10.0.0.1 attempted to reach an unreachable or filtered external endpoint \\\\(including upstream&\\\\#x27;s unverified scheduled transfer hypothesis\\\\). Discriminating between these requires host process telemetry, firewall disposition logs, and asset owner verification for 10.0.0.1.\\n\\n**Key evidence**\\n- Observation observation-demo records TCP traffic from host 10.0.0.1 at site alpha to 203.0.113.10 \\\\(labeled Example Network, ZZ\\\\) with 0 bytes\\\\_sent and null bytes\\\\_received. [O1, incident]\\n- Historical enrichment queries for 10.0.0.1, 203.0.113.10, Example Network, country ZZ, and the directed TCP tuple returned status not\\\\_configured because the AWS history source is not connected. [H1, H2, H3, H4, H5]\\n- The incident record is marked synthetic from source synthetic-test and includes an unverified upstream hypothesis of a scheduled transfer. [incident]\\n\\n**Recommended analyst actions**\\n1. Inspect endpoint process, socket, and scheduled task telemetry on host 10.0.0.1 \\\\(site alpha\\\\) between 2026-11-03T12:00:00Z and 12:15:00Z to identify the binary and user initiating TCP traffic to 203.0.113.10.\\n   - Why: Zero bytes sent with null bytes received provides no payload context; host telemetry is necessary to determine whether a legitimate task or unauthorized binary initiated the connection.\\n   - Decision (subject to the review gate): If tied to a known, authorized application or documented job with no anomalous child processes, document and close; if tied to an unknown binary or unauthorized script, escalate for incident response.\\n2. Review firewall, proxy, and DNS logs for 10.0.0.1 around 2026-11-03T12:00:00Z\\u201312:15:00Z to determine the destination port, DNS query preceding connections to 203.0.113.10, and whether traffic was blocked or reset.\\n   - Why: The supplied observation lacks destination port, DNS context, and connection disposition needed to interpret a 0-byte outbound TCP record.\\n   - Decision (subject to the review gate): If logs show repeated unauthorized connection attempts or suspicious domain resolutions, prioritize host investigation; if a single expected connection to a documented partner, lower priority.\\n3. If host and network checks confirm unauthorized or malicious activity from 10.0.0.1 to 203.0.113.10, apply a targeted outbound block to 203.0.113.10 or isolate host 10.0.0.1 after business-impact review.\\n   - Why: Targeted containment prevents potential C2 or unauthorized communication once malicious behavior is corroborated, while avoiding premature disruption.\\n   - Decision (subject to the review gate): Execute only if investigation confirms unauthorized binary execution or malicious indicators on 10.0.0.1 and an authorized human approves the change.\\n   - Explicit authorized human approval required; review business impact.\\n\\n**Escalate if:** Escalate to incident response and seek approval for host containment if endpoint telemetry reveals an unauthorized or unsigned process on 10.0.0.1 initiating connections to 203.0.113.10, persistence mechanisms, or concurrent anomalous outbound activity.\\n\\n**Limits:** Historical enrichment is completely unavailable \\\\(AWS adapter not\\\\_configured\\\\); novelty or prior recurrence cannot be inferred. The incident and context are explicitly marked as synthetic test data. Observation O1 lacks destination port, DNS resolution, bytes\\\\_received value, and detector baseline semantics.\\n\\nEvidence keys resolve to original IDs, JSON paths and findings in recommendation_results.json.\\n\\n## Review boundaries\\n- Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.\\n- Training knowledge is not fresh threat intelligence or evidence of this incident.\\n- No automatic actions. Confirm authority, business impact and evidence before response.\\n- The v3 handoff omits full detector metrics/baselines, domains and registration inventory.\\n\", \"export_status\": \"partial\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "run_recommendation",
+        "id": "d6674558-8976-40df-973d-f16e7387c09a",
+        "tool_call_id": "recommendation_dba8e99a9ab04c999e414d70ae2ce2d6",
+        "artifact": {
+          "exports": [
+            {
+              "filename": "recommendation_results.json",
+              "mime_type": "application/json",
+              "status": "unconfirmed"
+            }
+          ]
+        },
+        "status": "success"
+      },
+      {
+        "content": "Recommendation run: partial; 1/1 incident analyses completed. 0/2 exports confirmed. No actions executed. Unconfirmed writes are not retried automatically.\n\n# Analyst recommendations\n\nRun: **partial** \u00b7 Human review required \u00b7 No actions executed\n\nLearned cybersecurity analysis of supplied evidence\u2014not live threat intelligence.\nDecision gate: do not close or de-escalate from a familiar port, signed job or historical match alone. Corroborate authorization, scope and absence of conflicting evidence.\nHistorical source: aws\\_not\\_configured; enrichment: partial.\n\n## 1. 10.0.0.1 \u2014 HIGH review priority\n2026-11-03T12:00:00Z \u2192 2026-11-03T12:15:00Z \u00b7 Synthetic: True\n\nA synthetic incident involving host 10.0.0.1 \\(site alpha\\) recorded a TCP observation to 203.0.113.10 \\(labeled Example Network, country ZZ\\) with 0 bytes sent and null bytes received. Because the historical data source is not configured, prior prevalence and directed activity history are unavailable, leaving the purpose and authorization of this connection attempt unknown.\n\n**Assessment:** Hypothesis 1 \\(Malicious\\): An unauthorized process on 10.0.0.1 attempted outbound TCP communication or C2 probing to 203.0.113.10 that failed or was blocked at handshake. Hypothesis 2 \\(Benign\\): A legitimate scheduled service, health check, or misconfigured application on 10.0.0.1 attempted to reach an unreachable or filtered external endpoint \\(including upstream&\\#x27;s unverified scheduled transfer hypothesis\\). Discriminating between these requires host process telemetry, firewall disposition logs, and asset owner verification for 10.0.0.1.\n\n**Key evidence**\n- Observation observation-demo records TCP traffic from host 10.0.0.1 at site alpha to 203.0.113.10 \\(labeled Example Network, ZZ\\) with 0 bytes\\_sent and null bytes\\_received. [O1, incident]\n- Historical enrichment queries for 10.0.0.1, 203.0.113.10, Example Network, country ZZ, and the directed TCP tuple returned status not\\_configured because the AWS history source is not connected. [H1, H2, H3, H4, H5]\n- The incident record is marked synthetic from source synthetic-test and includes an unverified upstream hypothesis of a scheduled transfer. [incident]\n\n**Recommended analyst actions**\n1. Inspect endpoint process, socket, and scheduled task telemetry on host 10.0.0.1 \\(site alpha\\) between 2026-11-03T12:00:00Z and 12:15:00Z to identify the binary and user initiating TCP traffic to 203.0.113.10.\n   - Why: Zero bytes sent with null bytes received provides no payload context; host telemetry is necessary to determine whether a legitimate task or unauthorized binary initiated the connection.\n   - Decision (subject to the review gate): If tied to a known, authorized application or documented job with no anomalous child processes, document and close; if tied to an unknown binary or unauthorized script, escalate for incident response.\n2. Review firewall, proxy, and DNS logs for 10.0.0.1 around 2026-11-03T12:00:00Z\u201312:15:00Z to determine the destination port, DNS query preceding connections to 203.0.113.10, and whether traffic was blocked or reset.\n   - Why: The supplied observation lacks destination port, DNS context, and connection disposition needed to interpret a 0-byte outbound TCP record.\n   - Decision (subject to the review gate): If logs show repeated unauthorized connection attempts or suspicious domain resolutions, prioritize host investigation; if a single expected connection to a documented partner, lower priority.\n3. If host and network checks confirm unauthorized or malicious activity from 10.0.0.1 to 203.0.113.10, apply a targeted outbound block to 203.0.113.10 or isolate host 10.0.0.1 after business-impact review.\n   - Why: Targeted containment prevents potential C2 or unauthorized communication once malicious behavior is corroborated, while avoiding premature disruption.\n   - Decision (subject to the review gate): Execute only if investigation confirms unauthorized binary execution or malicious indicators on 10.0.0.1 and an authorized human approves the change.\n   - Explicit authorized human approval required; review business impact.\n\n**Escalate if:** Escalate to incident response and seek approval for host containment if endpoint telemetry reveals an unauthorized or unsigned process on 10.0.0.1 initiating connections to 203.0.113.10, persistence mechanisms, or concurrent anomalous outbound activity.\n\n**Limits:** Historical enrichment is completely unavailable \\(AWS adapter not\\_configured\\); novelty or prior recurrence cannot be inferred. The incident and context are explicitly marked as synthetic test data. Observation O1 lacks destination port, DNS resolution, bytes\\_received value, and detector baseline semantics.\n\nEvidence keys resolve to original IDs, JSON paths and findings in recommendation_results.json.\n\n## Review boundaries\n- Model-generated advice is fallible; validation checks structure/references, not complete semantic truth.\n- Training knowledge is not fresh threat intelligence or evidence of this incident.\n- No automatic actions. Confirm authority, business impact and evidence before response.\n- The v3 handoff omits full detector metrics/baselines, domains and registration inventory.\n",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "5d4896f5-a620-4bf7-86cc-1dc68ae28c3a",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      }
+    ]
+  }
+}

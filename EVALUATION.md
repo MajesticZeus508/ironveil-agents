@@ -2,13 +2,50 @@
 
 ## Executive result
 
-The workflow is functional but **not reliably producing every incident analysis**.
-The latest recorded controlled sequence used entry **0.1.24**, Enrichment **0.1.3**
-and Recommendation **0.1.4**, the versions independently rechecked in AMS.
-All five chains completed orchestration/export; only one produced all seven
-validated Recommendation analyses. No new hosted inference was launched for cleanup.
+Latest releases: entry **0.1.30**, Enrichment **0.1.5**, Recommendation/Reporting
+**0.1.9** (staging/platform, 2026-11-18). Both structured handoffs work without
+intermediate files, but **managed exports are currently blocked**. A single LUX
+diagnostic chain completed 1/1 incident analysis with no confirmed attachments.
+The older seven-incident evaluation below still shows incomplete narrative
+reliability; the smaller test does not supersede its failure rate. No new hosted
+inference or full agent-suite rerun was launched for documentation housekeeping.
 
-## Hosted evaluation — 2026-11-11 UTC
+## Latest hosted diagnostic chain — 2026-11-18 UTC
+
+Parent `inv_7ae33958-b73c-4260-a837-c63b3ba8cf6f`: 18:59:45.356433Z to
+19:00:45.596401Z (**60.240s** creation-to-completion, one finding/incident and
+seven observations; not comparable to the older 17-finding benchmark).
+Both children platform-completed on the exact releases above, one submission
+each. Canonical receipts/output hash matched; Reporting 1/1 completed, zero failed.
+All 23 history criteria `not_configured`, no AWS searches or actions.
+
+All three writes stopped before dispatch: `missing_sgp_configuration`, ValueError,
+HTTP status null, request_may_have_been_sent=false. No confirmed files/readback.
+Immediate cause: missing/blank sandbox SGP URL configuration; not evidence of a
+storage HTTP outage. Staging confirmed; production untested. Final status correctly
+INVESTIGATION INCOMPLETE. [Exact evidence](triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
+## Latest full local SDK regression — 2026-11-18
+
+| Suite | Passed | Skipped | Failures/errors |
+|---|---:|---:|---:|
+| Triage | 91 | 0 | 0 |
+| Enrichment | 34 | 0 | 0 |
+| Reporting | 26 | 0 | 0 |
+| **Total** | **151** | **0** | **0** |
+
+Python 3.13.14, Agent Kit 0.50.0, local sling-agent 0.1.0 (deploy pin unchanged
+0.1.0.dev6). Real SDK/checkpointer workflow uses injected stores and stub incident
+inference; these are not real storage/model acceptance tests. Includes both form
+boundaries, canonical receipts, unknown/null/provenance preservation, fail-closed
+validation, independent inputs and nine cross-pod safe-write diagnostic tests.
+Enrichment staged-core freshness passed. Three package checks ready=true, no
+blockers; local Semgrep unavailable, **security scan unknown**.
+
+## Historical five-run hosted evaluation — 2026-11-11 UTC
+
+Versions 0.1.24 / 0.1.3 / 0.1.4, prior file-based handoffs. Files succeeded then;
+that success does not establish storage availability for the current releases.
 
 Same synthetic input, fresh sequential threads, unchanged configuration:
 17 findings → seven incidents → 98 observations. Exactly five parent and ten
@@ -49,7 +86,7 @@ separate observations, not substitutes for the five-run failure rate. The guarde
 handoff failure's root cause remains unresolved.
 See [release ledger](triage_agent/STAGING_RELEASE_2026-11-10.md).
 
-## Fresh offline regression — housekeeping
+## Historical ordinary-CLI regression — earlier housekeeping
 
 Command per agent: `python3 -B -m unittest discover -s tests -v`.
 Ordinary CLI is **Python 3.9.6**, below the documented 3.11+ support floor;
@@ -90,6 +127,9 @@ recorded separately. Enrichment's two SDK checks remain unexecuted in this CLI.
 1. Recover original hosted JSON files without rerunning inference; extract the
    validation subcode and per-incident durations/statuses.
 2. Correlate timeout windows with platform-owned gateway/provider timing.
-3. Investigate the guarded managed-read/receipt failure without weakening checks.
+3. Have platform owners restore staging SGP runtime configuration; then authorize
+   a fresh synthetic attachment/readback acceptance without weakening checks.
+   The older guarded managed-read failure is a distinct unresolved observation;
+   structured handoffs remove that dependency but do not retrospectively diagnose it.
 4. Complete binary-safe source backup and per-file hash comparison.
 5. Obtain final-image security evidence before broader data use.

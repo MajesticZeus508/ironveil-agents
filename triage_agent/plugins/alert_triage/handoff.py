@@ -3,6 +3,11 @@ import asyncio
 import json
 import os
 
+if __package__:
+    from .structured_handoff import structured_dispatch, verify_structured_receipt
+else:
+    from structured_handoff import structured_dispatch, verify_structured_receipt
+
 # This working source targets Dev; retained staging deployments are unchanged.
 ENRICHMENT_AGENT_ID = "e8dc7ffc-c6d5-4920-9c12-a25e797835d8"
 DOWNSTREAM_TIMEOUT = 120
@@ -28,7 +33,10 @@ def verified_result(values, export, *, recommendation=False):
                 "error": "receiver_rejected_handoff"}
     receipt = ({"file_id": result.get("received_file_id"), "sha256": result.get("source_sha256"),
                 "schema": "alert-enrichment/1"} if recommendation else result.get("handoff_receipt", {}))
-    if (receipt.get("file_id") != export["file_id"] or receipt.get("sha256") != export["sha256"]
+    if export.get("input_mode") == "structured":
+        receipt = result.get("handoff_receipt", {})
+        verify_structured_receipt(receipt, export, recommendation=recommendation)
+    elif (receipt.get("file_id") != export["file_id"] or receipt.get("sha256") != export["sha256"]
             or receipt.get("schema") != ("alert-enrichment/1" if recommendation else "alert-indicators/3")):
         raise ValueError("receipt_mismatch")
     status = result["run"]["status"]
@@ -58,7 +66,35 @@ def verified_result(values, export, *, recommendation=False):
             counts[key] = run[key]
         if counts["completed"] + counts["failed"] != counts["incident_count"]:
             raise ValueError("invalid_recommendation_counts")
-    return {"application_status": status, "counts": counts,
+    structured = {}
+    if not recommendation and "structured_result" in result:
+        from copy import deepcopy
+        if __package__:
+            from .structured_handoff import prepare_handoff
+        else:
+            from structured_handoff import prepare_handoff
+        envelope = result["structured_result"]
+        if envelope.get("status") != "ready" or envelope.get("canonicalization") != "canonical-json/1" or envelope.get("schema") != "alert-enrichment/1":
+            raise ValueError("invalid_structured_result")
+        prepared = prepare_handoff(envelope.get("payload"), recommendation=True)
+        if (prepared["payload_sha256"] != envelope.get("payload_sha256")
+                or prepared["handoff"].get("handoff_receipt") != receipt
+                or prepared["handoff"].get("run") != run):
+            raise ValueError("structured_result_mismatch")
+        structured = {"structured_result": deepcopy(envelope)}
+    # Only re-project fixed, typed diagnostic fields from the child tool. Never
+    # forward arbitrary error strings/bodies, or unconfirmed file IDs.
+    diagnostics = []
+    entries = result.get("export_diagnostics", [])
+    for entry in (entries[:2] if isinstance(entries, list) else []):
+        if not isinstance(entry, dict) or entry.get("operation") != "managed_file_write":
+            continue
+        if __package__:
+            from .file_writes import sanitize_diagnostic
+        else:
+            from file_writes import sanitize_diagnostic
+        diagnostics.append(sanitize_diagnostic(entry))
+    return {**structured, "export_diagnostics": diagnostics, "application_status": status, "counts": counts,
             "history_status": "not_configured" if result.get("history_status") == "not_configured" else "unknown",
             "handoff_receipt": receipt, "export_status": result.get("export_status", "unknown"),
             "exports": exports}
@@ -94,8 +130,17 @@ async def invoke_enrichment(export, *, correlation=None, factory=None, status_re
               "application_status": "unknown", "history_status": "unknown", "exports": [],
               "parent": correlation or {}, "thread_id": None, "invocation_id": None,
               "file_id": export.get("file_id"), "sha256": export.get("sha256"), "attempts": 0}
-    if not (export.get("status") == "created" and export.get("file_id") and export.get("sha256")):
-        result["error"] = "export_not_confirmed"
+    try:
+        if recommendation and export.get("input_mode") != "structured":
+            if not (export.get("status") == "created" and export.get("file_id") and export.get("sha256")):
+                raise ValueError
+            value = dispatch_input(export["file_id"])
+            value["task"]["payload"]["parts"][0]["text"] = "Summarize the enriched alerts and recommend analyst actions."
+        else:
+            value = structured_dispatch(export, recommendation=recommendation)
+            result.update({key: export[key] for key in ("input_mode", "payload_sha256", "canonicalization", "schema")})
+    except (ValueError, TypeError, RecursionError, OverflowError):
+        result["error"] = "export_not_confirmed" if recommendation else "structured_handoff_invalid"
         return result
     base = os.getenv("AMS_API_URL") or os.getenv("MCPX_CHECKPOINT_URL")
     if not base:
@@ -109,9 +154,6 @@ async def invoke_enrichment(export, *, correlation=None, factory=None, status_re
             result["attempts"] = 1
             result["platform_status"] = "unknown"
             try:
-                value = dispatch_input(export["file_id"])
-                if recommendation:
-                    value["task"]["payload"]["parts"][0]["text"] = "Summarize the enriched alerts and recommend analyst actions."
                 values = await remote.ainvoke(value, config=config)
             finally:
                 result.update(thread_id=remote.last_thread_id, invocation_id=remote.last_invocation_id)

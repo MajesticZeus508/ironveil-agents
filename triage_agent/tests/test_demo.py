@@ -111,7 +111,9 @@ class DemoTests(unittest.TestCase):
                 return SimpleNamespace(status=200, body={"id": "fresh-triage"})
         async def enrich(export, **kwargs):
             order.append("enrichment")
-            self.assertEqual(export["file_id"], "fresh-triage")
+            self.assertIsNone(export["file_id"])
+            self.assertEqual(export["input_mode"], "structured")
+            self.assertEqual(export["handoff"]["source"]["input_file_id"], "original")
             return self.child()
         async def recommend(child, store, **kwargs):
             order.append("recommendation")

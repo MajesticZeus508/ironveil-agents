@@ -11,6 +11,35 @@ HAS_KIT = importlib.util.find_spec("spark_agent_kit") is not None
 
 @unittest.skipUnless(HAS_KIT, "Run with Slingshot managed Python for Agent Kit contract checks")
 class ProgressContractTests(unittest.TestCase):
+    def test_remote_structured_harness_marshalling(self):
+        import asyncio
+        import httpx
+        import json
+        from handoff import remote_client
+        from structured_handoff import prepare_handoff, structured_dispatch
+        from test_handoff import projection
+        data = json.loads((Path(__file__).resolve().parents[2] / "enrichment_agent/fixtures/triage_v3.json").read_bytes())
+        prepared = prepare_handoff(data)
+        wire = structured_dispatch(prepared)
+        calls = []
+        def respond(request):
+            calls.append(request)
+            if request.method == "POST":
+                body = json.loads(request.content)
+                self.assertEqual(body["input"], wire)
+                self.assertIsInstance(body["input"]["task"]["payload"]["parts"][0]["params"]["handoff"], dict)
+                self.assertNotIn("thread_id", body)
+                self.assertNotIn("authorization", request.headers)
+                return httpx.Response(200, json={"thread_id": "new-thread", "invocation_id": "new-inv"})
+            if request.url.path.endswith("/output"):
+                return httpx.Response(200, json=projection(prepared))
+            return httpx.Response(200, json={"id": "new-inv", "status": "completed"})
+        remote = remote_client("https://managed")
+        remote.async_transport = httpx.MockTransport(respond)
+        values = asyncio.run(remote.ainvoke(wire, config={"configurable": {}}))
+        self.assertIn("messages", values)
+        self.assertEqual(sum(r.method == "POST" for r in calls), 1)
+
     def test_remote_harness_marshalling_and_file_projection(self):
         import asyncio
         import httpx

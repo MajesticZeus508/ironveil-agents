@@ -20,12 +20,15 @@ DETECTORS = {
     "fanout": "distinct external destinations",
     "protocol_mix": "distinct destinations over one protocol",
     "egress_volume": "distinct destinations of uploads of 100 MB or more",
+    "egress_volume_hourly": "distinct destinations of uploads of 100 MB or more, per hour",
     "geo_spread": "distinct destination countries",
     "company_spread": "distinct destination companies",
     "fan_in": "distinct internal sources",
     "site_volume": "distinct active hosts",
 }
 PRIORITIES = {"high": 0, "medium": 1, "low": 2, "unknown": 3}
+# Exact observed LUX labels. Membership allows extraction, not canonical semantics.
+LUX_OPAQUE_DETECTORS = {"to AMS egress_volume", "to AMS site_volume", "to AMS company_spread"}
 DOMAIN_FIELDS = {"domain", "domain_name", "hostname", "dns_name", "query_name", "url", "url_host"}
 REGISTRATION_FIELDS = {"asn", "registered_organization", "network_range", "registration_date"}
 IOC_FIELDS = ("time_window", "src", "dst", "protocol", "bytes_sent", "bytes_received", "country", "company", "src_site")
@@ -60,22 +63,33 @@ def text(value, name):
         raise ValueError(f"{name} must be a nonempty string")
 
 
+def opaque_lux_metric(f):
+    return (f.get("source") == "swoop/valhalla/simulated"
+            and isinstance(f.get("detector"), str)
+            and f["detector"] in LUX_OPAQUE_DETECTORS and f.get("measures") == "unknown")
+
+
 def validate_finding(f):
     if not isinstance(f, dict) or f.get("schema") != "swoop-ueba-finding/1":
         raise ValueError("unsupported finding schema")
     for key in ("finding_id", "incident_key", "source"):
         text(f.get(key), key)
     entity = f.get("entity")
-    if not isinstance(entity, dict) or entity.get("type") not in {"host", "external_service", "site"}:
+    if not isinstance(entity, dict) or entity.get("type") not in {"host", "external_service", "site", "unknown"}:
         raise ValueError("unsupported entity")
-    text(entity.get("id"), "entity.id")
+    if entity["type"] == "unknown":
+        if f.get("source") != "swoop/valhalla/simulated" or set(entity) != {"type", "id", "site"} or entity["id"] is not None or entity["site"] is not None:
+            raise ValueError("unsupported unresolved entity shape")
+    else:
+        text(entity.get("id"), "entity.id")
     if entity.get("site") is not None:
         text(entity["site"], "entity.site")
     window = f.get("time_window", {})
     if utc(window["start"]) > utc(window["end"]):
         raise ValueError("reversed time window")
     detector = f.get("detector")
-    if detector not in DETECTORS or f.get("measures") != DETECTORS[detector]:
+    opaque = opaque_lux_metric(f)
+    if not opaque and (not isinstance(detector, str) or detector not in DETECTORS or f.get("measures") != DETECTORS[detector]):
         raise ValueError("unsupported detector/measure combination")
     if detector == "protocol_mix":
         text(entity.get("protocol"), "entity.protocol")
@@ -272,7 +286,7 @@ def indicator_inventory(records):
     for record in records:
         f = record["finding"]
         entity = f["entity"]
-        if entity["type"] != "site":
+        if entity["type"] not in {"site", "unknown"}:
             try:
                 ipaddress.ip_address(entity["id"])
                 add("ip", entity["id"], record, "entity.id", "entity")
@@ -319,7 +333,10 @@ def group_findings(records):
     for record in records:
         f = record["finding"]
         e, w = f["entity"], f["time_window"]
-        groups[(e["type"], e["id"], e.get("site"), f["incident_key"], utc(w["start"]), utc(w["end"]))].append(record)
+        # Placeholder incident keys are not evidence of a shared entity. Keep
+        # unresolved findings separate after ordinary finding-ID deduplication.
+        unresolved = (f["finding_id"],) if e["type"] == "unknown" else ()
+        groups[(e["type"], e["id"], e.get("site"), f["incident_key"], utc(w["start"]), utc(w["end"]), *unresolved)].append(record)
     return list(groups.values())
 
 
@@ -330,6 +347,15 @@ def summarize(records):
     for record in records:
         f = record["finding"]
         severity = f.get("severity")
+        if f["entity"]["type"] == "unknown":
+            issues.append({"kind": "unknown_entity", "finding_id": f["finding_id"],
+                           "field_path": "entity", "raw_value": deepcopy(f["entity"]),
+                           "detail": "Entity identity is unresolved. Evidence src/src_site and related_entities do not establish host identity; no identity inference applied. Group isolated by finding_id."})
+        if opaque_lux_metric(f):
+            issues.append({"kind": "unknown_measure_semantics", "finding_id": f["finding_id"],
+                           "field_path": "measures",
+                           "raw_value": {k: deepcopy(f[k]) for k in ("detector", "measures", "observed", "baseline", "z_score", "normalcy_score")},
+                           "detail": "Observed LUX label accepted without aliasing. Measure units, upload threshold and detector semantics are unknown; do not interpret observed as bytes or destination counts, or infer units from evidence."})
         severities.append({"finding_id": f["finding_id"], "severity": severity})
         if severity not in {"high", "medium", "low"}:
             issues.append({"kind": "unknown_severity", "finding_id": f["finding_id"]})

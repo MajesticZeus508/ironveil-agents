@@ -27,6 +27,17 @@ IronVeil Recommendations             (called automatically)
 Analyst reports returned through the entry point
 ```
 
+Both internal handoffs now pass explicit, canonical-hashed JSON objects, not
+intermediate files or model-rewritten prose. Managed files remain analyst exports,
+not prerequisites for downstream analysis. See [architecture](triage_agent/WORKFLOW.md).
+
+**Staging storage blocker (2026-11-18):** all three deployed agents report
+`missing_sgp_configuration`; missing/blank `SGP_API_URL` stops uploads **before
+dispatch**. The latest structured chain completed analysis but returned **no
+confirmed attachments**, correctly marked INVESTIGATION INCOMPLETE. Platform
+runtime configuration needs repair; production has not been tested, so this is
+confirmed in staging, **not proven staging-only**. [Diagnosis](triage_agent/DIAGNOSTIC_RELEASE_2026_11_18.md).
+
 ### Where the code lives
 
 | Directory | Purpose |
@@ -41,14 +52,15 @@ Directory names are retained for stable paths. The entry point was formerly
 ## Team handoff
 
 ScaleGov **staging**, tenant **platform** (`6a1099f9e1ca37ee1216d8c3`).
-Live AMS inventory rechecked during housekeeping; evaluation timestamps extend
-through **2026-11-11 UTC**. Dates in older filenames are retained as evidence.
+Three-agent release and hosted verification checkpoint: **2026-11-18 UTC**.
+The wider seven-agent inventory retains its older checkpoint. This documentation
+pass does not launch another hosted run or claim a fresh infrastructure audit.
 
 | Agent | Active/latest | Local staging implementation | Role |
 |---|---|---|---|
-| **IronVeil Investigation — Start Here** | **0.1.24** | `triage_agent/releases/staging_0_1_24/` | **User-facing entry point**; triage and full-workflow orchestration |
-| IronVeil Historical Enrichment | **0.1.3** | `enrichment_agent/ams/` | Supporting agent; history criteria; AWS **not configured** |
-| IronVeil Recommendations | **0.1.4** | `recommendation_agent/ams/` | Supporting agent; analyst assessments; human review, no actions |
+| **IronVeil Investigation — Start Here** | **0.1.30** | `triage_agent/releases/staging_0_1_30/` | **User-facing entry point**; file/LUX input, extraction and orchestration |
+| IronVeil Historical Enrichment | **0.1.5** | `enrichment_agent/ams/` | Structured v3 receiver/result; AWS **not configured** |
+| IronVeil Recommendations | **0.1.9** | `recommendation_agent/ams/` | Structured enrichment receiver; analyst assessments; human review, no actions |
 
 **Do not publish Triage's editable `plugins/alert_triage/` directly to staging:**
 it targets Dev receivers. The isolated staging release is retained separately.
@@ -57,6 +69,10 @@ Local source presence is not a fresh byte-for-byte AMS bundle verification.
 ## Read first
 
 - [Operator runbook](DEMO.md): input, outputs, controls and troubleshooting.
+- [Documentation map](triage_agent/DOCUMENTATION.md): current guidance versus
+  historical evidence, source ownership and next-session reading order.
+- [Workflow and handoffs](triage_agent/WORKFLOW.md): exact envelopes, receipts,
+  checkpoints, limits and the separation of analysis from file exports.
 - [Team evaluation summary](EVALUATION.md): fresh offline tests and hosted outcomes,
   including failures—not just the earlier successful demonstration.
 - [AMS inventory and backup gaps](AMS_INVENTORY.md): all seven visible agents,
@@ -65,7 +81,11 @@ Local source presence is not a fresh byte-for-byte AMS bundle verification.
   [Enrichment](enrichment_agent/README.md),
   [Recommendation](recommendation_agent/README.md).
 
-Latest five-run hosted evaluation: all five chains reached every stage and
+Latest diagnostic chain: both structured handoffs verified, **1/1 analysis**, no
+confirmed files; all three writes stopped at missing runtime SGP configuration.
+Latest full SDK suites: **151 passed, zero skips** (91/34/26).
+
+Historical five-run hosted evaluation (2026-11-11, older versions): all five chains reached every stage and
 returned five files each; **28/35 Recommendation analyses succeeded (80%)**.
 Six timed out and one failed validation. Median end-to-end time **190.490s**;
 only one of five runs achieved 7/7 analyses. This is exploratory evidence, not an SLA

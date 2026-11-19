@@ -1,0 +1,171 @@
+{
+  "entity": {
+    "id": "10.10.185.226",
+    "site": "Spoonbridge & Cherry",
+    "type": "host"
+  },
+  "schema": "swoop-ueba-finding/1",
+  "source": "swoop/valhalla/simulated",
+  "z_score": 15.787348878623813,
+  "baseline": {
+    "mean": 1.2666666666666666,
+    "std_dev": 0.6798692684790381,
+    "windows": 24,
+    "zero_variance": false
+  },
+  "detector": "egress_volume_hourly",
+  "evidence": [
+    {
+      "dst": "23.240.116.109",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:40:58.462+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "BRAZIL",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 16743760435,
+      "egress_band": "large",
+      "bytes_received": 7508747,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "100.209.8.213",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:57:15.914+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "IRELAND",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 6095659953,
+      "egress_band": "large",
+      "bytes_received": 5921076,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "25.50.124.172",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:27:44.136+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "UNITED STATES",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 8829779738,
+      "egress_band": "large",
+      "bytes_received": 7112827,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "58.193.48.112",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:49:38.671+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "IRELAND",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 28530395778,
+      "egress_band": "large",
+      "bytes_received": 2940712,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "170.110.218.56",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:52:19.815+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "SINGAPORE",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 29986036376,
+      "egress_band": "large",
+      "bytes_received": 5863017,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "25.151.26.252",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:09:32.739+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "FRANCE",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 16414795934,
+      "egress_band": "large",
+      "bytes_received": 7294508,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "112.212.225.33",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:01:35.714+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "SWEDEN",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 29751497798,
+      "egress_band": "large",
+      "bytes_received": 6526997,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "149.103.38.4",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:34:32.015+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "INDIA",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 23773504231,
+      "egress_band": "large",
+      "bytes_received": 7890151,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "145.236.188.110",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:08:45.507+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "IRELAND",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 29793038341,
+      "egress_band": "large",
+      "bytes_received": 548954,
+      "bytes_sent_z_score": null
+    },
+    {
+      "dst": "193.59.233.195",
+      "src": "10.10.185.226",
+      "time": "2026-11-12T17:40:19.293+0000",
+      "company": "DIGITALOCEAN LLC",
+      "country": "NETHERLANDS",
+      "protocol": "TCP",
+      "src_site": "Spoonbridge & Cherry",
+      "bytes_sent": 17139748817,
+      "egress_band": "large",
+      "bytes_received": 7873600,
+      "bytes_sent_z_score": null
+    }
+  ],
+  "measures": "distinct destinations of uploads of 100 MB or more, per hour",
+  "observed": 12,
+  "severity": "high",
+  "finding_id": "a2cc03ec-df67-475a-900d-de116e178838",
+  "time_window": {
+    "end": "2026-11-12T17:59:59.999Z",
+    "start": "2026-11-12T17:00:00.000Z"
+  },
+  "incident_key": "host:10.10.185.226@2026-11-12T17:00:00.000Z",
+  "normalcy_score": 3.802276288585802e-56,
+  "related_entities": [
+    "100.209.8.213",
+    "112.212.225.33",
+    "145.236.188.110",
+    "149.103.38.4",
+    "170.110.218.56",
+    "193.59.233.195",
+    "23.240.116.109",
+    "25.151.26.252",
+    "25.50.124.172",
+    "58.193.48.112"
+  ]
+}

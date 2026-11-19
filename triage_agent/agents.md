@@ -1,6 +1,6 @@
 # Alert Triage Agent — Initial Proof of Concept
 
-## Current maintenance scope (2026-11-10; supersedes the initial brief below)
+## Current maintenance scope (2026-11-18; supersedes the initial brief below)
 
 Read README.md and ../DEMO.md for current operation. The approved implementation
 is now a deployed Donovan entry, default extraction-only Triage, and five separate
@@ -9,14 +9,19 @@ revert this behavior to the original local-only/model-per-group specification.
 Optional live Triage context remains available through TRIAGE_EXTRACTION_ONLY=false.
 The preserved fixture is `staging_input_verification.json` (original run2 JSONL
 bytes, hash-verified); the older documented filename is absent.
-Staging entry is 0.1.24 in `releases/staging_0_1_24/`; preserve that release.
+Staging entry checkpoint is 0.1.30 in `releases/staging_0_1_30/`; preserve all releases.
+Both downstream handoffs use explicit canonical-hashed objects, not intermediate
+files. Read `WORKFLOW.md` and `DOCUMENTATION.md`. LUX form and reviewed unknown/
+opaque-label compatibility are deployed. Enrichment 0.1.5 / Reporting 0.1.9 complete
+structured processing; staging exports fail before dispatch for missing SGP runtime
+configuration. No host/policy bypass or automatic write retry; production untested.
 Editable `plugins/alert_triage/` targets Dev. Current tests/evaluation and backup
 gaps are in `../EVALUATION.md` and `../AMS_INVENTORY.md`.
 
 Preserve ams_snapshots/, fixtures and historical outputs. Edit production source
 only in plugins/alert_triage/ when implementation is explicitly authorized.
 Documentation cleanup does not authorize code changes, publishes, hotswaps,
-credential changes or Git commits. Preserve exact file/hash receipts, partial
+credential changes or Git commits. Preserve exact canonical/file hash receipts, partial
 status, sanitized errors, no automatic submission retries, and no actions executed.
 No live AWS/history connection or new external intelligence source is approved.
 Tests/reliability_verify and plugins/triage_isolation are local-only diagnostics,

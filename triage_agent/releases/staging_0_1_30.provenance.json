@@ -1,0 +1,87 @@
+{
+  "source": "plugins/alert_triage",
+  "target_environment": "scalegov-staging",
+  "tenant_id": "6a1099f9e1ca37ee1216d8c3",
+  "files": {
+    "agent.py": {
+      "source_sha256": "5e156848562d6ef389c5696fa7982b01996ea13dda245055a0f3b0d33b0a9f21",
+      "release_sha256": "5e156848562d6ef389c5696fa7982b01996ea13dda245055a0f3b0d33b0a9f21"
+    },
+    "context_contract.py": {
+      "source_sha256": "5f845c4438e6bfa139af904564c8052998ea3955a896e8f0266c00d5e9e2e1e7",
+      "release_sha256": "5f845c4438e6bfa139af904564c8052998ea3955a896e8f0266c00d5e9e2e1e7"
+    },
+    "contracts.py": {
+      "source_sha256": "f6c9e01b3082441c50cae91055e1f491f5f05f8fda5ef0aec686ff88d673089b",
+      "release_sha256": "f6c9e01b3082441c50cae91055e1f491f5f05f8fda5ef0aec686ff88d673089b"
+    },
+    "demo.py": {
+      "source_sha256": "4a3e153ec32271467c44783115d4d4569b3fa401e92e47179ed40e460c81b3d2",
+      "release_sha256": "4a3e153ec32271467c44783115d4d4569b3fa401e92e47179ed40e460c81b3d2"
+    },
+    "event_input.py": {
+      "source_sha256": "c1b1cb7a1f1aa55d94f3ee07c9eceb7eaee0f323825e7efdb46c59c1afa66cf2",
+      "release_sha256": "c1b1cb7a1f1aa55d94f3ee07c9eceb7eaee0f323825e7efdb46c59c1afa66cf2"
+    },
+    "export.py": {
+      "source_sha256": "8d41daa979f077f8627248ad3b3cdd1835b0783f915deda095ca0d7278ac913b",
+      "release_sha256": "8d41daa979f077f8627248ad3b3cdd1835b0783f915deda095ca0d7278ac913b"
+    },
+    "file_first.py": {
+      "source_sha256": "2cb557e002eaf91dd334fa954b63a16f578f24d0cb4a9619d61a9d400f924271",
+      "release_sha256": "2cb557e002eaf91dd334fa954b63a16f578f24d0cb4a9619d61a9d400f924271"
+    },
+    "file_output.py": {
+      "source_sha256": "8702c8e47d115f0827286378b680c4fa0fde2ce91f0032001a648d9dfeb9269d",
+      "release_sha256": "8702c8e47d115f0827286378b680c4fa0fde2ce91f0032001a648d9dfeb9269d"
+    },
+    "file_writes.py": {
+      "source_sha256": "08c1191f6f84606d7f582b44b680a8ab38886cd0394b79d789722a9c314ddc00",
+      "release_sha256": "08c1191f6f84606d7f582b44b680a8ab38886cd0394b79d789722a9c314ddc00"
+    },
+    "graph.py": {
+      "source_sha256": "a9c11f73c1f683159ccdc002fc2c10d6227199e37fed8d5aef91bf28856758b2",
+      "release_sha256": "a9c11f73c1f683159ccdc002fc2c10d6227199e37fed8d5aef91bf28856758b2"
+    },
+    "handoff.py": {
+      "source_sha256": "b801c6c409f52e5933bd8c9327e9bf38d2115b8a5f0065c36e67f90bd4644c64",
+      "release_sha256": "1dddd96d16bf53c046f38170216df51cc35be4ad67020daa06c71cee883066b6"
+    },
+    "hosted.py": {
+      "source_sha256": "9be78c4538a82aa1d42af92d03029b67c90416a279f2ce1671541ead8d6343ff",
+      "release_sha256": "9be78c4538a82aa1d42af92d03029b67c90416a279f2ce1671541ead8d6343ff"
+    },
+    "manifest.json": {
+      "source_sha256": "b28aa5c40c7984c7b466f571153539f06bb794c1c0aad2d1a6a92026eb583212",
+      "release_sha256": "b28aa5c40c7984c7b466f571153539f06bb794c1c0aad2d1a6a92026eb583212"
+    },
+    "model_compat.py": {
+      "source_sha256": "83bae1e52440f1e1938932717798087c11bfd66e3632f806d90dfda98c718c5d",
+      "release_sha256": "83bae1e52440f1e1938932717798087c11bfd66e3632f806d90dfda98c718c5d"
+    },
+    "persona.py": {
+      "source_sha256": "cb3e2e2d2f7936febf4f825f7a0691af2f7c8eeb8c7f61f54f01c6ec75276478",
+      "release_sha256": "cb3e2e2d2f7936febf4f825f7a0691af2f7c8eeb8c7f61f54f01c6ec75276478"
+    },
+    "progress.py": {
+      "source_sha256": "5b50069de720e5a9f8c08d5dde55f9e748a31eedd728a0f641dfcc60d66c424b",
+      "release_sha256": "5b50069de720e5a9f8c08d5dde55f9e748a31eedd728a0f641dfcc60d66c424b"
+    },
+    "requirements.txt": {
+      "source_sha256": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b",
+      "release_sha256": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b"
+    },
+    "stages.py": {
+      "source_sha256": "c59682e447512fc650b653427e25d4719335384c7f09a454c14efdf9ef61f4ff",
+      "release_sha256": "b1ed91152a7a8267bfd59cb9a17eb0c6c23f1ea9e60eb45fd167ccfebc90638a"
+    },
+    "structured_handoff.py": {
+      "source_sha256": "4a4410771fee19b644f841fcc2edb8ea89e7d460e6f61cb38ebba41f8ef798a3",
+      "release_sha256": "4a4410771fee19b644f841fcc2edb8ea89e7d460e6f61cb38ebba41f8ef798a3"
+    },
+    "triage.py": {
+      "source_sha256": "5de11cab2baf031cb4690fe0f00ebd2318477bae0043db1bb29e3324d595a1f5",
+      "release_sha256": "5de11cab2baf031cb4690fe0f00ebd2318477bae0043db1bb29e3324d595a1f5"
+    }
+  }
+}

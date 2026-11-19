@@ -1,0 +1,43 @@
+{
+  "agent_id": "934ba6f7-3dcc-4dfb-9454-acdc92f7a10f",
+  "version": "0.1.8",
+  "path": "recommendation_agent/ams",
+  "archive_sha256": "8d00a18daa5b7760de05b16156f789416ce018da18fa58b121896adc83464e0d",
+  "created_at": "2026-11-17T17:46:37.062811+00:00",
+  "status": "publish_failed_platform_dependency_no_new_version_observed",
+  "failure": "HTTP 500: outbound policy platform-litellm-runtime-tls-v1 resolution failed; ARP 503 Authentication dependency unavailable",
+  "reconciliation": "Read-only versions list still latest 0.1.7; no 0.1.8 observed. No retry performed.",
+  "files": {
+    "agent/graph.py": "2f267f613de4c807f03d4dc03bc93c858e0646ab897745701e8ea0a029681b30",
+    "requirements.txt": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b",
+    "langgraph.json": "53ebcfcc200c918f7a16d03b63b6fafae1d5b53e1199eb8b11f42d126000ee1b",
+    "agent/core.py": "f10413d5a88a81392ef3fbf3f2cbfbbf570749c683fcde5af46711e8913975da",
+    "agent/hosted.py": "b67538fd7374de791cdea12bd90196407849a1aee301262e9fb7ff98ef7c81fe",
+    "agent/input_contract.py": "b3ad3922b382278a858cacf3edba493f0037c00b20a76cbbbd5bce68d7959d96",
+    "agent/manifest.json": "ba4571c28c16e07a952ece9246a965a47dc1c5615bc15a42818cf16f8c60605b",
+    "agent/routing.py": "326d93e7906f8a0a12c2cca62d2b7a095afc0a039e84106e0824313730fcf7e7",
+    "agent/structured_input.py": "54ca93134eb3baa5af6b3f4935f3ca9ebc4b2924e74a78f6e48e366ac89e1120",
+    "agent/workspace/.keep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "display_name": "IronVeil Recommendations",
+  "previous_version": "0.1.7",
+  "file_id": "30f2a1dc-34cb-4ff2-ae3b-c04557a29d1b",
+  "operator_requested_retries": [
+    {
+      "requested_at": "2026-11-17T19:20:59.048474+00:00",
+      "status": "publication_accepted",
+      "source_file_id": "30f2a1dc-34cb-4ff2-ae3b-c04557a29d1b",
+      "response": {
+        "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/PublishAgentVersionResponseBody.json",
+        "id": "934ba6f7-3dcc-4dfb-9454-acdc92f7a10f",
+        "deployment_id": "bd8c3a46-93e2-47d4-a774-2c89f37febff",
+        "version": "0.1.8",
+        "is_latest": false,
+        "version_type": "published",
+        "endpoint": "https://mcpx.scalegov-staging.teleport.scalegov.com/agents/934ba6f7-3dcc-4dfb-9454-acdc92f7a10f",
+        "metadata": {}
+      },
+      "version_observed_after_request": true
+    }
+  ]
+}

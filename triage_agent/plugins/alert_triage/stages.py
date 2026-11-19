@@ -11,14 +11,16 @@ from typing import Annotated
 
 if __package__:
     from .handoff import dispatch_input, remote_client, verified_result, ENRICHMENT_AGENT_ID
-    from .hosted import analyze_uploaded
+    from .hosted import analyze_input
     from .agent import LiveContextClient
     from .triage import ExtractionOnlyClient
+    from .structured_handoff import structured_dispatch, verify_structured_receipt
 else:
     from handoff import dispatch_input, remote_client, verified_result, ENRICHMENT_AGENT_ID
-    from hosted import analyze_uploaded
+    from hosted import analyze_input
     from agent import LiveContextClient
     from triage import ExtractionOnlyClient
+    from structured_handoff import structured_dispatch, verify_structured_receipt
 
 LOG = logging.getLogger(__name__)
 # Dev receiver; staging's published source retains its original receiver ID.
@@ -52,15 +54,24 @@ async def submit(export, recommendation=False, factory=None):
     """
     base = os.getenv("AMS_API_URL") or os.getenv("MCPX_CHECKPOINT_URL")
     result = {"platform_status": "unknown", "application_status": "unknown", "exports": [],
-              "file_id": export["file_id"], "sha256": export["sha256"],
+              "file_id": export.get("file_id"), "sha256": export.get("sha256"),
               "agent_id": RECOMMENDATION_ID if recommendation else ENRICHMENT_AGENT_ID,
-              "thread_id": None, "invocation_id": None, "attempts": 1}
+              "thread_id": None, "invocation_id": None, "attempts": 0}
+    try:
+        if recommendation and export.get("input_mode") != "structured":
+            if not (export.get("status") == "created" and export.get("file_id") and export.get("sha256")):
+                raise ValueError
+            value = dispatch_input(export["file_id"])
+            value["task"]["payload"]["parts"][0]["text"] = "Summarize the enriched alerts and recommend analyst actions."
+        else:
+            value = structured_dispatch(export, recommendation=recommendation)
+            result.update({key: export[key] for key in ("input_mode", "payload_sha256", "canonicalization", "schema")})
+    except (ValueError, TypeError, RecursionError, OverflowError):
+        return {**result, "error": "recommendation_export_unavailable" if recommendation else "structured_handoff_invalid"}
     if not base:
         return {**result, "attempts": 0, "error": "managed_ams_route_unavailable"}
     remote = factory(base) if factory else remote_client(base, result["agent_id"], 720 if recommendation else 90)
-    value = dispatch_input(export["file_id"])
-    if recommendation:
-        value["task"]["payload"]["parts"][0]["text"] = "Summarize the enriched alerts and recommend analyst actions."
+    result["attempts"] = 1
     stream = remote.astream(value, config={"configurable": {}})
     async def observe():
             # The SDK records IDs before observing SSE. The first received event
@@ -117,9 +128,18 @@ async def collect(ticket, recommendation=False, client=None, timeout=None,
         result["error"] = "missing_child_ticket_do_not_retry"
         return finish("invalid_ticket")
     if (any(not isinstance(ticket.get(key), str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", ticket[key])
-            for key in ("invocation_id", "thread_id", "file_id"))
+            for key in ("invocation_id", "thread_id"))
             or not isinstance(ticket.get("sha256"), str)
             or not re.fullmatch(r"[0-9a-f]{64}", ticket["sha256"])):
+        result["error"] = "invalid_child_ticket_do_not_retry"
+        return finish("invalid_ticket")
+    try:
+        if ticket.get("input_mode") == "structured":
+            verify_structured_receipt(ticket, ticket, recommendation=recommendation)
+        elif (not isinstance(ticket.get("file_id"), str)
+              or not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", ticket["file_id"])):
+            raise ValueError
+    except ValueError:
         result["error"] = "invalid_child_ticket_do_not_retry"
         return finish("invalid_ticket")
     base = os.getenv("AMS_API_URL") or os.getenv("MCPX_CHECKPOINT_URL")
@@ -238,6 +258,7 @@ def make_stage_tools(workdir):
 
     async def execute(name, runtime):
         started = time.monotonic()
+        prior = {}
         LOG.info("workflow_stage_start stage=%s", name)
         try:
             values = state(runtime)
@@ -245,10 +266,10 @@ def make_stage_tools(workdir):
             store = SGPResourceClient()
             if name == "run_triage":
                 client = ExtractionOnlyClient() if os.getenv("TRIAGE_EXTRACTION_ONLY", "true").lower() == "true" else LiveContextClient()
-                result = await analyze_uploaded(values.get("source_file_ids", []), store, client)
+                result = await analyze_input(values.get("source_file_ids", []), values.get("lux_event_json"), store, client)
             elif name == "submit_enrichment":
-                export = prior.get("run_triage", {}).get("indicator_export", {})
-                result = await submit(export) if export.get("status") == "created" else {"error": "triage_export_unavailable"}
+                prepared = prior.get("run_triage", {}).get("enrichment_handoff", {})
+                result = await submit(prepared) if prepared.get("status") == "ready" else {"error": "structured_handoff_unavailable"}
             elif name == "collect_enrichment":
                 result = await collect(prior.get("submit_enrichment", {}))
             elif name == "submit_recommendation":
@@ -262,6 +283,10 @@ def make_stage_tools(workdir):
             raise  # Cancellation must never be converted into a successful checkpoint.
         except Exception as exc:
             result = {"error": "stage_failed_uncertain", "error_class": safe_error_class(exc), "exports": []}
+        if name != "run_triage":
+            receipt = prior.get("run_triage", {}).get("run", {}).get("event_receipt")
+            if receipt:
+                result["event_receipt"] = receipt
         result["diagnostics"] = {"stage": name, "elapsed_seconds": round(time.monotonic() - started, 3),
                                  "retry_policy": "no_submission_retry"}
         LOG.info("workflow_stage_end stage=%s elapsed=%.3f outcome=%s invocation_id=%s", name,

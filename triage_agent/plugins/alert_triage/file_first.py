@@ -34,7 +34,7 @@ def file_first_message(messages):
             text = status_message({**triage, "downstream": stages.get("collect_enrichment"),
                                    "recommendation": stages.get("collect_recommendation")})
         else:
-            text = "Input or extraction failed; no analysis is claimed. Attach one original findings JSON/JSONL file."
+            text = "Input or extraction failed; no analysis is claimed. Supply one original findings JSON/JSONL file or a structured lux_event form."
         failed = next((name for name in order if stages.get(name, {}).get("error")), None)
         if failed:
             text += f" Workflow stopped at {failed}; previously confirmed attachments remain available. No automatic retry. A submitted child may still be running."

@@ -47,8 +47,11 @@ class Verify(AgentMiddleware):
         outcome2 = await asyncio.to_thread(unittest.TextTestRunner().run, suite2)
         assert outcome2.wasSuccessful(), "recommendation_tests_failed"
         async def extraction(*args, **kwargs):
+            from alert_triage.structured_handoff import prepare_handoff
             return {"run": {"accepted_findings": 1, "incident_groups": 1, "completed": 1, "failed": 0,
                             "errors": [], "status": "completed"},
+                    "enrichment_handoff": prepare_handoff({"schema": "alert-indicators/3",
+                        "extraction": {"accepted_findings": 1}, "incidents": [], "indicators": []}),
                     "indicator_export": {"status": "created", "file_id": "triage", "filename": "extracted_indicators.json",
                                          "mime_type": "application/json", "sha256": "hash"}}
         async def submit(export, recommendation=False, **kwargs):
@@ -63,7 +66,7 @@ class Verify(AgentMiddleware):
         async def prepare(child, store, invoke, **kwargs):
             return await invoke(child["exports"][0])
         from alert_triage import demo
-        with patch.object(stages, "analyze_uploaded", extraction), patch.object(stages, "submit", submit), patch.object(stages, "collect", collect), patch.object(demo, "recommend_from_enrichment", prepare):
+        with patch.object(stages, "analyze_input", extraction), patch.object(stages, "submit", submit), patch.object(stages, "collect", collect), patch.object(demo, "recommend_from_enrichment", prepare):
             production.compile(checkpointer=InMemorySaver())
             result = await production.ainvoke({"task": {"intent": "dispatch", "payload": {"parts": [{"type": "text", "text": "run"}]}}},
                                            config={"configurable": {"thread_id": "sdk-check"}})

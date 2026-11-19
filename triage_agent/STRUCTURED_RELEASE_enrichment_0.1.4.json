@@ -1,0 +1,46 @@
+{
+  "agent_id": "420e63bd-8220-48bd-bada-743f0daea46c",
+  "version": "0.1.4",
+  "path": "enrichment_agent/ams",
+  "archive_sha256": "e72e1c08097578564414f9ebff0e72cc6386217e99b100dadaacacca84d96d3a",
+  "created_at": "2026-11-17T17:46:19.284438+00:00",
+  "status": "publish_failed_platform_dependency_no_new_version_observed",
+  "failure": "HTTP 500: outbound policy platform-artifacts-runtime-http-v5 resolution failed; ARP 503 Authentication dependency unavailable",
+  "reconciliation": "Read-only versions list still latest 0.1.3; no 0.1.4 observed. No retry performed.",
+  "files": {
+    "agent/graph.py": "2352f58d45c6717d05b5d286b206afd72013b6d2c5b76204c9807e51134afca1",
+    "requirements.txt": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b",
+    "langgraph.json": "53ebcfcc200c918f7a16d03b63b6fafae1d5b53e1199eb8b11f42d126000ee1b",
+    "agent/README.md": "327f980144fc0a3d79bad5cf3ac16b5da6f71b89a34659bf164293b39c1c9a69",
+    "agent/contracts.py": "efc73a4f7d8256093c80c0ff97a145c4ab5b71731ce75ca218c34a1572598aa1",
+    "agent/core_provenance.json": "6dafc41c3e7fb514b3f99a89e3a61fa560168a22a2651d7b673ce95cc32cd940",
+    "agent/enrich.py": "d10d9f7f92009eeec83708d065935569ff1923dfbdf9cae90dee7e461432a9dc",
+    "agent/history.py": "a5827fddab5d586565475735d40f61a1249232ed1c52e98c1496174fd62621dc",
+    "agent/hosted.py": "7015b16ac5b42b0b18c0d73c7acc9874fa6817d99d303570097ceabe75589ae2",
+    "agent/input_contract.py": "5fc0c63923185853f8a3c3c93e4b6b195b30bb8188c3d8ffcc7a6de1be5db27a",
+    "agent/manifest.json": "b1cd06e66cfd07479178939e94fd0a245a7e2fe26ecb05cac7495425070e9ff2",
+    "agent/routing.py": "48853782ce5f8d87edbb372537979e8786946d68c98621823a4d6b5cfbc220d7",
+    "agent/workspace/.keep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "display_name": "IronVeil Historical Enrichment",
+  "previous_version": "0.1.3",
+  "file_id": "bcda0044-ebaf-42ff-87fa-40bcbc761e34",
+  "operator_requested_retries": [
+    {
+      "requested_at": "2026-11-17T19:20:57.208541+00:00",
+      "status": "publication_accepted",
+      "source_file_id": "bcda0044-ebaf-42ff-87fa-40bcbc761e34",
+      "response": {
+        "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/PublishAgentVersionResponseBody.json",
+        "id": "420e63bd-8220-48bd-bada-743f0daea46c",
+        "deployment_id": "a82794fe-4167-47f5-aa73-9c218399a7f7",
+        "version": "0.1.4",
+        "is_latest": false,
+        "version_type": "published",
+        "endpoint": "https://mcpx.scalegov-staging.teleport.scalegov.com/agents/420e63bd-8220-48bd-bada-743f0daea46c",
+        "metadata": {}
+      },
+      "version_observed_after_request": true
+    }
+  ]
+}

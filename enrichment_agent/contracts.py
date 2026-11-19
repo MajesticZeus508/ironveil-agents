@@ -99,6 +99,55 @@ def parse_bytes(raw, limit=10_000_000):
     return value, hashlib.sha256(raw).hexdigest()
 
 
+def canonical_handoff(value, limit=10_000_000):
+    """Snapshot finite JSON without coercion; hash canonical-json/1 payload bytes.
+
+    Sorted keys, compact separators, ASCII escapes, no NaN, no trailing newline.
+    This is Python JSON canonicalization, not RFC 8785 numeric normalization.
+    """
+    nodes = 0
+
+    def check(item, depth=0):
+        nonlocal nodes
+        nodes += 1
+        require(nodes <= 1_000_000, "node_limit")
+        require(depth <= 40, "nesting_limit")
+        kind = type(item)
+        if kind is str:
+            require(len(item) <= 10_000, "string_limit")
+        elif kind is dict:
+            for key, child in item.items():
+                require(type(key) is str, "invalid_json_key")
+                check(key, depth + 1)
+                check(child, depth + 1)
+        elif kind is list:
+            for child in item:
+                check(child, depth + 1)
+        elif kind is float:
+            import math
+            require(math.isfinite(item), "nonfinite_number")
+        else:
+            require(item is None or kind in (bool, int), "invalid_json_type")
+
+    try:
+        check(value)
+        chunks, size = [], 0
+        encoder = json.JSONEncoder(sort_keys=True, separators=(",", ":"),
+                                   ensure_ascii=True, allow_nan=False)
+        for chunk in encoder.iterencode(value):
+            size += len(chunk)  # ensure_ascii makes character and byte counts equal.
+            require(size <= limit, "input_too_large")
+            chunks.append(chunk)
+        raw = "".join(chunks).encode("ascii")
+        snapshot, digest = parse_bytes(raw, limit)
+    except (ValueError, TypeError, RecursionError) as exc:
+        if isinstance(exc, ContractError):
+            raise
+        raise ContractError("invalid_json") from None
+    validate_handoff(snapshot)
+    return snapshot, digest
+
+
 def _bounds(value, depth=0):
     require(depth <= 40, "nesting_limit")
     if isinstance(value, str):

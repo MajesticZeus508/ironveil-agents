@@ -1,0 +1,318 @@
+{
+  "agent_id": "420e63bd-8220-48bd-bada-743f0daea46c",
+  "version": "0.1.4",
+  "status": "completed",
+  "started": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/InvokeAgentResponseBody.json",
+    "thread_id": "2d5f99a9-68bf-4058-8d38-69541e0f1d8b",
+    "invocation_id": "inv_f1c95a37-bdc7-423d-9322-0a054045a186",
+    "agent_version": "0.1.4"
+  },
+  "terminal": {
+    "status": "completed",
+    "failure_code": null,
+    "failure_phase": null,
+    "version": null
+  },
+  "output": {
+    "render_events": [
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 0,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_160e2756c369f0fa",
+        "actor": {
+          "id": "e717c04b-02a1-4084-bc2c-0792600af547",
+          "role": "user"
+        },
+        "op": "dispatch",
+        "payload": {
+          "message": null,
+          "files": [],
+          "inputs": {
+            "task": {
+              "intent": "dispatch",
+              "payload": {
+                "parts": [
+                  {
+                    "slot": "triage_handoff",
+                    "type": "form",
+                    "params": {
+                      "handoff": {
+                        "context_provenance": {
+                          "interpretation": "Synthetic test data, not live analysis.",
+                          "model": "test_stub"
+                        },
+                        "enrichment_status": "not_enriched",
+                        "extraction": {
+                          "accepted_findings": 1,
+                          "errors": [],
+                          "incident_groups": 1,
+                          "observation_count": 1,
+                          "status": "completed"
+                        },
+                        "incidents": [
+                          {
+                            "analysis_error": null,
+                            "analysis_status": "completed",
+                            "context_status": "available",
+                            "data_quality_issues": [],
+                            "disposition": "needs_review",
+                            "entity": {
+                              "id": "10.0.0.1",
+                              "site": "alpha",
+                              "type": "host"
+                            },
+                            "id": "incident-demo",
+                            "incident_key": "synthetic-demo",
+                            "limitations": [
+                              "Synthetic fixture."
+                            ],
+                            "possible_explanations": [
+                              "Hypothesis: scheduled transfer."
+                            ],
+                            "recommended_next_steps": [],
+                            "review_priority": "high",
+                            "source": [
+                              "synthetic-test"
+                            ],
+                            "summary": "",
+                            "synthetic": true,
+                            "time_window": {
+                              "end": "2026-11-03T12:15:00Z",
+                              "start": "2026-11-03T12:00:00Z"
+                            }
+                          }
+                        ],
+                        "indicators": [
+                          {
+                            "bytes_received": null,
+                            "bytes_sent": 0,
+                            "company": "Example Network",
+                            "country": "ZZ",
+                            "dst": "203.0.113.10",
+                            "id": "observation-demo",
+                            "incident_id": "incident-demo",
+                            "protocol": "TCP",
+                            "refs": [
+                              {
+                                "evidence_index": 0,
+                                "finding_id": "finding-demo",
+                                "null_fields": [
+                                  "bytes_received"
+                                ],
+                                "source": 1
+                              }
+                            ],
+                            "src": "10.0.0.1",
+                            "src_site": "alpha"
+                          }
+                        ],
+                        "schema": "alert-indicators/3",
+                        "source": {
+                          "input_file_id": null,
+                          "input_format": "jsonl",
+                          "input_sha256": "synthetic-example",
+                          "source_location_kind": "line"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "source_file_ids": []
+          },
+          "client_ref": "inv_f1c95a37-bdc7-423d-9322-0a054045a186"
+        }
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 8,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_233fa72ef38249964915",
+        "actor": {
+          "id": "model_4e1764bc0ea2f5c38c11",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "openai/gpt-5.4"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 9,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_233fa72ef38249964915",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 12,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "enrichment_c5ab400b0ae84b968d6d9ce03f690268",
+        "actor": {
+          "id": "tool_8d048842e26e29a4d6ec",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "run_enrichment",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 13,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "enrichment_c5ab400b0ae84b968d6d9ce03f690268",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:enrichment_c5ab400b0ae84b968d6d9ce03f690268:tool_text:0",
+              "text": "{\"run\": {\"status\": \"partial\", \"query_count\": 5, \"outcomes\": {\"not_configured\": 5}, \"errors\": []}, \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"canonicalization\": \"canonical-json/1\"}, \"structured_result\": {\"status\": \"ready\", \"schema\": \"alert-enrichment/1\", \"canonicalization\": \"canonical-json/1\", \"payload_sha256\": \"61f474ac53c49b6e065af03816a21579e89ae23e78cff0676afcc2315fddb326\", \"payload\": {\"schema\": \"alert-enrichment/1\", \"generated_at\": \"2026-11-17T19:23:52.387370+00:00\", \"input\": {\"context_provenance\": {\"interpretation\": \"Synthetic test data, not live analysis.\", \"model\": \"test_stub\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"errors\": [], \"incident_groups\": 1, \"observation_count\": 1, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": null, \"analysis_status\": \"completed\", \"context_status\": \"available\", \"data_quality_issues\": [], \"disposition\": \"needs_review\", \"entity\": {\"id\": \"10.0.0.1\", \"site\": \"alpha\", \"type\": \"host\"}, \"id\": \"incident-demo\", \"incident_key\": \"synthetic-demo\", \"limitations\": [\"Synthetic fixture.\"], \"possible_explanations\": [\"Hypothesis: scheduled transfer.\"], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"synthetic-test\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-03T12:15:00Z\", \"start\": \"2026-11-03T12:00:00Z\"}}], \"indicators\": [{\"bytes_received\": null, \"bytes_sent\": 0, \"company\": \"Example Network\", \"country\": \"ZZ\", \"dst\": \"203.0.113.10\", \"id\": \"observation-demo\", \"incident_id\": \"incident-demo\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"finding-demo\", \"null_fields\": [\"bytes_received\"], \"source\": 1}], \"src\": \"10.0.0.1\", \"src_site\": \"alpha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"jsonl\", \"input_sha256\": \"synthetic-example\", \"source_location_kind\": \"line\"}}, \"input_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"supplemental_context\": null, \"context_sha256\": null, \"source\": {\"adapter\": \"aws_not_configured\", \"status\": \"not_configured\"}, \"run\": {\"status\": \"partial\", \"query_count\": 5, \"outcomes\": {\"not_configured\": 5}, \"errors\": []}, \"policy\": {\"lookback_days\": 30, \"sample_limit\": 5, \"history_interval\": \"[incident_start-lookback, incident_start); whole records only\", \"activity_match\": \"directed src/dst + protocol + src_site; not anomaly recurrence\"}, \"capabilities\": {\"domain_input\": \"supplemental_context_only; full domain inventory absent from v3\", \"registration_input\": \"supplemental_context_only; company is only a supplied label\", \"location_input\": \"v3 destination country label only\", \"aws\": \"not_connected\"}, \"limitations\": [\"Seen before does not establish benign activity or compromise.\", \"Negative results apply only to declared complete history and the exact criteria/window.\", \"Counts are matched records, not independent connections; incomplete counts are lower bounds.\", \"Attribute prevalence does not establish that the same endpoint or behavior occurred.\", \"IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.\", \"V3 omits domains, related-only indicators and full registration attributes.\", \"Current input hypotheses are untrusted context and do not drive queries.\"], \"results\": [{\"query_id\": \"00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30\", \"incident_id\": \"incident-demo\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"10.0.0.1\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"indicator_key\": \"eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235\", \"incident_id\": \"incident-demo\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"Example Network\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec\", \"incident_id\": \"incident-demo\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"203.0.113.10\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"indicator_key\": \"6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184\", \"incident_id\": \"incident-demo\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"10.0.0.1\", \"dst\": \"203.0.113.10\", \"protocol\": \"TCP\", \"src_site\": \"alpha\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5\", \"incident_id\": \"incident-demo\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"ZZ\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}], \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"canonicalization\": \"canonical-json/1\"}}}, \"history_status\": \"not_configured\", \"exports\": [{\"filename\": \"enrichment_results.json\", \"mime_type\": \"application/json\", \"status\": \"unconfirmed\"}], \"export_status\": \"partial\"}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 17,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_6f72d1e7ab369b861d08",
+        "actor": {
+          "id": "model_4e1764bc0ea2f5c38c11",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "openai/gpt-5.4"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 18,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_6f72d1e7ab369b861d08",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:generate_6f72d1e7ab369b861d08:text:0",
+              "text": "Validated triage handoff; 5 historical queries prepared. AWS historical data is not configured; no historical searches ran and no matches are claimed. Run: partial. 0/2 output files confirmed. No automatic retry of unconfirmed writes.",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 19,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_160e2756c369f0fa",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": "graph_completed"
+        },
+        "error": null
+      }
+    ],
+    "messages": [
+      {
+        "content": "Process the supplied triage handoff.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "6041c8a2-232e-42e1-bb27-389ff7f0d8e0"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "958e2380-9836-4797-8416-a96c8789cf32",
+        "tool_calls": [
+          {
+            "name": "run_enrichment",
+            "args": {},
+            "id": "enrichment_c5ab400b0ae84b968d6d9ce03f690268",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"run\": {\"status\": \"partial\", \"query_count\": 5, \"outcomes\": {\"not_configured\": 5}, \"errors\": []}, \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"canonicalization\": \"canonical-json/1\"}, \"structured_result\": {\"status\": \"ready\", \"schema\": \"alert-enrichment/1\", \"canonicalization\": \"canonical-json/1\", \"payload_sha256\": \"61f474ac53c49b6e065af03816a21579e89ae23e78cff0676afcc2315fddb326\", \"payload\": {\"schema\": \"alert-enrichment/1\", \"generated_at\": \"2026-11-17T19:23:52.387370+00:00\", \"input\": {\"context_provenance\": {\"interpretation\": \"Synthetic test data, not live analysis.\", \"model\": \"test_stub\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"errors\": [], \"incident_groups\": 1, \"observation_count\": 1, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": null, \"analysis_status\": \"completed\", \"context_status\": \"available\", \"data_quality_issues\": [], \"disposition\": \"needs_review\", \"entity\": {\"id\": \"10.0.0.1\", \"site\": \"alpha\", \"type\": \"host\"}, \"id\": \"incident-demo\", \"incident_key\": \"synthetic-demo\", \"limitations\": [\"Synthetic fixture.\"], \"possible_explanations\": [\"Hypothesis: scheduled transfer.\"], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"synthetic-test\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-03T12:15:00Z\", \"start\": \"2026-11-03T12:00:00Z\"}}], \"indicators\": [{\"bytes_received\": null, \"bytes_sent\": 0, \"company\": \"Example Network\", \"country\": \"ZZ\", \"dst\": \"203.0.113.10\", \"id\": \"observation-demo\", \"incident_id\": \"incident-demo\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"finding-demo\", \"null_fields\": [\"bytes_received\"], \"source\": 1}], \"src\": \"10.0.0.1\", \"src_site\": \"alpha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"jsonl\", \"input_sha256\": \"synthetic-example\", \"source_location_kind\": \"line\"}}, \"input_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"supplemental_context\": null, \"context_sha256\": null, \"source\": {\"adapter\": \"aws_not_configured\", \"status\": \"not_configured\"}, \"run\": {\"status\": \"partial\", \"query_count\": 5, \"outcomes\": {\"not_configured\": 5}, \"errors\": []}, \"policy\": {\"lookback_days\": 30, \"sample_limit\": 5, \"history_interval\": \"[incident_start-lookback, incident_start); whole records only\", \"activity_match\": \"directed src/dst + protocol + src_site; not anomaly recurrence\"}, \"capabilities\": {\"domain_input\": \"supplemental_context_only; full domain inventory absent from v3\", \"registration_input\": \"supplemental_context_only; company is only a supplied label\", \"location_input\": \"v3 destination country label only\", \"aws\": \"not_connected\"}, \"limitations\": [\"Seen before does not establish benign activity or compromise.\", \"Negative results apply only to declared complete history and the exact criteria/window.\", \"Counts are matched records, not independent connections; incomplete counts are lower bounds.\", \"Attribute prevalence does not establish that the same endpoint or behavior occurred.\", \"IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.\", \"V3 omits domains, related-only indicators and full registration attributes.\", \"Current input hypotheses are untrusted context and do not drive queries.\"], \"results\": [{\"query_id\": \"00bbc34829e1a56d52c7b950d901707ad5e635ce38319f03b12d719fe70b0f30\", \"incident_id\": \"incident-demo\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"10.0.0.1\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"indicator_key\": \"eaffe1c104694dbcf87bd0ece03225e488ddc57348ffaa90030733bea7f8a768\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"0cb68909ff2f2e33bb22b045728ec2c5341ab57ca08dac09e1b38d50c9033235\", \"incident_id\": \"incident-demo\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"Example Network\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"81baca810887c8edc24d6119403a04e0ab71a4c4b6fd8b0647a5a3b7a9345cec\", \"incident_id\": \"incident-demo\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"203.0.113.10\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"indicator_key\": \"6d7bcf543e6c4dffe25acba92ca23f7870b7f91facdd897db152f722a98161cc\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"8e72260ba7a1c67378c50eb0457a39a8fc0e8fd3735a9dc7004498c7c703b184\", \"incident_id\": \"incident-demo\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"10.0.0.1\", \"dst\": \"203.0.113.10\", \"protocol\": \"TCP\", \"src_site\": \"alpha\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f160e645d0c915bef53a20ade5d1e6c78bdfe9746eae197c0a62f1acf80f9ba5\", \"incident_id\": \"incident-demo\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"ZZ\"}, \"window\": {\"start\": \"2026-10-04T12:00:00+00:00\", \"end_exclusive\": \"2026-11-03T12:00:00+00:00\"}, \"observation_ids\": [\"observation-demo\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}], \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"32d9a7a03f423dbb46866a3628588c63c1b8bed94bc7b572110f517a92b7e7cd\", \"canonicalization\": \"canonical-json/1\"}}}, \"history_status\": \"not_configured\", \"exports\": [{\"filename\": \"enrichment_results.json\", \"mime_type\": \"application/json\", \"status\": \"unconfirmed\"}], \"export_status\": \"partial\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "run_enrichment",
+        "id": "fff1cd99-cd01-4631-8938-3216e61a7816",
+        "tool_call_id": "enrichment_c5ab400b0ae84b968d6d9ce03f690268",
+        "artifact": {
+          "exports": [
+            {
+              "filename": "enrichment_results.json",
+              "mime_type": "application/json",
+              "status": "unconfirmed"
+            }
+          ]
+        },
+        "status": "success"
+      },
+      {
+        "content": "Validated triage handoff; 5 historical queries prepared. AWS historical data is not configured; no historical searches ran and no matches are claimed. Run: partial. 0/2 output files confirmed. No automatic retry of unconfirmed writes.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "19aea425-9d8e-4b5d-9949-f1ce3fe697ed",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      }
+    ]
+  }
+}

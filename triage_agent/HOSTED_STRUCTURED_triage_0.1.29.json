@@ -1,0 +1,783 @@
+{
+  "agent_id": "d4ffbfc9-696f-4a5a-b174-75daaa1c993f",
+  "version": "0.1.29",
+  "status": "completed",
+  "started": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/InvokeAgentResponseBody.json",
+    "thread_id": "359345d3-815b-4be9-b3d2-d8136a8ba242",
+    "invocation_id": "inv_89d6dccf-b716-416c-8fb0-5947d6fcbda5",
+    "agent_version": "0.1.29"
+  },
+  "terminal": {
+    "status": "completed",
+    "failure_code": null,
+    "failure_phase": null,
+    "version": null
+  },
+  "output": {
+    "render_events": [
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 0,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_2612090148665349",
+        "actor": {
+          "id": "e717c04b-02a1-4084-bc2c-0792600af547",
+          "role": "user"
+        },
+        "op": "dispatch",
+        "payload": {
+          "message": null,
+          "files": [],
+          "inputs": {
+            "task": {
+              "intent": "dispatch",
+              "payload": {
+                "parts": [
+                  {
+                    "slot": "lux_event",
+                    "type": "form",
+                    "params": {
+                      "event": {
+                        "entity": {
+                          "id": null,
+                          "site": null,
+                          "type": "unknown"
+                        },
+                        "schema": "swoop-ueba-finding/1",
+                        "source": "swoop/valhalla/simulated",
+                        "z_score": 28.660076761934885,
+                        "baseline": {
+                          "mean": 0.0625,
+                          "std_dev": 0.24206145913796356,
+                          "windows": 16,
+                          "zero_variance": false
+                        },
+                        "detector": "to AMS egress_volume",
+                        "evidence": [
+                          {
+                            "dst": "45.19.162.246",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:21:00.390+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "SINGAPORE",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 27624271461,
+                            "egress_band": "large",
+                            "bytes_received": 32931,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "209.140.95.36",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:27:25.366+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "CANADA",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 19970070334,
+                            "egress_band": "large",
+                            "bytes_received": 6909394,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "47.74.147.130",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:24:34.080+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "UNITED STATES",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 21502427989,
+                            "egress_band": "large",
+                            "bytes_received": 1666491,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "7.226.124.164",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:24:13.633+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "GERMANY",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 28293982282,
+                            "egress_band": "large",
+                            "bytes_received": 8837583,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "31.28.242.253",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:20:24.965+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "UNITED STATES",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 9367433532,
+                            "egress_band": "large",
+                            "bytes_received": 1100643,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "184.126.60.157",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:25:15.034+0000",
+                            "company": "DIGITALOCEAN LLC",
+                            "country": "UNITED KINGDOM",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 8472554780,
+                            "egress_band": "large",
+                            "bytes_received": 6320983,
+                            "bytes_sent_z_score": null
+                          },
+                          {
+                            "dst": "146.93.235.197",
+                            "src": "192.168.75.251",
+                            "time": "2026-11-13T15:26:33.591+0000",
+                            "company": "LINODE LLC",
+                            "country": "SWEDEN",
+                            "protocol": "TCP",
+                            "src_site": "Minnehaha",
+                            "bytes_sent": 1350049203,
+                            "egress_band": "large",
+                            "bytes_received": 5122127,
+                            "bytes_sent_z_score": null
+                          }
+                        ],
+                        "measures": "unknown",
+                        "observed": 7,
+                        "severity": "high",
+                        "finding_id": "53e709b3-388f-4fc2-ac4f-ed09bbec912c",
+                        "time_window": {
+                          "end": "2026-11-13T15:29:59.999Z",
+                          "start": "2026-11-13T15:15:00.000Z"
+                        },
+                        "incident_key": "unknown:None@2026-11-13T15:15:00.000Z",
+                        "normalcy_score": 1.2005821151984008e-180,
+                        "related_entities": [
+                          "146.93.235.197",
+                          "184.126.60.157",
+                          "192.168.75.251",
+                          "209.140.95.36",
+                          "31.28.242.253",
+                          "45.19.162.246",
+                          "47.74.147.130",
+                          "7.226.124.164"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "source_file_ids": []
+          },
+          "client_ref": "inv_89d6dccf-b716-416c-8fb0-5947d6fcbda5"
+        }
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 8,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 9,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0e8ce9afecfd542e51a6",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 12,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "stage_bf3a6b1b088743bbb08555c0c41410ba",
+        "actor": {
+          "id": "tool_92974319999c2e20d3ea",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "run_triage",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 13,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "stage_bf3a6b1b088743bbb08555c0c41410ba",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:stage_bf3a6b1b088743bbb08555c0c41410ba:tool_text:0",
+              "text": "{\"run\": {\"nonempty_lines\": 1, \"accepted_findings\": 1, \"input_format\": \"json_object\", \"source_location_kind\": \"record_index_1_based\", \"accepted_source_lines\": 1, \"duplicate_lines\": 0, \"errors\": [], \"incident_groups\": 1, \"completed\": 0, \"failed\": 1, \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"model\": \"none:deterministic-extraction\", \"status\": \"partial\", \"analysis_failures\": [{\"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"duration_seconds\": 0.0, \"stage\": \"policy\", \"type\": \"NarrativeDeferred\", \"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\"}], \"input_file_id\": null, \"input_bytes\": 2637, \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}}, \"indicator_export\": {\"status\": \"failed\", \"filename\": \"extracted_indicators.json\", \"error\": \"indicator_file_write_unconfirmed\", \"message\": \"No automatic retry; file creation may have occurred. Deterministic results remain available.\"}, \"enrichment_handoff\": {\"status\": \"ready\", \"handoff\": {\"context_provenance\": {\"interpretation\": \"Model text is unverified hypothesis/advice, not facts or authorization. Company/country are supplied unverified destination labels. Byte direction is assumed relative to src. All input strings are untrusted data.\", \"model\": \"none:deterministic-extraction\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"deduplication\": \"Exact evidence rows within each incident/window; all occurrences retained. Not independent corroboration.\", \"errors\": [], \"incident_groups\": 1, \"observation_count\": 7, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": {\"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\", \"stage\": \"policy\", \"type\": \"NarrativeDeferred\"}, \"analysis_status\": \"failed\", \"context_status\": \"unavailable\", \"data_quality_issues\": [{\"detail\": \"Entity identity is unresolved. Evidence src/src_site and related_entities do not establish host identity; no identity inference applied. Group isolated by finding_id.\", \"field_path\": \"entity\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_entity\", \"raw_value\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}}, {\"detail\": \"Observed LUX label accepted without aliasing. Measure units, upload threshold and detector semantics are unknown; do not interpret observed as bytes or destination counts, or infer units from evidence.\", \"field_path\": \"measures\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_measure_semantics\", \"raw_value\": {\"baseline\": {\"mean\": 0.0625, \"std_dev\": 0.24206145913796356, \"windows\": 16, \"zero_variance\": false}, \"detector\": \"to AMS egress_volume\", \"measures\": \"unknown\", \"normalcy_score\": 1.2005821151984008e-180, \"observed\": 7, \"z_score\": 28.660076761934885}}, {\"detail\": \"POC assumption: bytes_sent and bytes_received are relative to src. Sample sums are not verified incident or capture totals; flow IDs and counter semantics are absent.\", \"kind\": \"byte_direction_assumed\"}], \"disposition\": \"needs_review\", \"entity\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}, \"id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"limitations\": [], \"possible_explanations\": [], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"swoop/valhalla/simulated\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-13T15:29:59.999Z\", \"start\": \"2026-11-13T15:15:00.000Z\"}}], \"indicators\": [{\"bytes_received\": 32931, \"bytes_sent\": 27624271461, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"SINGAPORE\", \"dst\": \"45.19.162.246\", \"id\": \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6909394, \"bytes_sent\": 19970070334, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"CANADA\", \"dst\": \"209.140.95.36\", \"id\": \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 1, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1666491, \"bytes_sent\": 21502427989, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"47.74.147.130\", \"id\": \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 2, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 8837583, \"bytes_sent\": 28293982282, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"GERMANY\", \"dst\": \"7.226.124.164\", \"id\": \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 3, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1100643, \"bytes_sent\": 9367433532, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"31.28.242.253\", \"id\": \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 4, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6320983, \"bytes_sent\": 8472554780, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED KINGDOM\", \"dst\": \"184.126.60.157\", \"id\": \"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 5, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 5122127, \"bytes_sent\": 1350049203, \"company\": \"LINODE LLC\", \"country\": \"SWEDEN\", \"dst\": \"146.93.235.197\", \"id\": \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 6, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"json_object\", \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"source_location_kind\": \"record_index_1_based\"}}, \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"input_mode\": \"structured\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\"}, \"diagnostics\": {\"stage\": \"run_triage\", \"elapsed_seconds\": 0.003, \"retry_policy\": \"no_submission_retry\"}}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 17,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 18,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_0bf1c89653414bfd8c7b",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 21,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "stage_f6f3503fc97043faaf70655f79bfffae",
+        "actor": {
+          "id": "tool_f1ea4e124ed386e1bb9a",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "submit_enrichment",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 22,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "stage_f6f3503fc97043faaf70655f79bfffae",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:stage_f6f3503fc97043faaf70655f79bfffae:tool_text:0",
+              "text": "{\"platform_status\": \"submitted\", \"application_status\": \"unknown\", \"exports\": [], \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"agent_id\": \"420e63bd-8220-48bd-bada-743f0daea46c\", \"thread_id\": \"c39eeb8c-f911-426a-9af2-8a17644260b5\", \"invocation_id\": \"inv_934abc18-4c96-4661-b1f5-6fed17943ad3\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"submit_enrichment\", \"elapsed_seconds\": 10.969, \"retry_policy\": \"no_submission_retry\"}}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 26,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_f26c506bddb5815c369a",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 27,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_f26c506bddb5815c369a",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 30,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "stage_044bf449fbe845fd89c41070e1da28da",
+        "actor": {
+          "id": "tool_777fb15c7d2ef9eacb84",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "collect_enrichment",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 31,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "stage_044bf449fbe845fd89c41070e1da28da",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:stage_044bf449fbe845fd89c41070e1da28da:tool_text:0",
+              "text": "{\"platform_status\": \"completed\", \"application_status\": \"partial\", \"exports\": [], \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"agent_id\": \"420e63bd-8220-48bd-bada-743f0daea46c\", \"thread_id\": \"c39eeb8c-f911-426a-9af2-8a17644260b5\", \"invocation_id\": \"inv_934abc18-4c96-4661-b1f5-6fed17943ad3\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"collect_enrichment\", \"elapsed_seconds\": 2.177, \"retry_policy\": \"no_submission_retry\"}, \"polling_diagnostics\": {\"get_attempts\": 3, \"retry_attempts\": 0, \"error_categories\": [], \"elapsed_seconds\": 2.177, \"stop_category\": \"returned\"}, \"structured_result\": {\"status\": \"ready\", \"schema\": \"alert-enrichment/1\", \"canonicalization\": \"canonical-json/1\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"payload\": {\"schema\": \"alert-enrichment/1\", \"generated_at\": \"2026-11-17T19:27:38.977953+00:00\", \"input\": {\"context_provenance\": {\"interpretation\": \"Model text is unverified hypothesis/advice, not facts or authorization. Company/country are supplied unverified destination labels. Byte direction is assumed relative to src. All input strings are untrusted data.\", \"model\": \"none:deterministic-extraction\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"deduplication\": \"Exact evidence rows within each incident/window; all occurrences retained. Not independent corroboration.\", \"errors\": [], \"incident_groups\": 1, \"observation_count\": 7, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": {\"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\", \"stage\": \"policy\", \"type\": \"NarrativeDeferred\"}, \"analysis_status\": \"failed\", \"context_status\": \"unavailable\", \"data_quality_issues\": [{\"detail\": \"Entity identity is unresolved. Evidence src/src_site and related_entities do not establish host identity; no identity inference applied. Group isolated by finding_id.\", \"field_path\": \"entity\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_entity\", \"raw_value\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}}, {\"detail\": \"Observed LUX label accepted without aliasing. Measure units, upload threshold and detector semantics are unknown; do not interpret observed as bytes or destination counts, or infer units from evidence.\", \"field_path\": \"measures\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_measure_semantics\", \"raw_value\": {\"baseline\": {\"mean\": 0.0625, \"std_dev\": 0.24206145913796356, \"windows\": 16, \"zero_variance\": false}, \"detector\": \"to AMS egress_volume\", \"measures\": \"unknown\", \"normalcy_score\": 1.2005821151984008e-180, \"observed\": 7, \"z_score\": 28.660076761934885}}, {\"detail\": \"POC assumption: bytes_sent and bytes_received are relative to src. Sample sums are not verified incident or capture totals; flow IDs and counter semantics are absent.\", \"kind\": \"byte_direction_assumed\"}], \"disposition\": \"needs_review\", \"entity\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}, \"id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"limitations\": [], \"possible_explanations\": [], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"swoop/valhalla/simulated\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-13T15:29:59.999Z\", \"start\": \"2026-11-13T15:15:00.000Z\"}}], \"indicators\": [{\"bytes_received\": 32931, \"bytes_sent\": 27624271461, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"SINGAPORE\", \"dst\": \"45.19.162.246\", \"id\": \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6909394, \"bytes_sent\": 19970070334, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"CANADA\", \"dst\": \"209.140.95.36\", \"id\": \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 1, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1666491, \"bytes_sent\": 21502427989, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"47.74.147.130\", \"id\": \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 2, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 8837583, \"bytes_sent\": 28293982282, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"GERMANY\", \"dst\": \"7.226.124.164\", \"id\": \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 3, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1100643, \"bytes_sent\": 9367433532, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"31.28.242.253\", \"id\": \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 4, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6320983, \"bytes_sent\": 8472554780, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED KINGDOM\", \"dst\": \"184.126.60.157\", \"id\": \"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 5, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 5122127, \"bytes_sent\": 1350049203, \"company\": \"LINODE LLC\", \"country\": \"SWEDEN\", \"dst\": \"146.93.235.197\", \"id\": \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 6, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"json_object\", \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"source_location_kind\": \"record_index_1_based\"}}, \"input_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"supplemental_context\": null, \"context_sha256\": null, \"source\": {\"adapter\": \"aws_not_configured\", \"status\": \"not_configured\"}, \"run\": {\"status\": \"partial\", \"query_count\": 23, \"outcomes\": {\"not_configured\": 23}, \"errors\": []}, \"policy\": {\"lookback_days\": 30, \"sample_limit\": 5, \"history_interval\": \"[incident_start-lookback, incident_start); whole records only\", \"activity_match\": \"directed src/dst + protocol + src_site; not anomaly recurrence\"}, \"capabilities\": {\"domain_input\": \"supplemental_context_only; full domain inventory absent from v3\", \"registration_input\": \"supplemental_context_only; company is only a supplied label\", \"location_input\": \"v3 destination country label only\", \"aws\": \"not_connected\"}, \"limitations\": [\"Seen before does not establish benign activity or compromise.\", \"Negative results apply only to declared complete history and the exact criteria/window.\", \"Counts are matched records, not independent connections; incomplete counts are lower bounds.\", \"Attribute prevalence does not establish that the same endpoint or behavior occurred.\", \"IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.\", \"V3 omits domains, related-only indicators and full registration attributes.\", \"Current input hypotheses are untrusted context and do not drive queries.\"], \"results\": [{\"query_id\": \"02a92cdebbafd6cbbf9c189d08551b90963065f554c2ea3cd9b0a7b39b1bf1b5\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"45.19.162.246\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"0deff39c32502e66f1d4b3a8f9ddbebe4cbf9a3359c3d7beec2d6f9a6acc8a0e\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"SWEDEN\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"10f0301d8d408ab9144c6cf33d1603ab8e8b8feec070c4a97e1e0235869415e6\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"47.74.147.130\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"26bdc8f119a817e9355855bdd25eef90352e8dc3322ffb7a13608b3e3dd96ffd\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"192.168.75.251\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"indicator_key\": \"dd429a63157c8bfd2a26b4fbea1d6c290b1704c239fa25ddfc22e7fabec72603\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"44802c64412107d84975b08b1fa5c9e269803910912b6525f0fb2b62258d47ce\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"7.226.124.164\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"indicator_key\": \"29e8c22baabd0f79190f1052122c650e7849475627995bb9257b25d929d64c77\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"5e6ba364dfc49e3a2074a0954a91b2e5b4a0c3ef94285e9799f5f9bc69cbf250\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"184.126.60.157\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"62eed95710c9957f91e91a8786f496fe060938634379526651cb239d5f582488\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"LINODE LLC\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"6e0778e3618ce60af4e77ebc102374cfe855b328de50f72abf1b3b270e06c736\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"184.126.60.157\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"indicator_key\": \"ed8231dd0f8e94ff29686b9c007772f05887aa014f9676bc5fd40b6c91072976\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"769a2eaa064aff218a8526f7481c535cb64fced28dcfcbd68783cf682161f423\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"7.226.124.164\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"831f2fa9c64f3b8e9f58fdbdc3f32f8a3f9d6f86cb9d36361d1ce3b1b6fa04fc\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"31.28.242.253\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\"], \"indicator_key\": \"2ea0cd2a142d5294d7c5d8c5ae166519af1a8337b6c20617341ba66a0e200017\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"8c76c050e0b6fcdc3f14e07123a9006bb53d29114d13878e8806806a51f5f7f5\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"45.19.162.246\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"indicator_key\": \"e0680a74acb76766ae703273eaa3c0767f25ce9d03df8c23ad98c6121a29fca9\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"988eb2b390bd1c722f7403558ab46d12032561e67413336af8265cb33e8e5396\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"UNITED STATES\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a6a7e3ffa0f945f3c0f18cca685d44c090b3ff771ae5c6b5f4bd4ac33f4439c1\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"31.28.242.253\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a7c14e27272ec81c2ed19cead121c5667e016df39bc37a22fd6850bde59b3a37\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"CANADA\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a834003b67c15bcafde7344cc25010b4596131c1027a19b709c728a3fa613f0b\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"209.140.95.36\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"indicator_key\": \"1dd6aa1fe058b61b7a7e4451c4dca48f2b5b8b59f0139afb32ddb5add2504cb0\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b1ed53a8c5ac964af2f2a2c37ed4c5f85711f09716ce99d6fa275cf329089e1b\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"47.74.147.130\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"indicator_key\": \"1f4942e4540b45bf57f874e775a057d48f72c40ca7b7f48e003c8efef87c2008\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b299f85d110b834ecdec9fa8a838b204af4a10f50a167a13754820331e782663\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"GERMANY\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b6192a17f6a4570e7f7c1648daab6b2253b6311f1987fc6838e2c368a4e03875\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"DIGITALOCEAN LLC\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"bfb37f8f1094d213ccc68f8d31a39289d0dde381e294948fdd5513a29ddc73cc\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"146.93.235.197\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"cb0abb78a0ec333ba7093a298fc6efda072eca6759ee61bb9c0992248e1467f8\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"SINGAPORE\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"e7930988332dbc1f49d87726751342dec83553503d8e2be7bc8951dda8e79eeb\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"209.140.95.36\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f3e9e360b7c4bd6ff65794f563fa83cdba5388e9245039b2798853760b52d5c9\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"UNITED KINGDOM\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f902ca69c628bb5359445207c3802cf001d6f8038e2f16f49a01e6ff48490100\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"146.93.235.197\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"indicator_key\": \"0db83e9a7d48a5d584904528633fc4c65d99e39252aba025f4cd70dfecef544e\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}], \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\"}}}, \"counts\": {}, \"history_status\": \"not_configured\", \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\"}, \"export_status\": \"partial\"}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 35,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_8d812169a381618eb005",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 36,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_8d812169a381618eb005",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 39,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "stage_7edc8923c0c3408d880c84f39fa6616f",
+        "actor": {
+          "id": "tool_a9008114eb8b24b91df2",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "submit_recommendation",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 40,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "stage_7edc8923c0c3408d880c84f39fa6616f",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:stage_7edc8923c0c3408d880c84f39fa6616f:tool_text:0",
+              "text": "{\"platform_status\": \"submitted\", \"application_status\": \"unknown\", \"exports\": [], \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"agent_id\": \"934ba6f7-3dcc-4dfb-9454-acdc92f7a10f\", \"thread_id\": \"bcc8ee0f-6e1a-4c56-bc78-48c33b72fd13\", \"invocation_id\": \"inv_cc7f3262-4cdb-4670-92b5-548cf651bbc9\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-enrichment/1\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"submit_recommendation\", \"elapsed_seconds\": 6.152, \"retry_policy\": \"no_submission_retry\"}}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 44,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_def25ed05d1c6fbf42c2",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 45,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_def25ed05d1c6fbf42c2",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 48,
+          "path": "('__pregel_pull', '_ToolActionMiddleware.after_model')",
+          "local": 0
+        },
+        "action_id": "stage_5106557dc84641dfb1a32c5785c33bb5",
+        "actor": {
+          "id": "tool_3c47f5f974154d98de91",
+          "role": "agent"
+        },
+        "op": "tool",
+        "payload": {
+          "name": "collect_recommendation",
+          "arguments": {}
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 49,
+          "path": "('__pregel_push', 0, False)",
+          "local": 0
+        },
+        "action_id": "stage_5106557dc84641dfb1a32c5785c33bb5",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:stage_5106557dc84641dfb1a32c5785c33bb5:tool_text:0",
+              "text": "{\"platform_status\": \"completed\", \"application_status\": \"partial\", \"exports\": [], \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"agent_id\": \"934ba6f7-3dcc-4dfb-9454-acdc92f7a10f\", \"thread_id\": \"bcc8ee0f-6e1a-4c56-bc78-48c33b72fd13\", \"invocation_id\": \"inv_cc7f3262-4cdb-4670-92b5-548cf651bbc9\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-enrichment/1\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"collect_recommendation\", \"elapsed_seconds\": 32.893, \"retry_policy\": \"no_submission_retry\"}, \"polling_diagnostics\": {\"get_attempts\": 18, \"retry_attempts\": 0, \"error_categories\": [], \"elapsed_seconds\": 32.892, \"stop_category\": \"returned\"}, \"counts\": {\"incident_count\": 1, \"completed\": 1, \"failed\": 0}, \"history_status\": \"unknown\", \"handoff_receipt\": {\"schema\": \"alert-enrichment/1\", \"input_mode\": \"structured\", \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\"}, \"export_status\": \"partial\"}",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "ActionEvent",
+        "event_id": {
+          "step": 53,
+          "path": "('__pregel_pull', '_ModelActionMiddleware.before_model')",
+          "local": 0
+        },
+        "action_id": "generate_34ab86ea0a6fc15adbf0",
+        "actor": {
+          "id": "model_4dd202f6f08f05988f75",
+          "role": "model"
+        },
+        "op": "generate",
+        "payload": {
+          "model": "gemini/gemini-4-argon"
+        }
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 54,
+          "path": "('__pregel_pull', 'model')",
+          "local": 0
+        },
+        "action_id": "generate_34ab86ea0a6fc15adbf0",
+        "payload": {
+          "blocks": [
+            {
+              "type": "text",
+              "block_id": "block:generate_34ab86ea0a6fc15adbf0:text:0",
+              "text": "INVESTIGATION INCOMPLETE. Triage export failed or unconfirmed; no attachment is claimed for that export. 1 accepted findings; 1 groups. Deterministic extraction only; narrative deferred to Recommendation, no Triage model calls. 0 input errors. Context unavailable by policy; run: partial. No automatic retry; file creation may have occurred. Enrichment platform: completed; application: partial; 0/2 output files confirmed. AWS history: not_configured; no historical searches ran. Recommendation platform: completed; application: partial; 0/2 output files confirmed. 1/1 incident recommendations completed; 0 failed. Human review required. No actions executed.",
+              "group": null
+            }
+          ],
+          "structured": null,
+          "stop_reason": null
+        },
+        "error": null
+      },
+      {
+        "type": "OutcomeEvent",
+        "event_id": {
+          "step": 55,
+          "path": "dispatch",
+          "local": 0
+        },
+        "action_id": "act_2612090148665349",
+        "payload": {
+          "blocks": [],
+          "structured": null,
+          "stop_reason": "graph_completed"
+        },
+        "error": null
+      }
+    ],
+    "messages": [
+      {
+        "content": "Analyze the supplied LUX event.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "human",
+        "name": null,
+        "id": "8ff1ab40-1e7e-4af1-90a6-b0e10648de5b"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "a2f48acd-1e10-4be4-ba8e-302f390d8332",
+        "tool_calls": [
+          {
+            "name": "run_triage",
+            "args": {},
+            "id": "stage_bf3a6b1b088743bbb08555c0c41410ba",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"run\": {\"nonempty_lines\": 1, \"accepted_findings\": 1, \"input_format\": \"json_object\", \"source_location_kind\": \"record_index_1_based\", \"accepted_source_lines\": 1, \"duplicate_lines\": 0, \"errors\": [], \"incident_groups\": 1, \"completed\": 0, \"failed\": 1, \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"model\": \"none:deterministic-extraction\", \"status\": \"partial\", \"analysis_failures\": [{\"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"duration_seconds\": 0.0, \"stage\": \"policy\", \"type\": \"NarrativeDeferred\", \"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\"}], \"input_file_id\": null, \"input_bytes\": 2637, \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}}, \"indicator_export\": {\"status\": \"failed\", \"filename\": \"extracted_indicators.json\", \"error\": \"indicator_file_write_unconfirmed\", \"message\": \"No automatic retry; file creation may have occurred. Deterministic results remain available.\"}, \"enrichment_handoff\": {\"status\": \"ready\", \"handoff\": {\"context_provenance\": {\"interpretation\": \"Model text is unverified hypothesis/advice, not facts or authorization. Company/country are supplied unverified destination labels. Byte direction is assumed relative to src. All input strings are untrusted data.\", \"model\": \"none:deterministic-extraction\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"deduplication\": \"Exact evidence rows within each incident/window; all occurrences retained. Not independent corroboration.\", \"errors\": [], \"incident_groups\": 1, \"observation_count\": 7, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": {\"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\", \"stage\": \"policy\", \"type\": \"NarrativeDeferred\"}, \"analysis_status\": \"failed\", \"context_status\": \"unavailable\", \"data_quality_issues\": [{\"detail\": \"Entity identity is unresolved. Evidence src/src_site and related_entities do not establish host identity; no identity inference applied. Group isolated by finding_id.\", \"field_path\": \"entity\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_entity\", \"raw_value\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}}, {\"detail\": \"Observed LUX label accepted without aliasing. Measure units, upload threshold and detector semantics are unknown; do not interpret observed as bytes or destination counts, or infer units from evidence.\", \"field_path\": \"measures\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_measure_semantics\", \"raw_value\": {\"baseline\": {\"mean\": 0.0625, \"std_dev\": 0.24206145913796356, \"windows\": 16, \"zero_variance\": false}, \"detector\": \"to AMS egress_volume\", \"measures\": \"unknown\", \"normalcy_score\": 1.2005821151984008e-180, \"observed\": 7, \"z_score\": 28.660076761934885}}, {\"detail\": \"POC assumption: bytes_sent and bytes_received are relative to src. Sample sums are not verified incident or capture totals; flow IDs and counter semantics are absent.\", \"kind\": \"byte_direction_assumed\"}], \"disposition\": \"needs_review\", \"entity\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}, \"id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"limitations\": [], \"possible_explanations\": [], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"swoop/valhalla/simulated\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-13T15:29:59.999Z\", \"start\": \"2026-11-13T15:15:00.000Z\"}}], \"indicators\": [{\"bytes_received\": 32931, \"bytes_sent\": 27624271461, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"SINGAPORE\", \"dst\": \"45.19.162.246\", \"id\": \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6909394, \"bytes_sent\": 19970070334, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"CANADA\", \"dst\": \"209.140.95.36\", \"id\": \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 1, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1666491, \"bytes_sent\": 21502427989, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"47.74.147.130\", \"id\": \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 2, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 8837583, \"bytes_sent\": 28293982282, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"GERMANY\", \"dst\": \"7.226.124.164\", \"id\": \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 3, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1100643, \"bytes_sent\": 9367433532, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"31.28.242.253\", \"id\": \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 4, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6320983, \"bytes_sent\": 8472554780, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED KINGDOM\", \"dst\": \"184.126.60.157\", \"id\": \"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 5, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 5122127, \"bytes_sent\": 1350049203, \"company\": \"LINODE LLC\", \"country\": \"SWEDEN\", \"dst\": \"146.93.235.197\", \"id\": \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 6, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"json_object\", \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"source_location_kind\": \"record_index_1_based\"}}, \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"input_mode\": \"structured\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\"}, \"diagnostics\": {\"stage\": \"run_triage\", \"elapsed_seconds\": 0.003, \"retry_policy\": \"no_submission_retry\"}}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "run_triage",
+        "id": "f31315bb-ad89-4ecb-8378-1dc8176a0fff",
+        "tool_call_id": "stage_bf3a6b1b088743bbb08555c0c41410ba",
+        "artifact": {
+          "stage_exports": [
+            {
+              "status": "failed",
+              "filename": "extracted_indicators.json",
+              "error": "indicator_file_write_unconfirmed",
+              "message": "No automatic retry; file creation may have occurred. Deterministic results remain available."
+            }
+          ]
+        },
+        "status": "success"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "f286e467-8c31-44c0-bdaf-37f7d133a1ca",
+        "tool_calls": [
+          {
+            "name": "submit_enrichment",
+            "args": {},
+            "id": "stage_f6f3503fc97043faaf70655f79bfffae",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"platform_status\": \"submitted\", \"application_status\": \"unknown\", \"exports\": [], \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"agent_id\": \"420e63bd-8220-48bd-bada-743f0daea46c\", \"thread_id\": \"c39eeb8c-f911-426a-9af2-8a17644260b5\", \"invocation_id\": \"inv_934abc18-4c96-4661-b1f5-6fed17943ad3\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"submit_enrichment\", \"elapsed_seconds\": 10.969, \"retry_policy\": \"no_submission_retry\"}}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "submit_enrichment",
+        "id": "52c74d16-5db0-4a21-b4ea-2b68a553cf10",
+        "tool_call_id": "stage_f6f3503fc97043faaf70655f79bfffae",
+        "artifact": {
+          "stage_exports": []
+        },
+        "status": "success"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "7340b63e-0da8-430f-a814-deb9329c0ca9",
+        "tool_calls": [
+          {
+            "name": "collect_enrichment",
+            "args": {},
+            "id": "stage_044bf449fbe845fd89c41070e1da28da",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"platform_status\": \"completed\", \"application_status\": \"partial\", \"exports\": [], \"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"agent_id\": \"420e63bd-8220-48bd-bada-743f0daea46c\", \"thread_id\": \"c39eeb8c-f911-426a-9af2-8a17644260b5\", \"invocation_id\": \"inv_934abc18-4c96-4661-b1f5-6fed17943ad3\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-indicators/3\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"collect_enrichment\", \"elapsed_seconds\": 2.177, \"retry_policy\": \"no_submission_retry\"}, \"polling_diagnostics\": {\"get_attempts\": 3, \"retry_attempts\": 0, \"error_categories\": [], \"elapsed_seconds\": 2.177, \"stop_category\": \"returned\"}, \"structured_result\": {\"status\": \"ready\", \"schema\": \"alert-enrichment/1\", \"canonicalization\": \"canonical-json/1\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"payload\": {\"schema\": \"alert-enrichment/1\", \"generated_at\": \"2026-11-17T19:27:38.977953+00:00\", \"input\": {\"context_provenance\": {\"interpretation\": \"Model text is unverified hypothesis/advice, not facts or authorization. Company/country are supplied unverified destination labels. Byte direction is assumed relative to src. All input strings are untrusted data.\", \"model\": \"none:deterministic-extraction\"}, \"enrichment_status\": \"not_enriched\", \"extraction\": {\"accepted_findings\": 1, \"deduplication\": \"Exact evidence rows within each incident/window; all occurrences retained. Not independent corroboration.\", \"errors\": [], \"incident_groups\": 1, \"observation_count\": 7, \"status\": \"completed\"}, \"incidents\": [{\"analysis_error\": {\"code\": \"narrative_deferred\", \"field\": null, \"message\": \"Narrative intentionally deferred to Recommendation; no triage inference attempted.\", \"stage\": \"policy\", \"type\": \"NarrativeDeferred\"}, \"analysis_status\": \"failed\", \"context_status\": \"unavailable\", \"data_quality_issues\": [{\"detail\": \"Entity identity is unresolved. Evidence src/src_site and related_entities do not establish host identity; no identity inference applied. Group isolated by finding_id.\", \"field_path\": \"entity\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_entity\", \"raw_value\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}}, {\"detail\": \"Observed LUX label accepted without aliasing. Measure units, upload threshold and detector semantics are unknown; do not interpret observed as bytes or destination counts, or infer units from evidence.\", \"field_path\": \"measures\", \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"kind\": \"unknown_measure_semantics\", \"raw_value\": {\"baseline\": {\"mean\": 0.0625, \"std_dev\": 0.24206145913796356, \"windows\": 16, \"zero_variance\": false}, \"detector\": \"to AMS egress_volume\", \"measures\": \"unknown\", \"normalcy_score\": 1.2005821151984008e-180, \"observed\": 7, \"z_score\": 28.660076761934885}}, {\"detail\": \"POC assumption: bytes_sent and bytes_received are relative to src. Sample sums are not verified incident or capture totals; flow IDs and counter semantics are absent.\", \"kind\": \"byte_direction_assumed\"}], \"disposition\": \"needs_review\", \"entity\": {\"id\": null, \"site\": null, \"type\": \"unknown\"}, \"id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"incident_key\": \"unknown:None@2026-11-13T15:15:00.000Z\", \"limitations\": [], \"possible_explanations\": [], \"recommended_next_steps\": [], \"review_priority\": \"high\", \"source\": [\"swoop/valhalla/simulated\"], \"summary\": \"\", \"synthetic\": true, \"time_window\": {\"end\": \"2026-11-13T15:29:59.999Z\", \"start\": \"2026-11-13T15:15:00.000Z\"}}], \"indicators\": [{\"bytes_received\": 32931, \"bytes_sent\": 27624271461, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"SINGAPORE\", \"dst\": \"45.19.162.246\", \"id\": \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 0, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6909394, \"bytes_sent\": 19970070334, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"CANADA\", \"dst\": \"209.140.95.36\", \"id\": \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 1, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1666491, \"bytes_sent\": 21502427989, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"47.74.147.130\", \"id\": \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 2, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 8837583, \"bytes_sent\": 28293982282, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"GERMANY\", \"dst\": \"7.226.124.164\", \"id\": \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 3, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 1100643, \"bytes_sent\": 9367433532, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED STATES\", \"dst\": \"31.28.242.253\", \"id\": \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 4, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 6320983, \"bytes_sent\": 8472554780, \"company\": \"DIGITALOCEAN LLC\", \"country\": \"UNITED KINGDOM\", \"dst\": \"184.126.60.157\", \"id\": \"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 5, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}, {\"bytes_received\": 5122127, \"bytes_sent\": 1350049203, \"company\": \"LINODE LLC\", \"country\": \"SWEDEN\", \"dst\": \"146.93.235.197\", \"id\": \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"protocol\": \"TCP\", \"refs\": [{\"evidence_index\": 6, \"finding_id\": \"53e709b3-388f-4fc2-ac4f-ed09bbec912c\", \"source\": 1}], \"src\": \"192.168.75.251\", \"src_site\": \"Minnehaha\"}], \"schema\": \"alert-indicators/3\", \"source\": {\"input_file_id\": null, \"input_format\": \"json_object\", \"input_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"source_location_kind\": \"record_index_1_based\"}}, \"input_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"supplemental_context\": null, \"context_sha256\": null, \"source\": {\"adapter\": \"aws_not_configured\", \"status\": \"not_configured\"}, \"run\": {\"status\": \"partial\", \"query_count\": 23, \"outcomes\": {\"not_configured\": 23}, \"errors\": []}, \"policy\": {\"lookback_days\": 30, \"sample_limit\": 5, \"history_interval\": \"[incident_start-lookback, incident_start); whole records only\", \"activity_match\": \"directed src/dst + protocol + src_site; not anomaly recurrence\"}, \"capabilities\": {\"domain_input\": \"supplemental_context_only; full domain inventory absent from v3\", \"registration_input\": \"supplemental_context_only; company is only a supplied label\", \"location_input\": \"v3 destination country label only\", \"aws\": \"not_connected\"}, \"limitations\": [\"Seen before does not establish benign activity or compromise.\", \"Negative results apply only to declared complete history and the exact criteria/window.\", \"Counts are matched records, not independent connections; incomplete counts are lower bounds.\", \"Attribute prevalence does not establish that the same endpoint or behavior occurred.\", \"IP prevalence is dataset-wide; private IP reuse, NAT and DHCP require scoped interpretation.\", \"V3 omits domains, related-only indicators and full registration attributes.\", \"Current input hypotheses are untrusted context and do not drive queries.\"], \"results\": [{\"query_id\": \"02a92cdebbafd6cbbf9c189d08551b90963065f554c2ea3cd9b0a7b39b1bf1b5\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"45.19.162.246\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"0deff39c32502e66f1d4b3a8f9ddbebe4cbf9a3359c3d7beec2d6f9a6acc8a0e\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"SWEDEN\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"10f0301d8d408ab9144c6cf33d1603ab8e8b8feec070c4a97e1e0235869415e6\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"47.74.147.130\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"26bdc8f119a817e9355855bdd25eef90352e8dc3322ffb7a13608b3e3dd96ffd\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"192.168.75.251\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\", \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"indicator_key\": \"dd429a63157c8bfd2a26b4fbea1d6c290b1704c239fa25ddfc22e7fabec72603\", \"address_classification\": \"non_global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"44802c64412107d84975b08b1fa5c9e269803910912b6525f0fb2b62258d47ce\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"7.226.124.164\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"indicator_key\": \"29e8c22baabd0f79190f1052122c650e7849475627995bb9257b25d929d64c77\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"5e6ba364dfc49e3a2074a0954a91b2e5b4a0c3ef94285e9799f5f9bc69cbf250\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"184.126.60.157\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"62eed95710c9957f91e91a8786f496fe060938634379526651cb239d5f582488\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"LINODE LLC\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"6e0778e3618ce60af4e77ebc102374cfe855b328de50f72abf1b3b270e06c736\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"184.126.60.157\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"indicator_key\": \"ed8231dd0f8e94ff29686b9c007772f05887aa014f9676bc5fd40b6c91072976\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"769a2eaa064aff218a8526f7481c535cb64fced28dcfcbd68783cf682161f423\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"7.226.124.164\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"831f2fa9c64f3b8e9f58fdbdc3f32f8a3f9d6f86cb9d36361d1ce3b1b6fa04fc\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"31.28.242.253\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\"], \"indicator_key\": \"2ea0cd2a142d5294d7c5d8c5ae166519af1a8337b6c20617341ba66a0e200017\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"8c76c050e0b6fcdc3f14e07123a9006bb53d29114d13878e8806806a51f5f7f5\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"45.19.162.246\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"indicator_key\": \"e0680a74acb76766ae703273eaa3c0767f25ce9d03df8c23ad98c6121a29fca9\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"988eb2b390bd1c722f7403558ab46d12032561e67413336af8265cb33e8e5396\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"UNITED STATES\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a6a7e3ffa0f945f3c0f18cca685d44c090b3ff771ae5c6b5f4bd4ac33f4439c1\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"31.28.242.253\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a7c14e27272ec81c2ed19cead121c5667e016df39bc37a22fd6850bde59b3a37\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"CANADA\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"a834003b67c15bcafde7344cc25010b4596131c1027a19b709c728a3fa613f0b\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"209.140.95.36\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"indicator_key\": \"1dd6aa1fe058b61b7a7e4451c4dca48f2b5b8b59f0139afb32ddb5add2504cb0\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b1ed53a8c5ac964af2f2a2c37ed4c5f85711f09716ce99d6fa275cf329089e1b\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"47.74.147.130\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\"], \"indicator_key\": \"1f4942e4540b45bf57f874e775a057d48f72c40ca7b7f48e003c8efef87c2008\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b299f85d110b834ecdec9fa8a838b204af4a10f50a167a13754820331e782663\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"GERMANY\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"b6192a17f6a4570e7f7c1648daab6b2253b6311f1987fc6838e2c368a4e03875\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_company\": \"DIGITALOCEAN LLC\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\", \"2bbd5052ceffc7c81ac898566bd0cdb0bd8c3b59f3050e3a398c5ec0aac0a234\", \"44315d33dc4d58137ec8f7b0124354959c21bb40d97874cfaa3d60cde77a5da2\", \"65428aa22251e5f62e4a0e0f2e699f6f16183ed54291174beceeb9851336e68d\", \"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\", \"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"bfb37f8f1094d213ccc68f8d31a39289d0dde381e294948fdd5513a29ddc73cc\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"146.93.235.197\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"cb0abb78a0ec333ba7093a298fc6efda072eca6759ee61bb9c0992248e1467f8\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"SINGAPORE\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"6fa7bdfe0110fdd05a92e7c931a7baf6f1b48b8782181989973c92b47d6cc0ad\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"e7930988332dbc1f49d87726751342dec83553503d8e2be7bc8951dda8e79eeb\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"directed_activity_tuple\", \"criteria\": {\"src\": \"192.168.75.251\", \"dst\": \"209.140.95.36\", \"protocol\": \"TCP\", \"src_site\": \"Minnehaha\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"aec26de05a4d428dedae71af82eaac1fbe681d519c1d55c73e2b96ff62abe567\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f3e9e360b7c4bd6ff65794f563fa83cdba5388e9245039b2798853760b52d5c9\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"attribute_prevalence\", \"criteria\": {\"dst_country\": \"UNITED KINGDOM\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"0690815ec0c4ada11f863d32b99c415c066ba696a6152bf5cf629de29f3df172\"], \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}, {\"query_id\": \"f902ca69c628bb5359445207c3802cf001d6f8038e2f16f49a01e6ff48490100\", \"incident_id\": \"efc0b4e8e2ada91e918a08a7fe8fd81c61009893ee5f1c5c836b42e6c8a521be\", \"kind\": \"ip_prevalence\", \"criteria\": {\"endpoint_ip\": \"146.93.235.197\"}, \"window\": {\"start\": \"2026-10-14T15:15:00+00:00\", \"end_exclusive\": \"2026-11-13T15:15:00+00:00\"}, \"observation_ids\": [\"5d9f879b18afbe01b629659ba5ead224cc0c53ece5a2be0ee32231a330c90251\"], \"indicator_key\": \"0db83e9a7d48a5d584904528633fc4c65d99e39252aba025f4cd70dfecef544e\", \"address_classification\": \"global\", \"status\": \"not_configured\", \"search_complete\": false, \"matched_record_count\": null, \"first_seen\": null, \"last_seen\": null, \"samples\": [], \"samples_truncated\": false}], \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\"}}}, \"counts\": {}, \"history_status\": \"not_configured\", \"handoff_receipt\": {\"file_id\": null, \"sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"schema\": \"alert-indicators/3\", \"input_mode\": \"structured\", \"payload_sha256\": \"cf4081b27bca2a47fe86c7aaecc6a646a4082c6952ac46ab3e60b0036efca9d8\", \"canonicalization\": \"canonical-json/1\"}, \"export_status\": \"partial\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "collect_enrichment",
+        "id": "9f0e2700-3e73-4c29-a675-b761fa280b23",
+        "tool_call_id": "stage_044bf449fbe845fd89c41070e1da28da",
+        "artifact": {
+          "stage_exports": []
+        },
+        "status": "success"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "c2dd41e6-3b01-4206-9d50-f11643ff6430",
+        "tool_calls": [
+          {
+            "name": "submit_recommendation",
+            "args": {},
+            "id": "stage_7edc8923c0c3408d880c84f39fa6616f",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"platform_status\": \"submitted\", \"application_status\": \"unknown\", \"exports\": [], \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"agent_id\": \"934ba6f7-3dcc-4dfb-9454-acdc92f7a10f\", \"thread_id\": \"bcc8ee0f-6e1a-4c56-bc78-48c33b72fd13\", \"invocation_id\": \"inv_cc7f3262-4cdb-4670-92b5-548cf651bbc9\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-enrichment/1\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"submit_recommendation\", \"elapsed_seconds\": 6.152, \"retry_policy\": \"no_submission_retry\"}}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "submit_recommendation",
+        "id": "43a921b5-c317-4e30-8d10-c8b1192c9796",
+        "tool_call_id": "stage_7edc8923c0c3408d880c84f39fa6616f",
+        "artifact": {
+          "stage_exports": []
+        },
+        "status": "success"
+      },
+      {
+        "content": "",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "1c57a181-f05e-4c67-aed6-a0b5e3829451",
+        "tool_calls": [
+          {
+            "name": "collect_recommendation",
+            "args": {},
+            "id": "stage_5106557dc84641dfb1a32c5785c33bb5",
+            "type": "tool_call"
+          }
+        ],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      },
+      {
+        "content": "{\"platform_status\": \"completed\", \"application_status\": \"partial\", \"exports\": [], \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"agent_id\": \"934ba6f7-3dcc-4dfb-9454-acdc92f7a10f\", \"thread_id\": \"bcc8ee0f-6e1a-4c56-bc78-48c33b72fd13\", \"invocation_id\": \"inv_cc7f3262-4cdb-4670-92b5-548cf651bbc9\", \"attempts\": 1, \"input_mode\": \"structured\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\", \"schema\": \"alert-enrichment/1\", \"event_receipt\": {\"input_mode\": \"lux_event_form\", \"payload_sha256\": \"55442620a0c28275a512d0ba4b6cde99cd3b807bd34f8edf060ee5e189086480\", \"hash_basis\": \"json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8\", \"received_at\": \"2026-11-17T19:27:27.933159+00:00\", \"finding_ids\": [\"53e709b3-388f-4fc2-ac4f-ed09bbec912c\"], \"spark_event_id\": null, \"spark_source_id\": null, \"identity_note\": \"Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs.\"}, \"diagnostics\": {\"stage\": \"collect_recommendation\", \"elapsed_seconds\": 32.893, \"retry_policy\": \"no_submission_retry\"}, \"polling_diagnostics\": {\"get_attempts\": 18, \"retry_attempts\": 0, \"error_categories\": [], \"elapsed_seconds\": 32.892, \"stop_category\": \"returned\"}, \"counts\": {\"incident_count\": 1, \"completed\": 1, \"failed\": 0}, \"history_status\": \"unknown\", \"handoff_receipt\": {\"schema\": \"alert-enrichment/1\", \"input_mode\": \"structured\", \"file_id\": null, \"sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"payload_sha256\": \"32f235d7287450c7d0aa005fc523c30bb7a708190e9302a31bd5ccc9b9c27d73\", \"canonicalization\": \"canonical-json/1\"}, \"export_status\": \"partial\"}",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "tool",
+        "name": "collect_recommendation",
+        "id": "93c51150-06c5-4fbd-a1b4-7adfa2e2d274",
+        "tool_call_id": "stage_5106557dc84641dfb1a32c5785c33bb5",
+        "artifact": {
+          "stage_exports": []
+        },
+        "status": "success"
+      },
+      {
+        "content": "INVESTIGATION INCOMPLETE. Triage export failed or unconfirmed; no attachment is claimed for that export. 1 accepted findings; 1 groups. Deterministic extraction only; narrative deferred to Recommendation, no Triage model calls. 0 input errors. Context unavailable by policy; run: partial. No automatic retry; file creation may have occurred. Enrichment platform: completed; application: partial; 0/2 output files confirmed. AWS history: not_configured; no historical searches ran. Recommendation platform: completed; application: partial; 0/2 output files confirmed. 1/1 incident recommendations completed; 0 failed. Human review required. No actions executed.",
+        "additional_kwargs": {},
+        "response_metadata": {},
+        "type": "ai",
+        "name": null,
+        "id": "ad8cb0bf-755a-4997-b082-64b12018f378",
+        "tool_calls": [],
+        "invalid_tool_calls": [],
+        "usage_metadata": null
+      }
+    ]
+  }
+}

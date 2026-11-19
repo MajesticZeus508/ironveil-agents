@@ -1,0 +1,56 @@
+{
+  "agent_id": "d4ffbfc9-696f-4a5a-b174-75daaa1c993f",
+  "version": "0.1.29",
+  "path": "triage_agent/releases/staging_0_1_29",
+  "archive_sha256": "2fdf5c7f38c70ce9df0082e08049448a5536d935acb7dfdc4ccadc1f384944d7",
+  "created_at": "2026-11-17T19:24:44.850216+00:00",
+  "status": "publication_accepted",
+  "files": {
+    "agent/graph.py": "a9c11f73c1f683159ccdc002fc2c10d6227199e37fed8d5aef91bf28856758b2",
+    "requirements.txt": "9a43329cfdf9c37a75e6e383124fc698ffb703ef9a32ac303e193810e6215a8b",
+    "langgraph.json": "53ebcfcc200c918f7a16d03b63b6fafae1d5b53e1199eb8b11f42d126000ee1b",
+    "agent/agent.py": "5e156848562d6ef389c5696fa7982b01996ea13dda245055a0f3b0d33b0a9f21",
+    "agent/context_contract.py": "5f845c4438e6bfa139af904564c8052998ea3955a896e8f0266c00d5e9e2e1e7",
+    "agent/contracts.py": "f6c9e01b3082441c50cae91055e1f491f5f05f8fda5ef0aec686ff88d673089b",
+    "agent/demo.py": "4a3e153ec32271467c44783115d4d4569b3fa401e92e47179ed40e460c81b3d2",
+    "agent/event_input.py": "c1b1cb7a1f1aa55d94f3ee07c9eceb7eaee0f323825e7efdb46c59c1afa66cf2",
+    "agent/export.py": "a0ac8a11d20c29acca4241974c525826e1beed5f89a7395be14b4775d69d181c",
+    "agent/file_first.py": "2cb557e002eaf91dd334fa954b63a16f578f24d0cb4a9619d61a9d400f924271",
+    "agent/file_output.py": "8702c8e47d115f0827286378b680c4fa0fde2ce91f0032001a648d9dfeb9269d",
+    "agent/handoff.py": "80cd224a1e6577bc0ceeab32110c761e4a063d531d31d84df8b34d94a6cfa7b7",
+    "agent/hosted.py": "9be78c4538a82aa1d42af92d03029b67c90416a279f2ce1671541ead8d6343ff",
+    "agent/manifest.json": "b28aa5c40c7984c7b466f571153539f06bb794c1c0aad2d1a6a92026eb583212",
+    "agent/model_compat.py": "83bae1e52440f1e1938932717798087c11bfd66e3632f806d90dfda98c718c5d",
+    "agent/persona.py": "cb3e2e2d2f7936febf4f825f7a0691af2f7c8eeb8c7f61f54f01c6ec75276478",
+    "agent/progress.py": "5b50069de720e5a9f8c08d5dde55f9e748a31eedd728a0f641dfcc60d66c424b",
+    "agent/stages.py": "b1ed91152a7a8267bfd59cb9a17eb0c6c23f1ea9e60eb45fd167ccfebc90638a",
+    "agent/structured_handoff.py": "4a4410771fee19b644f841fcc2edb8ea89e7d460e6f61cb38ebba41f8ef798a3",
+    "agent/triage.py": "5de11cab2baf031cb4690fe0f00ebd2318477bae0043db1bb29e3324d595a1f5",
+    "agent/workspace/.keep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "display_name": "IronVeil Investigation \u2014 Start Here",
+  "previous_version": "0.1.28",
+  "file_id": "3631d6b2-7cef-41d1-8fbb-a5afd2db8437",
+  "response": {
+    "$schema": "https://mcpx.scalegov-staging.teleport.scalegov.com/schemas/PublishAgentVersionResponseBody.json",
+    "id": "d4ffbfc9-696f-4a5a-b174-75daaa1c993f",
+    "deployment_id": "3c1486f8-8aa2-461c-91d4-e8a31d5f1c30",
+    "version": "0.1.29",
+    "is_latest": false,
+    "version_type": "published",
+    "endpoint": "https://mcpx.scalegov-staging.teleport.scalegov.com/agents/d4ffbfc9-696f-4a5a-b174-75daaa1c993f",
+    "metadata": {
+      "tags": [
+        "ps:donovan:chat"
+      ],
+      "maxFileSize": 1000000,
+      "maxFileCount": 1,
+      "requiresFileUpload": true,
+      "supportedFileTypes": [
+        "application/json",
+        "application/x-ndjson",
+        "text/plain"
+      ]
+    }
+  }
+}

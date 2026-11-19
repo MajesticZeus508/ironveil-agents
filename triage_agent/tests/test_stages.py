@@ -49,12 +49,18 @@ class StageTests(unittest.TestCase):
                 finally:
                     self.closed = True
         remote = Remote()
+        from structured_handoff import prepare_handoff
+        from export import build_indicator_export
+        from triage import analyze, ExtractionOnlyClient
+        raw = (Path(__file__).resolve().parents[1] / "staging_input_verification.json").read_text()
+        prepared = prepare_handoff(build_indicator_export(asyncio.run(analyze(raw, ExtractionOnlyClient()))))
         with patch.dict(os.environ, {"AMS_API_URL": "https://managed"}):
-            ticket = asyncio.run(submit({"file_id": "fresh", "sha256": "hash"}, factory=lambda base: remote))
+            ticket = asyncio.run(submit(prepared, factory=lambda base: remote))
         self.assertEqual(ticket["platform_status"], "submitted")
         self.assertEqual(ticket["invocation_id"], "inv-child")
         self.assertEqual(remote.calls, 1)
         self.assertTrue(remote.closed)
+        self.assertNotIn("handoff", ticket)  # Compact ticket only, not another payload copy.
 
     def test_error_names_never_echo_provider_data(self):
         Secret = type("SECRET_PROVIDER_VALUE", (Exception,), {})

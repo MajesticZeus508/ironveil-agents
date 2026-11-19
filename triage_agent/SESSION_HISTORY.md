@@ -2,13 +2,23 @@
 
 ## Current continuation guide
 
-Staging entry **0.1.24**, Enrichment **0.1.3**, Recommendation **0.1.4** were
-rechecked active/latest. Staging entry source is isolated under `releases/`;
-editable plugin source targets Dev. Latest five-run evaluation achieved 28/35
-analyses with five files in each chain; see [team evaluation](../EVALUATION.md).
-Fresh CLI Triage: 44 passed, 16 skipped of 60 after test-only fixture-path repair.
-Original bytes survive as `staging_input_verification.json`. Source backup gaps:
-[AMS inventory](../AMS_INVENTORY.md). Historical evidence below is preserved.
+Nov 18 checkpoint: staging entry **0.1.30**, Enrichment **0.1.5**, Reporting
+**0.1.9**, active/latest. Both internal structured handoffs verified; one LUX
+incident analysis completed with seven observations and no confirmed files.
+Diagnostics establish missing sandbox SGP URL configuration before dispatch.
+Production untested; no write retry or bypass. SDK suites **151 passed, no skips**.
+See [workflow](WORKFLOW.md), [diagnostic release](DIAGNOSTIC_RELEASE_2026_11_18.md),
+[documentation map](DOCUMENTATION.md) and [team evaluation](../EVALUATION.md).
+
+Since the original narrative below: LUX form ingestion, reviewed unknown/opaque
+label compatibility, serializer readiness rebuild, both canonical-hashed internal
+handoffs, then safe-write diagnostics were implemented/released with authorization.
+The Nov 17 ARP publication failure was resolved on requested retry; the current
+SGP runtime configuration blocker is separate. Historical five-run evaluation
+on older versions was 28/35 analyses and five files each; not current storage proof.
+Staging source is isolated under `releases/staging_0_1_30/`; editable source targets
+Dev. Preserve all release/snapshot/output evidence and original run2 input.
+[Backup gaps](../AMS_INVENTORY.md) remain. The narrative below is historical.
 
 ## Historical continuation checkpoint — 2026-11-10 UTC
 

@@ -26,26 +26,25 @@ The agent does **not** establish compromise or take response actions.
 
 ## Current release
 
-**Staging rebuild/promotion:** see [2026-11-10 release evidence](STAGING_RELEASE_2026-11-10.md)
-for entry 0.1.24 and downstream rebuilds after the operator-reported base-image fix.
+**2026-11-18 checkpoint:** staging **Triage 0.1.30 / Enrichment 0.1.5 /
+Reporting 0.1.9**, active/latest. Both structured handoffs and 1/1 incident
+analysis completed. All three agents report `missing_sgp_configuration` with
+request_may_have_been_sent=false: missing/blank sandbox SGP URL configuration
+prevents upload dispatch. No attachments confirmed; INVESTIGATION INCOMPLETE.
+Production untested. See [diagnostic release](DIAGNOSTIC_RELEASE_2026_11_18.md).
 
-**Dev follow-up:** [DEV_RELEASE.md](DEV_RELEASE.md) records the separate Dev
-deployment; [bounded polling retries](POLLING_RETRIES_2026-11-10.md) records the
-entry-only 0.1.25 change, tests and hosted verification. The staging checkpoint
-below remains historical and was not modified by this Dev release.
+Current staging source is `releases/staging_0_1_30/`; editable
+`plugins/alert_triage/` retains **Dev** receiver IDs. Do not publish it directly
+to staging. Default extraction-only behavior, five stages and no automatic
+submission/model/write retries remain. Full architecture and exact form/hash
+contracts: [WORKFLOW.md](WORKFLOW.md). Reading order and historical release
+distinctions: [DOCUMENTATION.md](DOCUMENTATION.md).
 
-**Live AMS recheck:** Triage **0.1.24** is active/latest in staging,
-source bundle `b06c9ba3-3223-4bdb-8281-61fba2bab92e`.
-Local staging source is `releases/staging_0_1_24/`; editable
-`plugins/alert_triage/` targets **Dev**, not staging. The entry orchestrates Enrichment then
-Recommendation through five checkpoint-sized stages. Triage inference is disabled
-by default; narrative is deferred to Recommendation. Latest operator-confirmed
-full-chain run on older 0.1.23 returned five files and 7/7 recommendations in **206.181s**.
-The newer five-run evaluation returned **28/35 successful analyses**, six timeouts
-and one validation rejection; median end-to-end **190.490s**. See
-[team evaluation](../EVALUATION.md); do not substitute the old success for current reliability evidence.
-See [current runbook and exact evidence](../DEMO.md) and
-[reliability implementation](RELIABILITY_WORK.md).
+Recent history: LUX ingestion and bounded unknown/opaque-label compatibility
+(0.1.25–0.1.27); serializer readiness rebuild (0.1.28); both structured handoffs
+(0.1.29, successful authorized retry after ARP auth failure); safe-write diagnostics
+(0.1.30). The dated release records preserve the intermediate failures rather
+than describe today's state. [Structured release ledger](STRUCTURED_CHAIN_RELEASE_2026_11_17.md).
 
 | Item | Current value |
 |---|---|
@@ -53,10 +52,10 @@ See [current runbook and exact evidence](../DEMO.md) and
 | AMS agent ID | `d4ffbfc9-696f-4a5a-b174-75daaa1c993f` |
 | Environment | ScaleGov staging |
 | Tenant | `6a1099f9e1ca37ee1216d8c3` (`platform`) |
-| Latest published version | **0.1.24**, active/latest at live recheck |
+| Latest published version | **0.1.30**, active/latest at 2026-11-18 checkpoint |
 | Configured model | `gemini/gemini-4-argon`; no Triage provider calls in default extraction-only mode |
 | Handoff schema | `alert-indicators/3` |
-| Tests | Fresh CLI: **44 passed, 16 skipped** of 60; prior managed: 60 passed |
+| Tests | Latest full SDK suite: **91 passed, zero skips**; joint total 151 |
 
 Historical AMS 0.1.17 references the same source bundle used for 0.1.16. Its 14 restored
 source/metadata files matched `plugins/alert_triage/` byte-for-byte at that checkpoint. The reason for
@@ -65,6 +64,10 @@ See [LOCAL_BACKUP.md](LOCAL_BACKUP.md). No new release was published for this
 documentation cleanup.
 
 ## Use in Donovan
+
+File uploads remain the normal Donovan entry. Explicit `lux_event` form ingestion
+is also deployed for API/event callers; agent acceptance does not establish live
+Events-rule configuration. See [current envelope](WORKFLOW.md#entry-input).
 
 1. Open Donovan staging in the tenant above; refresh the agent list.
 2. Start a new chat with **IronVeil Investigation — Start Here**.
@@ -79,24 +82,26 @@ that extension. The preserved local input is now `staging_input_verification.jso
 its 62,315 bytes and SHA-256 match the original run2 fixture. The old filename is absent.
 
 The agent shows concise execution updates in Donovan's Thinking presentation,
-then returns **extracted_indicators.json**, Enrichment JSON/Markdown, Recommendation
-JSON/Markdown and a short count/error status when all stages complete.
+then returns a count/error status and only confirmed attachments. Intended files
+are **extracted_indicators.json**, Enrichment JSON/Markdown and Recommendation
+JSON/Markdown. Current staging storage is blocked, so five files are not promised.
 The operator confirmed the revised presentation works. Updates are application
 status, **not private model reasoning**. No sample dataset is bundled in the
 deployed agent; missing/inaccessible uploads never fall back to old attachments.
 
 ## What happens during a run
 
-1. Read only the current invocation's attached file ID through managed file access.
+1. Read the current explicit attached file, or validate the explicit LUX form object.
 2. Validate records, preserve provenance, and record unsupported/malformed input.
 3. Collapse identical finding IDs; quarantine conflicting contents under one ID.
 4. Group by entity type/id/site, incident key, and UTC start/end window.
 5. Extract IP/domain inventories and exact evidence observations deterministically.
 6. Default to extraction only, marking narrative `narrative_deferred`, with zero
    Triage model calls. Create a managed JSON file only on confirmed write.
-7. Submit/collect Enrichment, verify its exact file/hash receipt and exports, then
-   submit/collect Recommendation and project verified attachments. Stage failures
-   preserve prior outputs and are explicitly incomplete.
+7. Submit/collect Enrichment through the structured v3 form; verify its canonical
+   receipt and full structured result, then submit/collect Recommendation through
+   the full-enrichment form. Intermediate write failure does not block analysis.
+   Project only verified confirmed attachments; failures remain incomplete.
 
 Hosted routing and final status are code-generated; they add no outer provider
 calls. For the supplied fixture, this means **17 findings → seven incident groups
@@ -142,7 +147,7 @@ by invented narrative. See [INDICATOR_CONTRACT.md](INDICATOR_CONTRACT.md).
 | Path | Purpose |
 |---|---|
 | `plugins/alert_triage/` | Editable **Dev-targeted** application source |
-| `releases/staging_0_1_24/` | Preserved staging release; do not edit |
+| `releases/staging_0_1_30/` | Current retained staging release; do not edit; older releases preserved |
 | `ams_snapshots/0.1.17/alert_triage/` | Restored published source, kept separate |
 | `triage.py` | Local CLI entry point |
 | `tests/` | Deterministic, stub, export and real-contract checks |
@@ -162,9 +167,9 @@ python -m unittest discover -s tests -v
 
 Use a fresh output directory, preserving historical examples. Pass `--input` explicitly:
 the historical CLI default still names `.jsonl`. Stub output is labeled test data,
-not a live-model result. Fresh ordinary CLI ran 60 tests: 44 passed, 16 skipped
-for missing SDK/httpx. Python 3.9.6 is below the documented 3.11+ floor.
-Prior managed regression passed all 60; not a fresh managed run in this pass.
+not a live-model result. Latest full SDK regression passed **91/91**, zero skips,
+Agent Kit 0.50.0. Older ordinary CLI skipped SDK/httpx tests and used Python 3.9.6,
+below the documented 3.11+ floor. No full suite rerun for documentation cleanup.
 
 CLI outputs are `triage_results.json`, `triage_report.md`, and compact
 `extracted_indicators.json`; `--audit-export` additionally writes detailed v2
@@ -199,7 +204,9 @@ a LangChain-compatible chat model” ([0.50.0 reference](https://scaleapi.github
 
 ## Performance and known limits
 
-- Latest five-run staging sample: median **190.490s**, range 162.103–209.962s;
+- Latest diagnostic LUX chain: 1/1 analysis, both handoffs, no confirmed files;
+  missing staging SGP configuration. Not a performance/reliability sample.
+- Historical five-run staging sample: median **190.490s**, range 162.103–209.962s;
   **28/35 analyses succeeded**, one of five runs achieved 7/7. See [evaluation](../EVALUATION.md).
 - Historical operator three-agent run: **206.181s** for 17 findings/seven incidents, 7/7
   recommendations; 12.13s/finding as a batch average, not individual latency.

@@ -1,14 +1,16 @@
-"""Read only invocation-attached managed files; never local paths or model IDs."""
+"""Normalize explicit current-invocation file/event inputs; never infer from prose."""
 from typing import Annotated
 
 if __package__:
     from .agent import LiveContextClient
     from .triage import analyze
-    from .export import save_indicator_export
+    from .export import build_indicator_export, save_indicator_export
+    from .structured_handoff import prepare_handoff
 else:
     from agent import LiveContextClient
     from triage import analyze
-    from export import save_indicator_export
+    from export import build_indicator_export, save_indicator_export
+    from structured_handoff import prepare_handoff
 
 
 async def analyze_uploaded(file_ids, reader, client, progress=None, downstream=None, correlation=None, recommendation=None):
@@ -33,30 +35,77 @@ async def analyze_uploaded(file_ids, reader, client, progress=None, downstream=N
         content = raw.decode("utf-8-sig")
     except UnicodeDecodeError:
         return {"error": "encoding", "message": "Upload must be UTF-8 JSON or JSONL, not a binary document."}
+    return await analyze_content(content, reader, client, progress, downstream, correlation, recommendation,
+                                 file_id=file_id, input_bytes=len(raw))
+
+
+async def analyze_input(file_ids, event_json, reader, client, **kwargs):
+    """Consume only channels prepared by the typed dispatch; file behavior is unchanged."""
+    if event_json is not None and file_ids:
+        return {"error": "ambiguous_input", "message": "Supply a LUX event or one managed findings file, not both."}
+    if event_json is None:
+        return await analyze_uploaded(file_ids, reader, client, **kwargs)
+    import json
+    if __package__:
+        from .event_input import serialize_event, MAX_EVENT_BYTES
+    else:
+        from event_input import serialize_event, MAX_EVENT_BYTES
+    try:
+        if not isinstance(event_json, str) or len(event_json.encode("utf-8")) > MAX_EVENT_BYTES:
+            raise ValueError
+        event = json.loads(event_json)
+        content = serialize_event(event)
+    except (ValueError, TypeError, RecursionError, UnicodeError):
+        return {"error": "invalid_event", "message": "LUX input must be bounded finite UTF-8 JSON; no input fallback was attempted."}
+    # One event = one finding. No guessed payload paths, arrays, or arbitrary wrappers.
+    if event.get("schema") != "swoop-ueba-finding/1":
+        return {"error": "unsupported_event", "message": "The lux_event form requires a swoop-ueba-finding/1 finding object directly."}
+    return await analyze_content(content, reader, client, event_mode=True,
+                                 input_bytes=len(content.encode("utf-8")), **kwargs)
+
+
+async def analyze_content(content, reader, client, progress=None, downstream=None, correlation=None,
+                          recommendation=None, *, file_id=None, input_bytes=None, event_mode=False):
     results = await analyze(content, client, progress=progress)
     results["run"]["input_file_id"] = file_id
-    results["run"]["input_bytes"] = len(raw)
+    results["run"]["input_bytes"] = input_bytes
+    if event_mode:
+        from datetime import datetime, timezone
+        # Kept in parent stage status, NOT added to the strict downstream v3 schema.
+        results["run"]["event_receipt"] = {
+            "input_mode": "lux_event_form", "payload_sha256": results["run"]["input_sha256"],
+            "hash_basis": "json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False); UTF-8",
+            "received_at": datetime.now(timezone.utc).isoformat(),
+            "finding_ids": [fid for group in results["results"] for fid in group["finding_ids"]],
+            "spark_event_id": None, "spark_source_id": None,
+            "identity_note": "Delivery IDs are not present in the supplied payload; finding IDs are not Spark event IDs."}
     if results["run"]["accepted_findings"] == 0:
-        return {"error": "no_valid_findings", "message": "No valid swoop-ueba-finding/1 records. Attach original findings JSON/JSONL, not a handoff export. No downstream agents ran or files were created.", "run": results["run"]}
+        return {"error": "no_valid_findings", "message": "No valid swoop-ueba-finding/1 records. Supply original findings, not a handoff export. No downstream agents ran or files were created.", "run": results["run"]}
     if progress:
         progress("Preparing the indicator file…")
-    exported = await save_indicator_export(results, reader)
+    handoff = build_indicator_export(results)
+    try:
+        prepared = prepare_handoff(handoff)
+    except (ValueError, TypeError, RecursionError, OverflowError):
+        prepared = {"status": "failed", "error": "structured_handoff_invalid"}
+    exported = await save_indicator_export(results, reader, handoff=handoff)
     if progress and exported.get("status") != "created":
         progress("File creation failed or is unconfirmed; no attachment is claimed.")
-    # Only compact status is returned to chat; the JSON file is the deliverable.
-    output = {"run": results["run"], "indicator_export": exported}
+    # The exact code-owned v3 snapshot is checkpointed with this turn's tool
+    # result. It is never recovered from previous messages, files or model prose.
+    output = {"run": results["run"], "indicator_export": exported, "enrichment_handoff": prepared}
     if downstream is not None:
-        if results["run"]["accepted_findings"] > 0 and exported.get("status") == "created":
+        if prepared.get("status") == "ready":
             if progress:
-                progress("Indicator file confirmed; invoking Historical Enrichment…")
+                progress("Structured handoff prepared; invoking Historical Enrichment independently of file export…")
             try:
-                output["downstream"] = await downstream(exported, correlation=correlation)
+                output["downstream"] = await downstream(prepared, correlation=correlation)
             except Exception:
                 output["downstream"] = {"platform_status": "unknown", "application_status": "unknown",
                                         "exports": [], "error": "downstream_failed_or_uncertain"}
         else:
             output["downstream"] = {"platform_status": "not_invoked", "application_status": "unknown",
-                                    "exports": [], "error": "no_accepted_findings_or_confirmed_export"}
+                                    "exports": [], "error": "structured_handoff_unavailable"}
     if recommendation is not None and output.get("downstream"):
         if progress:
             progress("Checking Enrichment JSON; preparing Recommendation. AWS history remains unavailable.")
@@ -81,29 +130,30 @@ def status_message(output):
                   f"{len(run['errors'])} input errors. Context unavailable by policy; run: {run['status']}.")
     if export.get("status") == "created":
         text = "Created extracted_indicators.json (" + export.get("schema", "alert-indicators/3") + "). " + counts
-        child = output.get("downstream")
-        if child:
-            text += (f" Enrichment platform: {child['platform_status']}; application: {child['application_status']}; "
+    else:
+        text = ("Triage export failed or unconfirmed; no attachment is claimed for that export. " + counts +
+                " No automatic retry; file creation may have occurred.")
+    child = output.get("downstream")
+    if child:
+        text += (f" Enrichment platform: {child['platform_status']}; application: {child['application_status']}; "
                      f"{len(child.get('exports', []))}/2 output files confirmed.")
-            if child.get("history_status") == "not_configured":
-                text += " AWS history: not_configured; no historical searches ran."
-            if child.get("error"):
-                text += " Downstream unavailable, rejected or unconfirmed; triage export preserved. No automatic retry."
-        rec = output.get("recommendation")
-        if rec:
-            text += (f" Recommendation platform: {rec['platform_status']}; application: {rec['application_status']}; "
+        if child.get("history_status") == "not_configured":
+            text += " AWS history: not_configured; no historical searches ran."
+        if child.get("error"):
+            text += " Downstream unavailable, rejected or unconfirmed; any confirmed triage export preserved. No automatic retry."
+    rec = output.get("recommendation")
+    if rec:
+        text += (f" Recommendation platform: {rec['platform_status']}; application: {rec['application_status']}; "
                      f"{len(rec.get('exports', []))}/2 output files confirmed.")
-            counts = rec.get("counts", {})
-            if counts:
-                text += f" {counts['completed']}/{counts['incident_count']} incident recommendations completed; {counts['failed']} failed."
-            if any(e.get("filename") == "recommendation_report.md" for e in rec.get("exports", [])):
-                text += " Open recommendation_report.md for the analyst report. Supporting JSON retains provenance."
-            if rec.get("error"):
-                text += " Recommendation unavailable or uncertain; earlier outputs preserved. No automatic retry; a timed-out child may still be running."
-            text += " Human review required. No actions executed."
-        return text
-    return ("Export failed or unconfirmed; no attachment is claimed. " + counts +
-            " No automatic retry; file creation may have occurred.")
+        counts = rec.get("counts", {})
+        if counts:
+            text += f" {counts['completed']}/{counts['incident_count']} incident recommendations completed; {counts['failed']} failed."
+        if any(e.get("filename") == "recommendation_report.md" for e in rec.get("exports", [])):
+            text += " Open recommendation_report.md for the analyst report. Supporting JSON retains provenance."
+        if rec.get("error"):
+            text += " Recommendation unavailable or uncertain; earlier outputs preserved. No automatic retry; a timed-out child may still be running."
+        text += " Human review required. No actions executed."
+    return text
 
 
 def make_triage_tool(workdir):
